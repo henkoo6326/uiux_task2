@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>자간·행간 — 영문 · Roboto | 비주얼커뮤니케이션</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@400;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════════════════
+   자간·행간 영문 (Figma 522:3477 「자간행간최종_영」, 1920×11132) — 1:1 클론.
+   설명 UI = Pretendard(국문) · 견본/디스플레이 = Roboto(영문).
+   배치: 각 섹션 = 1920-wide 프레임. 자식 left/width = 1920 대비 %,
+   top = 섹션높이 대비 %, font = vw.
+   세로 정렬: Figma cap-트림을 모든 브라우저에서 재현하기 위해
+   top 에서 cap 인셋(fontSize×k)을 빼서 보정.
+     k = capInset + (lh−1)/2  ·  Pretendard capInset 0.15, Roboto 0.12
+   프로토타입: 히어로 Spacing·Letter Spacing 자간 애니, Line 행간 애니.
+   ════════════════════════════════════════════════════════════════ */
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+:root{
+  --ink:#171919; --sub:#7a8082; --spec:#b9c1c2; --cmpsub:#64696b;
+  --gray:#f7f8f8; --rule:#d8dada; --coral:#ff6d50; --cyan:#09d3ff;
+  --band:rgba(255,109,80,0.55);
+}
+html{ scroll-behavior:smooth; }
+body{ font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
+      background:#fff; color:var(--ink); overflow-x:hidden; max-width:1920px; margin:0 auto; }
+img{ display:block; }
+
+/* ── 섹션 시스템 ── */
+.sec{ position:relative; width:100%; background:#fff; overflow:hidden;
+  opacity:0; transform:translateY(28px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); will-change:opacity,transform; }
+.sec.in{ opacity:1; transform:none; }
+.sec.gray{ background:var(--gray); }
+.t{ position:absolute; }
+
+/* 공통 텍스트 (국문 UI) */
+.eyebrow{ font-weight:500; font-size:calc(18/1920*100vw); letter-spacing:-0.02em; line-height:1.6; white-space:nowrap; }
+.title{ font-weight:500; font-size:calc(40/1920*100vw); letter-spacing:-0.02em; line-height:1.6; white-space:nowrap; }
+.subcap{ font-weight:400; font-size:calc(16/1920*100vw); letter-spacing:-0.02em; line-height:1.6; color:var(--sub); white-space:nowrap; }
+.body{ font-weight:400; font-size:calc(18/1920*100vw); letter-spacing:-0.02em; line-height:1.6; }
+.spec{ font-weight:500; font-size:calc(16/1920*100vw); letter-spacing:-0.02em; line-height:1.6; color:var(--spec); white-space:nowrap; }
+.hrule{ position:absolute; height:1px; background:var(--rule); }
+
+/* 데모 견본 (영문 Roboto) */
+.demo-disp{ position:absolute; font-family:'Roboto',sans-serif; font-weight:500; font-size:calc(48/1920*100vw); color:#000; white-space:nowrap; }
+.demo-body{ position:absolute; font-family:'Roboto',sans-serif; font-weight:400; font-size:calc(20/1920*100vw); color:#000; display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+.clabel{ position:absolute; font-weight:400; font-size:calc(22/1920*100vw); letter-spacing:-0.02em; line-height:1.6; color:#000; white-space:nowrap; }
+.clabel.rec{ background:var(--band); padding:0 calc(6/1920*100vw); }
+
+/* ── 프로토타입 자간 애니 (자간이 좁았다 넓어졌다) ── */
+@keyframes track { 0%,100%{ letter-spacing:-0.02em } 50%{ letter-spacing:0.14em } }
+@keyframes trackHero { 0%,100%{ letter-spacing:-0.02em } 50%{ letter-spacing:0.10em } }
+
+/* ── 프로토타입 행간 애니 (행간이 좁았다 넓어졌다) — Line 디스플레이 ── */
+.leaddisp{ position:absolute; overflow:visible;
+  background:repeating-linear-gradient(-45deg,var(--cyan) 0 1.4px,transparent 1.4px 13px);
+  animation:lead 4.6s ease-in-out infinite; }
+@keyframes lead{ 0%,100%{ height:calc(370/1920*100vw); transform:translateY(0) }
+  50%{ height:calc(470/1920*100vw); transform:translateY(calc(-50/1920*100vw)) } }
+.lead-band{ position:absolute; left:0; right:0; top:50%; transform:translateY(-50%);
+  height:calc(182/1920*100vw); background:var(--gray);
+  border-top:2px solid var(--cyan); border-bottom:2px solid var(--cyan); }
+.lead-measure{ position:absolute; left:calc(291/1145*100%); top:50%; transform:translateY(-50%);
+  width:0; height:calc(182/1920*100vw); border-left:1.6px solid var(--cyan); }
+.lead-word{ position:absolute; left:calc(691/1145*100%); top:50%; transform:translateY(-50%);
+  font-family:'Roboto',sans-serif; font-weight:400; font-size:calc(256.153/1920*100vw);
+  letter-spacing:-0.02em; color:#000; line-height:1; white-space:nowrap; }
+
+@media (prefers-reduced-motion:reduce){
+  .sec{ transition:none; opacity:1; transform:none; }
+  .leaddisp{ animation:none; }
+  [style*="track"]{ animation:none !important; }
+  html{ scroll-behavior:auto; }
+}
+
+/* ── 히어로 프로토타입 : Letter ↔ Line 토글 (Figma 502:1532 ↔ 502:2464) ──
+   글자는 Roboto Bold 를 패스로 분해(outline)해 흰 면 + 코랄 외곽선으로 표현한 baked SVG. */
+.h-lab{ position:absolute; left:calc(97/1920*100%); display:flex; align-items:baseline; gap:calc(20/1920*100vw);
+  font-family:'Roboto',sans-serif; font-weight:700; font-size:calc(107.08/1920*100vw); line-height:1; letter-spacing:-0.02em;
+  color:#d9d9d9; background:none; border:0; padding:0; cursor:pointer; white-space:nowrap; transition:color .3s; }
+.h-lab .arr{ display:none; }
+.h-lab.on{ color:#161616; }
+.h-lab.on .arr{ display:inline-block; }
+.h-lab:not(.on):hover{ color:var(--coral); }            /* Line 호버 시 색 변화 */
+.h-stage{ position:absolute; left:calc(679/1920*100%); top:calc(474/1080*100%);
+  width:calc(1142.675/1920*100%); height:calc(150.369/1920*100vw); }
+.hd{ position:absolute; inset:0; opacity:0; transition:opacity .5s ease; pointer-events:none; }
+.h-stage[data-mode="letter"] .hd-letter{ opacity:1; }
+.h-stage[data-mode="line"]   .hd-line{ opacity:1; }
+.dispsvg{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+.dispsvg path{ fill:#fff; stroke:var(--coral); stroke-width:1.5; stroke-linejoin:round; }
+.dispsvg .hdiv,.dispsvg .vdiv{ stroke:var(--coral); fill:none; stroke-width:.8; }
+.dispsvg .cband{ fill:var(--band); }
+/* Letter 상태 : 글자별 컬럼이 가로로 벌어지는 자간 애니 (페이지 진입 시 autoplay) */
+.hd-letter .gl{ animation-duration:5s; animation-timing-function:cubic-bezier(.5,0,.25,1); animation-iteration-count:infinite; }
+/* Line 상태 : 두 줄이 세로로 벌어지는 행간 애니 (Line 클릭 시 autoplay) */
+.hd-line{ top:50%; height:calc(320/1920*100vw); transform:translateY(-50%); }
+.dispsvg .lbg{ fill:var(--band); }
+.dispsvg .lband{ fill:#fff; }
+.lrow{ animation-duration:5s; animation-timing-function:cubic-bezier(.5,0,.25,1); animation-iteration-count:infinite; }
+.lrow-top{ animation-name:leadTop; } .lrow-bot{ animation-name:leadBot; }
+@keyframes leadTop{ 0%,16%{transform:translateY(75px)} 50%,62%{transform:translateY(6px)} 100%{transform:translateY(75px)} }
+@keyframes leadBot{ 0%,16%{transform:translateY(75px)} 50%,62%{transform:translateY(144px)} 100%{transform:translateY(75px)} }
+/* 비활성 상태의 애니는 정지 */
+.h-stage[data-mode="line"]   .hd-letter .gl{ animation-play-state:paused; }
+.h-stage[data-mode="letter"] .hd-line .lrow{ animation-play-state:paused; }
+@media (prefers-reduced-motion:reduce){ .hd{ transition:none; } .gl,.lrow{ animation:none!important; } }
+@keyframes ls0{0%,12%{transform:translateX(16.2px)}55%,68%{transform:translateX(-90px)}100%{transform:translateX(16.2px)}}
+@keyframes ls1{0%,12%{transform:translateX(13.5px)}55%,68%{transform:translateX(-75px)}100%{transform:translateX(13.5px)}}
+@keyframes ls2{0%,12%{transform:translateX(10.8px)}55%,68%{transform:translateX(-60px)}100%{transform:translateX(10.8px)}}
+@keyframes ls3{0%,12%{transform:translateX(8.1px)}55%,68%{transform:translateX(-45px)}100%{transform:translateX(8.1px)}}
+@keyframes ls4{0%,12%{transform:translateX(5.4px)}55%,68%{transform:translateX(-30px)}100%{transform:translateX(5.4px)}}
+@keyframes ls5{0%,12%{transform:translateX(2.7px)}55%,68%{transform:translateX(-15px)}100%{transform:translateX(2.7px)}}
+@keyframes ls6{0%,12%{transform:translateX(0px)}55%,68%{transform:translateX(0px)}100%{transform:translateX(0px)}}
+@keyframes ls7{0%,12%{transform:translateX(-2.7px)}55%,68%{transform:translateX(15px)}100%{transform:translateX(-2.7px)}}
+@keyframes ls8{0%,12%{transform:translateX(-5.4px)}55%,68%{transform:translateX(30px)}100%{transform:translateX(-5.4px)}}
+@keyframes ls9{0%,12%{transform:translateX(-8.1px)}55%,68%{transform:translateX(45px)}100%{transform:translateX(-8.1px)}}
+@keyframes ls10{0%,12%{transform:translateX(-10.8px)}55%,68%{transform:translateX(60px)}100%{transform:translateX(-10.8px)}}
+@keyframes ls11{0%,12%{transform:translateX(-13.5px)}55%,68%{transform:translateX(75px)}100%{transform:translateX(-13.5px)}}
+@keyframes ls12{0%,12%{transform:translateX(-16.2px)}55%,68%{transform:translateX(90px)}100%{transform:translateX(-16.2px)}}
+
+/* ── TOP 버튼 ── */
+.btn-top{ position:fixed; right:2.6vw; bottom:2.6vw; z-index:200; background:rgba(255,255,255,.86);
+  border:1px solid rgba(0,0,0,.1); border-radius:40px; padding:9px 20px;
+  font-family:'Roboto',sans-serif; font-size:11px; font-weight:700; letter-spacing:.12em; color:#171919;
+  cursor:pointer; opacity:0; transition:opacity .35s; backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); }
+.btn-top.on{ opacity:1; }
+</style>
+</head>
+<body>
+
+<main>
+
+  <!-- ════ 01 · HERO — Letter ↔ Line 토글 프로토타입 (Figma 502:1532 ↔ 502:2464) ════ (1920×1080) -->
+  <section class="sec" style="height:calc(1080/1920*100vw);max-height:1080px">
+    <button class="h-lab on" data-m="letter" style="top:calc((416 - 107.08*0.12)/1080*100%)" aria-pressed="true"><span class="arr">→</span><span>Letter</span></button>
+    <button class="h-lab"    data-m="line"   style="top:calc((557 - 107.08*0.12)/1080*100%)" aria-pressed="false"><span class="arr">→</span><span>Line</span></button>
+
+    <div class="h-stage" id="hStage" data-mode="letter">
+      <!-- Letter Spacing : 글자별 컬럼이 가로로 벌어지는 자간 애니 (outline SVG) -->
+      <div class="hd hd-letter">
+    <svg class="dispsvg" viewBox="0 0 1142.675 150.369" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <rect class="cband" x="0" y="28.49" width="1142.675" height="88.764"/>
+      <line class="hdiv" x1="0" y1="0.4"    x2="1142.675" y2="0.4"/>
+      <line class="hdiv" x1="0" y1="28.49"  x2="1142.675" y2="28.49"/>
+      <line class="hdiv" x1="0" y1="117.25" x2="1142.675" y2="117.25"/>
+      <line class="hdiv" x1="0" y1="149.9"  x2="1142.675" y2="149.9"/>
+      <g class="word" transform="translate(51.19,0)">
+      <g class="gl" style="animation-name:ls0"><line class="vdiv" x1="-2.2" y1="0" x2="-2.2" y2="150.37"/><path d="M33.38 4.22L33.38 98.54L82.83 98.54L82.83 117.25L10.09 117.25L10.09 4.22L33.38 4.22Z"/></g>
+      <g class="gl" style="animation-name:ls1"><line class="vdiv" x1="83.89" y1="0" x2="83.89" y2="150.37"/><path d="M133.36 118.80L133.36 118.80Q114.89 118.80 103.28 107.47Q91.68 96.14 91.68 77.27L91.68 77.27L91.68 75.10Q91.68 62.45 96.57 52.47Q101.46 42.49 110.43 37.10Q119.39 31.70 130.88 31.70L130.88 31.70Q148.11 31.70 158.01 42.57Q167.91 53.44 167.91 73.39L167.91 73.39L167.91 82.55L114.42 82.55Q115.51 90.78 120.98 95.75Q126.46 100.72 134.84 100.72L134.84 100.72Q147.80 100.72 155.10 91.32L155.10 91.32L166.12 103.67Q161.08 110.81 152.46 114.80Q143.84 118.80 133.36 118.80ZM130.80 49.87L130.80 49.87Q124.13 49.87 119.97 54.37Q115.82 58.87 114.66 67.26L114.66 67.26L145.86 67.26L145.86 65.47Q145.71 58.02 141.83 53.94Q137.94 49.87 130.80 49.87Z"/></g>
+      <g class="gl" style="animation-name:ls2"><line class="vdiv" x1="169.82" y1="0" x2="169.82" y2="150.37"/><path d="M185.06 12.61L207.50 12.61L207.50 33.26L221.86 33.26L221.86 49.71L207.50 49.71L207.50 91.63Q207.50 96.29 209.28 98.31Q211.07 100.33 216.11 100.33L216.11 100.33Q219.84 100.33 222.71 99.78L222.71 99.78L222.71 116.78Q216.11 118.80 209.13 118.80L209.13 118.80Q185.53 118.80 185.06 94.97L185.06 94.97L185.06 49.71L172.80 49.71L172.80 33.26L185.06 33.26L185.06 12.61Z"/></g>
+      <g class="gl" style="animation-name:ls3"><line class="vdiv" x1="223.54" y1="0" x2="223.54" y2="150.37"/><path d="M238.78 12.61L261.22 12.61L261.22 33.26L275.58 33.26L275.58 49.71L261.22 49.71L261.22 91.63Q261.22 96.29 263.00 98.31Q264.79 100.33 269.83 100.33L269.83 100.33Q273.56 100.33 276.43 99.78L276.43 99.78L276.43 116.78Q269.83 118.80 262.85 118.80L262.85 118.80Q239.25 118.80 238.78 94.97L238.78 94.97L238.78 49.71L226.52 49.71L226.52 33.26L238.78 33.26L238.78 12.61Z"/></g>
+      <g class="gl" style="animation-name:ls4"><line class="vdiv" x1="277.26" y1="0" x2="277.26" y2="150.37"/><path d="M326.73 118.80L326.73 118.80Q308.26 118.80 296.65 107.47Q285.05 96.14 285.05 77.27L285.05 77.27L285.05 75.10Q285.05 62.45 289.94 52.47Q294.83 42.49 303.79 37.10Q312.76 31.70 324.25 31.70L324.25 31.70Q341.48 31.70 351.38 42.57Q361.28 53.44 361.28 73.39L361.28 73.39L361.28 82.55L307.79 82.55Q308.88 90.78 314.35 95.75Q319.83 100.72 328.21 100.72L328.21 100.72Q341.17 100.72 348.47 91.32L348.47 91.32L359.49 103.67Q354.45 110.81 345.83 114.80Q337.21 118.80 326.73 118.80ZM324.17 49.87L324.17 49.87Q317.50 49.87 313.34 54.37Q309.19 58.87 308.03 67.26L308.03 67.26L339.23 67.26L339.23 65.47Q339.08 58.02 335.20 53.94Q331.31 49.87 324.17 49.87Z"/></g>
+      <g class="gl" style="animation-name:ls5"><line class="vdiv" x1="363.19" y1="0" x2="363.19" y2="150.37"/><path d="M421.52 32.71L421.21 54.29Q416.63 53.67 413.13 53.67L413.13 53.67Q400.40 53.67 396.44 62.29L396.44 62.29L396.44 117.25L374.01 117.25L374.01 33.26L395.20 33.26L395.82 43.27Q402.58 31.70 414.53 31.70L414.53 31.70Q418.26 31.70 421.52 32.71L421.52 32.71Z"/></g>
+      <g class="gl" style="animation-name:ls6"><line class="vdiv" x1="460.77" y1="0" x2="460.77" y2="150.37"/><path d="M531.67 87.60L531.67 87.60Q531.67 81.00 527.01 77.47Q522.36 73.93 510.25 70.01Q498.14 66.09 491.07 62.29L491.07 62.29Q471.82 51.89 471.82 34.27L471.82 34.27Q471.82 25.11 476.98 17.93Q482.14 10.75 491.81 6.71Q501.47 2.67 513.51 2.67L513.51 2.67Q525.62 2.67 535.09 7.06Q544.56 11.44 549.80 19.44Q555.04 27.44 555.04 37.60L555.04 37.60L531.75 37.60Q531.75 29.84 526.86 25.53Q521.97 21.22 513.12 21.22L513.12 21.22Q504.58 21.22 499.84 24.83Q495.11 28.44 495.11 34.34L495.11 34.34Q495.11 39.86 500.66 43.58Q506.21 47.31 517.00 50.57L517.00 50.57Q536.87 56.55 545.95 65.39Q555.04 74.24 555.04 87.44L555.04 87.44Q555.04 102.11 543.94 110.46Q532.83 118.80 514.05 118.80L514.05 118.80Q501.01 118.80 490.29 114.03Q479.58 109.25 473.95 100.95Q468.33 92.64 468.33 81.70L468.33 81.70L491.69 81.70Q491.69 100.40 514.05 100.40L514.05 100.40Q522.36 100.40 527.01 97.03Q531.67 93.65 531.67 87.60Z"/></g>
+      <g class="gl" style="animation-name:ls7"><line class="vdiv" x1="558.5" y1="0" x2="558.5" y2="150.37"/><path d="M644.93 74.87L644.93 76.03Q644.93 95.44 636.12 107.12Q627.31 118.80 612.33 118.80L612.33 118.80Q599.59 118.80 591.75 109.95L591.75 109.95L591.75 149.54L569.32 149.54L569.32 33.26L590.12 33.26L590.90 41.49Q599.05 31.70 612.17 31.70L612.17 31.70Q627.70 31.70 636.31 43.19Q644.93 54.68 644.93 74.87L644.93 74.87ZM622.49 74.40L622.49 74.40Q622.49 62.68 618.34 56.31Q614.19 49.95 606.27 49.95L606.27 49.95Q595.71 49.95 591.75 58.02L591.75 58.02L591.75 92.41Q595.87 100.72 606.43 100.72L606.43 100.72Q622.49 100.72 622.49 74.40Z"/></g>
+      <g class="gl" style="animation-name:ls8"><line class="vdiv" x1="648.01" y1="0" x2="648.01" y2="150.37"/><path d="M730.16 117.25L707.50 117.25Q705.94 114.22 705.25 109.72L705.25 109.72Q697.09 118.80 684.05 118.80L684.05 118.80Q671.71 118.80 663.60 111.66Q655.49 104.52 655.49 93.65L655.49 93.65Q655.49 80.30 665.38 73.16Q675.28 66.02 693.99 65.94L693.99 65.94L704.31 65.94L704.31 61.13Q704.31 55.30 701.33 51.81Q698.34 48.32 691.89 48.32L691.89 48.32Q686.23 48.32 683.01 51.03Q679.78 53.75 679.78 58.49L679.78 58.49L657.35 58.49Q657.35 51.19 661.85 44.98Q666.35 38.77 674.58 35.24Q682.81 31.70 693.06 31.70L693.06 31.70Q708.58 31.70 717.70 39.51Q726.83 47.31 726.83 61.44L726.83 61.44L726.83 97.84Q726.90 109.80 730.16 115.93L730.16 115.93L730.16 117.25ZM688.94 101.65L688.94 101.65Q693.91 101.65 698.10 99.43Q702.30 97.22 704.31 93.50L704.31 93.50L704.31 79.06L695.93 79.06Q679.08 79.06 678.00 90.70L678.00 90.70L677.92 92.02Q677.92 96.21 680.87 98.93Q683.82 101.65 688.94 101.65Z"/></g>
+      <g class="gl" style="animation-name:ls9"><line class="vdiv" x1="733.24" y1="0" x2="733.24" y2="150.37"/><path d="M778.99 100.72L778.99 100.72Q785.20 100.72 789.08 97.30Q792.96 93.88 793.12 88.22L793.12 88.22L814.16 88.22Q814.08 96.76 809.50 103.86Q804.92 110.96 796.96 114.88Q789.01 118.80 779.38 118.80L779.38 118.80Q761.37 118.80 750.97 107.35Q740.57 95.90 740.57 75.72L740.57 75.72L740.57 74.24Q740.57 54.84 750.89 43.27Q761.21 31.70 779.22 31.70L779.22 31.70Q794.98 31.70 804.49 40.67Q814.00 49.64 814.16 64.54L814.16 64.54L793.12 64.54Q792.96 58.02 789.08 53.94Q785.20 49.87 778.84 49.87L778.84 49.87Q771.00 49.87 767.00 55.57Q763.00 61.28 763.00 74.09L763.00 74.09L763.00 76.42Q763.00 89.38 766.96 95.05Q770.92 100.72 778.99 100.72Z"/></g>
+      <g class="gl" style="animation-name:ls10"><line class="vdiv" x1="816.15" y1="0" x2="816.15" y2="150.37"/><path d="M850.64 33.26L850.64 117.25L828.13 117.25L828.13 33.26L850.64 33.26ZM826.81 11.52L826.81 11.52Q826.81 6.48 830.19 3.22Q833.56-0.05 839.39-0.05L839.39-0.05Q845.13-0.05 848.55 3.22Q851.96 6.48 851.96 11.52L851.96 11.52Q851.96 16.64 848.51 19.91Q845.05 23.17 839.39 23.17Q833.72 23.17 830.26 19.91Q826.81 16.64 826.81 11.52Z"/></g>
+      <g class="gl" style="animation-name:ls11"><line class="vdiv" x1="858.3" y1="0" x2="858.3" y2="150.37"/><path d="M868.65 33.26L889.77 33.26L890.46 42.96Q899.47 31.70 914.61 31.70L914.61 31.70Q927.96 31.70 934.48 39.54Q941.00 47.39 941.16 62.99L941.16 62.99L941.16 117.25L918.72 117.25L918.72 63.53Q918.72 56.39 915.62 53.17Q912.51 49.95 905.29 49.95L905.29 49.95Q895.82 49.95 891.09 58.02L891.09 58.02L891.09 117.25L868.65 117.25L868.65 33.26Z"/></g>
+      <g class="gl" style="animation-name:ls12"><line class="vdiv" x1="947.34" y1="0" x2="947.34" y2="150.37"/><path d="M954.90 75.56L954.90 74.63Q954.90 55.30 964.09 43.50Q973.29 31.70 988.90 31.70L988.90 31.70Q1002.71 31.70 1010.40 41.18L1010.40 41.18L1011.33 33.26L1031.67 33.26L1031.67 114.46Q1031.67 125.48 1026.66 133.63Q1021.65 141.78 1012.57 146.05Q1003.49 150.32 991.30 150.32L991.30 150.32Q982.06 150.32 973.29 146.63Q964.52 142.94 960.02 137.12L960.02 137.12L969.95 123.46Q978.34 132.85 990.29 132.85L990.29 132.85Q999.22 132.85 1004.19 128.08Q1009.16 123.30 1009.16 114.53L1009.16 114.53L1009.16 110.03Q1001.39 118.80 988.74 118.80L988.74 118.80Q973.60 118.80 964.25 106.96Q954.90 95.13 954.90 75.56L954.90 75.56ZM977.33 76.26L977.33 76.26Q977.33 87.67 981.91 94.16Q986.49 100.64 994.49 100.64L994.49 100.64Q1004.73 100.64 1009.16 92.95L1009.16 92.95L1009.16 57.63Q1004.65 49.95 994.64 49.95L994.64 49.95Q986.57 49.95 981.95 56.55Q977.33 63.14 977.33 76.26Z"/></g>
+      <line class="vdiv" x1="1038.09" y1="0" x2="1038.09" y2="150.37"/>
+      </g>
+    </svg>
+      </div>
+      <!-- Line Spacing : 두 줄이 세로로 벌어지는 행간 애니 (outline SVG) -->
+      <div class="hd hd-line">
+    <svg class="dispsvg" viewBox="0 0 1142.675 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <rect class="lbg" x="0" y="0" width="1142.675" height="300"/>
+      <g class="lrow lrow-top"><rect class="lband" x="0" y="28.49" width="1142.675" height="88.764"/><g class="ltext"><path d="M33.38 4.22L33.38 98.54L82.83 98.54L82.83 117.25L10.09 117.25L10.09 4.22L33.38 4.22Z"/><path d="M118.38 33.26L118.38 117.25L95.87 117.25L95.87 33.26L118.38 33.26ZM94.55 11.52L94.55 11.52Q94.55 6.48 97.93 3.22Q101.30-0.05 107.13-0.05L107.13-0.05Q112.87-0.05 116.29 3.22Q119.70 6.48 119.70 11.52L119.70 11.52Q119.70 16.64 116.25 19.91Q112.79 23.17 107.13 23.17Q101.46 23.17 98.00 19.91Q94.55 16.64 94.55 11.52Z"/><path d="M136.39 33.26L157.51 33.26L158.20 42.96Q167.21 31.70 182.35 31.70L182.35 31.70Q195.70 31.70 202.22 39.54Q208.74 47.39 208.90 62.99L208.90 62.99L208.90 117.25L186.46 117.25L186.46 63.53Q186.46 56.39 183.36 53.17Q180.25 49.95 173.03 49.95L173.03 49.95Q163.56 49.95 158.83 58.02L158.83 58.02L158.83 117.25L136.39 117.25L136.39 33.26Z"/><path d="M264.55 118.80L264.55 118.80Q246.08 118.80 234.47 107.47Q222.87 96.14 222.87 77.27L222.87 77.27L222.87 75.10Q222.87 62.45 227.76 52.47Q232.65 42.49 241.62 37.10Q250.58 31.70 262.07 31.70L262.07 31.70Q279.30 31.70 289.20 42.57Q299.10 53.44 299.10 73.39L299.10 73.39L299.10 82.55L245.61 82.55Q246.70 90.78 252.17 95.75Q257.65 100.72 266.03 100.72L266.03 100.72Q278.99 100.72 286.29 91.32L286.29 91.32L297.31 103.67Q292.27 110.81 283.65 114.80Q275.03 118.80 264.55 118.80ZM261.99 49.87L261.99 49.87Q255.32 49.87 251.16 54.37Q247.01 58.87 245.85 67.26L245.85 67.26L277.05 67.26L277.05 65.47Q276.90 58.02 273.02 53.94Q269.13 49.87 261.99 49.87Z"/><path d="M651.70 87.60L651.70 87.60Q651.70 81.00 647.04 77.47Q642.38 73.93 630.28 70.01Q618.17 66.09 611.10 62.29L611.10 62.29Q591.85 51.89 591.85 34.27L591.85 34.27Q591.85 25.11 597.01 17.93Q602.17 10.75 611.84 6.71Q621.50 2.67 633.54 2.67L633.54 2.67Q645.65 2.67 655.12 7.06Q664.59 11.44 669.83 19.44Q675.07 27.44 675.07 37.60L675.07 37.60L651.78 37.60Q651.78 29.84 646.89 25.53Q642.00 21.22 633.15 21.22L633.15 21.22Q624.61 21.22 619.87 24.83Q615.14 28.44 615.14 34.34L615.14 34.34Q615.14 39.86 620.69 43.58Q626.24 47.31 637.03 50.57L637.03 50.57Q656.90 56.55 665.98 65.39Q675.07 74.24 675.07 87.44L675.07 87.44Q675.07 102.11 663.97 110.46Q652.86 118.80 634.08 118.80L634.08 118.80Q621.04 118.80 610.32 114.03Q599.61 109.25 593.98 100.95Q588.36 92.64 588.36 81.70L588.36 81.70L611.72 81.70Q611.72 100.40 634.08 100.40L634.08 100.40Q642.38 100.40 647.04 97.03Q651.70 93.65 651.70 87.60Z"/><path d="M764.96 74.87L764.96 76.03Q764.96 95.44 756.15 107.12Q747.34 118.80 732.36 118.80L732.36 118.80Q719.62 118.80 711.78 109.95L711.78 109.95L711.78 149.54L689.35 149.54L689.35 33.26L710.15 33.26L710.93 41.49Q719.08 31.70 732.20 31.70L732.20 31.70Q747.73 31.70 756.34 43.19Q764.96 54.68 764.96 74.87L764.96 74.87ZM742.52 74.40L742.52 74.40Q742.52 62.68 738.37 56.31Q734.22 49.95 726.30 49.95L726.30 49.95Q715.74 49.95 711.78 58.02L711.78 58.02L711.78 92.41Q715.90 100.72 726.46 100.72L726.46 100.72Q742.52 100.72 742.52 74.40Z"/><path d="M850.19 117.25L827.53 117.25Q825.97 114.22 825.28 109.72L825.28 109.72Q817.12 118.80 804.08 118.80L804.08 118.80Q791.74 118.80 783.63 111.66Q775.52 104.52 775.52 93.65L775.52 93.65Q775.52 80.30 785.41 73.16Q795.31 66.02 814.02 65.94L814.02 65.94L824.34 65.94L824.34 61.13Q824.34 55.30 821.36 51.81Q818.37 48.32 811.92 48.32L811.92 48.32Q806.26 48.32 803.03 51.03Q799.81 53.75 799.81 58.49L799.81 58.49L777.38 58.49Q777.38 51.19 781.88 44.98Q786.38 38.77 794.61 35.24Q802.84 31.70 813.09 31.70L813.09 31.70Q828.61 31.70 837.73 39.51Q846.86 47.31 846.86 61.44L846.86 61.44L846.86 97.84Q846.93 109.80 850.19 115.93L850.19 115.93L850.19 117.25ZM808.97 101.65L808.97 101.65Q813.94 101.65 818.13 99.43Q822.33 97.22 824.34 93.50L824.34 93.50L824.34 79.06L815.96 79.06Q799.11 79.06 798.03 90.70L798.03 90.70L797.95 92.02Q797.95 96.21 800.90 98.93Q803.85 101.65 808.97 101.65Z"/><path d="M899.02 100.72L899.02 100.72Q905.23 100.72 909.11 97.30Q912.99 93.88 913.15 88.22L913.15 88.22L934.19 88.22Q934.11 96.76 929.53 103.86Q924.95 110.96 916.99 114.88Q909.04 118.80 899.41 118.80L899.41 118.80Q881.40 118.80 871.00 107.35Q860.60 95.90 860.60 75.72L860.60 75.72L860.60 74.24Q860.60 54.84 870.92 43.27Q881.24 31.70 899.25 31.70L899.25 31.70Q915.01 31.70 924.52 40.67Q934.03 49.64 934.19 64.54L934.19 64.54L913.15 64.54Q912.99 58.02 909.11 53.94Q905.23 49.87 898.87 49.87L898.87 49.87Q891.03 49.87 887.03 55.57Q883.03 61.28 883.03 74.09L883.03 74.09L883.03 76.42Q883.03 89.38 886.99 95.05Q890.95 100.72 899.02 100.72Z"/><path d="M970.67 33.26L970.67 117.25L948.16 117.25L948.16 33.26L970.67 33.26ZM946.84 11.52L946.84 11.52Q946.84 6.48 950.22 3.22Q953.59-0.05 959.42-0.05L959.42-0.05Q965.16-0.05 968.58 3.22Q971.99 6.48 971.99 11.52L971.99 11.52Q971.99 16.64 968.54 19.91Q965.08 23.17 959.42 23.17Q953.75 23.17 950.29 19.91Q946.84 16.64 946.84 11.52Z"/><path d="M988.68 33.26L1009.80 33.26L1010.49 42.96Q1019.50 31.70 1034.64 31.70L1034.64 31.70Q1047.99 31.70 1054.51 39.54Q1061.03 47.39 1061.19 62.99L1061.19 62.99L1061.19 117.25L1038.75 117.25L1038.75 63.53Q1038.75 56.39 1035.65 53.17Q1032.54 49.95 1025.32 49.95L1025.32 49.95Q1015.85 49.95 1011.12 58.02L1011.12 58.02L1011.12 117.25L988.68 117.25L988.68 33.26Z"/><path d="M1074.93 75.56L1074.93 74.63Q1074.93 55.30 1084.12 43.50Q1093.32 31.70 1108.93 31.70L1108.93 31.70Q1122.74 31.70 1130.43 41.18L1130.43 41.18L1131.36 33.26L1151.70 33.26L1151.70 114.46Q1151.70 125.48 1146.69 133.63Q1141.68 141.78 1132.60 146.05Q1123.52 150.32 1111.33 150.32L1111.33 150.32Q1102.09 150.32 1093.32 146.63Q1084.55 142.94 1080.05 137.12L1080.05 137.12L1089.98 123.46Q1098.37 132.85 1110.32 132.85L1110.32 132.85Q1119.25 132.85 1124.22 128.08Q1129.19 123.30 1129.19 114.53L1129.19 114.53L1129.19 110.03Q1121.42 118.80 1108.77 118.80L1108.77 118.80Q1093.63 118.80 1084.28 106.96Q1074.93 95.13 1074.93 75.56L1074.93 75.56ZM1097.36 76.26L1097.36 76.26Q1097.36 87.67 1101.94 94.16Q1106.52 100.64 1114.52 100.64L1114.52 100.64Q1124.76 100.64 1129.19 92.95L1129.19 92.95L1129.19 57.63Q1124.68 49.95 1114.67 49.95L1114.67 49.95Q1106.60 49.95 1101.98 56.55Q1097.36 63.14 1097.36 76.26Z"/></g></g>
+      <g class="lrow lrow-bot"><rect class="lband" x="0" y="28.49" width="1142.675" height="88.764"/><g class="ltext"><path d="M33.38 4.22L33.38 98.54L82.83 98.54L82.83 117.25L10.09 117.25L10.09 4.22L33.38 4.22Z"/><path d="M118.38 33.26L118.38 117.25L95.87 117.25L95.87 33.26L118.38 33.26ZM94.55 11.52L94.55 11.52Q94.55 6.48 97.93 3.22Q101.30-0.05 107.13-0.05L107.13-0.05Q112.87-0.05 116.29 3.22Q119.70 6.48 119.70 11.52L119.70 11.52Q119.70 16.64 116.25 19.91Q112.79 23.17 107.13 23.17Q101.46 23.17 98.00 19.91Q94.55 16.64 94.55 11.52Z"/><path d="M136.39 33.26L157.51 33.26L158.20 42.96Q167.21 31.70 182.35 31.70L182.35 31.70Q195.70 31.70 202.22 39.54Q208.74 47.39 208.90 62.99L208.90 62.99L208.90 117.25L186.46 117.25L186.46 63.53Q186.46 56.39 183.36 53.17Q180.25 49.95 173.03 49.95L173.03 49.95Q163.56 49.95 158.83 58.02L158.83 58.02L158.83 117.25L136.39 117.25L136.39 33.26Z"/><path d="M264.55 118.80L264.55 118.80Q246.08 118.80 234.47 107.47Q222.87 96.14 222.87 77.27L222.87 77.27L222.87 75.10Q222.87 62.45 227.76 52.47Q232.65 42.49 241.62 37.10Q250.58 31.70 262.07 31.70L262.07 31.70Q279.30 31.70 289.20 42.57Q299.10 53.44 299.10 73.39L299.10 73.39L299.10 82.55L245.61 82.55Q246.70 90.78 252.17 95.75Q257.65 100.72 266.03 100.72L266.03 100.72Q278.99 100.72 286.29 91.32L286.29 91.32L297.31 103.67Q292.27 110.81 283.65 114.80Q275.03 118.80 264.55 118.80ZM261.99 49.87L261.99 49.87Q255.32 49.87 251.16 54.37Q247.01 58.87 245.85 67.26L245.85 67.26L277.05 67.26L277.05 65.47Q276.90 58.02 273.02 53.94Q269.13 49.87 261.99 49.87Z"/><path d="M651.70 87.60L651.70 87.60Q651.70 81.00 647.04 77.47Q642.38 73.93 630.28 70.01Q618.17 66.09 611.10 62.29L611.10 62.29Q591.85 51.89 591.85 34.27L591.85 34.27Q591.85 25.11 597.01 17.93Q602.17 10.75 611.84 6.71Q621.50 2.67 633.54 2.67L633.54 2.67Q645.65 2.67 655.12 7.06Q664.59 11.44 669.83 19.44Q675.07 27.44 675.07 37.60L675.07 37.60L651.78 37.60Q651.78 29.84 646.89 25.53Q642.00 21.22 633.15 21.22L633.15 21.22Q624.61 21.22 619.87 24.83Q615.14 28.44 615.14 34.34L615.14 34.34Q615.14 39.86 620.69 43.58Q626.24 47.31 637.03 50.57L637.03 50.57Q656.90 56.55 665.98 65.39Q675.07 74.24 675.07 87.44L675.07 87.44Q675.07 102.11 663.97 110.46Q652.86 118.80 634.08 118.80L634.08 118.80Q621.04 118.80 610.32 114.03Q599.61 109.25 593.98 100.95Q588.36 92.64 588.36 81.70L588.36 81.70L611.72 81.70Q611.72 100.40 634.08 100.40L634.08 100.40Q642.38 100.40 647.04 97.03Q651.70 93.65 651.70 87.60Z"/><path d="M764.96 74.87L764.96 76.03Q764.96 95.44 756.15 107.12Q747.34 118.80 732.36 118.80L732.36 118.80Q719.62 118.80 711.78 109.95L711.78 109.95L711.78 149.54L689.35 149.54L689.35 33.26L710.15 33.26L710.93 41.49Q719.08 31.70 732.20 31.70L732.20 31.70Q747.73 31.70 756.34 43.19Q764.96 54.68 764.96 74.87L764.96 74.87ZM742.52 74.40L742.52 74.40Q742.52 62.68 738.37 56.31Q734.22 49.95 726.30 49.95L726.30 49.95Q715.74 49.95 711.78 58.02L711.78 58.02L711.78 92.41Q715.90 100.72 726.46 100.72L726.46 100.72Q742.52 100.72 742.52 74.40Z"/><path d="M850.19 117.25L827.53 117.25Q825.97 114.22 825.28 109.72L825.28 109.72Q817.12 118.80 804.08 118.80L804.08 118.80Q791.74 118.80 783.63 111.66Q775.52 104.52 775.52 93.65L775.52 93.65Q775.52 80.30 785.41 73.16Q795.31 66.02 814.02 65.94L814.02 65.94L824.34 65.94L824.34 61.13Q824.34 55.30 821.36 51.81Q818.37 48.32 811.92 48.32L811.92 48.32Q806.26 48.32 803.03 51.03Q799.81 53.75 799.81 58.49L799.81 58.49L777.38 58.49Q777.38 51.19 781.88 44.98Q786.38 38.77 794.61 35.24Q802.84 31.70 813.09 31.70L813.09 31.70Q828.61 31.70 837.73 39.51Q846.86 47.31 846.86 61.44L846.86 61.44L846.86 97.84Q846.93 109.80 850.19 115.93L850.19 115.93L850.19 117.25ZM808.97 101.65L808.97 101.65Q813.94 101.65 818.13 99.43Q822.33 97.22 824.34 93.50L824.34 93.50L824.34 79.06L815.96 79.06Q799.11 79.06 798.03 90.70L798.03 90.70L797.95 92.02Q797.95 96.21 800.90 98.93Q803.85 101.65 808.97 101.65Z"/><path d="M899.02 100.72L899.02 100.72Q905.23 100.72 909.11 97.30Q912.99 93.88 913.15 88.22L913.15 88.22L934.19 88.22Q934.11 96.76 929.53 103.86Q924.95 110.96 916.99 114.88Q909.04 118.80 899.41 118.80L899.41 118.80Q881.40 118.80 871.00 107.35Q860.60 95.90 860.60 75.72L860.60 75.72L860.60 74.24Q860.60 54.84 870.92 43.27Q881.24 31.70 899.25 31.70L899.25 31.70Q915.01 31.70 924.52 40.67Q934.03 49.64 934.19 64.54L934.19 64.54L913.15 64.54Q912.99 58.02 909.11 53.94Q905.23 49.87 898.87 49.87L898.87 49.87Q891.03 49.87 887.03 55.57Q883.03 61.28 883.03 74.09L883.03 74.09L883.03 76.42Q883.03 89.38 886.99 95.05Q890.95 100.72 899.02 100.72Z"/><path d="M970.67 33.26L970.67 117.25L948.16 117.25L948.16 33.26L970.67 33.26ZM946.84 11.52L946.84 11.52Q946.84 6.48 950.22 3.22Q953.59-0.05 959.42-0.05L959.42-0.05Q965.16-0.05 968.58 3.22Q971.99 6.48 971.99 11.52L971.99 11.52Q971.99 16.64 968.54 19.91Q965.08 23.17 959.42 23.17Q953.75 23.17 950.29 19.91Q946.84 16.64 946.84 11.52Z"/><path d="M988.68 33.26L1009.80 33.26L1010.49 42.96Q1019.50 31.70 1034.64 31.70L1034.64 31.70Q1047.99 31.70 1054.51 39.54Q1061.03 47.39 1061.19 62.99L1061.19 62.99L1061.19 117.25L1038.75 117.25L1038.75 63.53Q1038.75 56.39 1035.65 53.17Q1032.54 49.95 1025.32 49.95L1025.32 49.95Q1015.85 49.95 1011.12 58.02L1011.12 58.02L1011.12 117.25L988.68 117.25L988.68 33.26Z"/><path d="M1074.93 75.56L1074.93 74.63Q1074.93 55.30 1084.12 43.50Q1093.32 31.70 1108.93 31.70L1108.93 31.70Q1122.74 31.70 1130.43 41.18L1130.43 41.18L1131.36 33.26L1151.70 33.26L1151.70 114.46Q1151.70 125.48 1146.69 133.63Q1141.68 141.78 1132.60 146.05Q1123.52 150.32 1111.33 150.32L1111.33 150.32Q1102.09 150.32 1093.32 146.63Q1084.55 142.94 1080.05 137.12L1080.05 137.12L1089.98 123.46Q1098.37 132.85 1110.32 132.85L1110.32 132.85Q1119.25 132.85 1124.22 128.08Q1129.19 123.30 1129.19 114.53L1129.19 114.53L1129.19 110.03Q1121.42 118.80 1108.77 118.80L1108.77 118.80Q1093.63 118.80 1084.28 106.96Q1074.93 95.13 1074.93 75.56L1074.93 75.56ZM1097.36 76.26L1097.36 76.26Q1097.36 87.67 1101.94 94.16Q1106.52 100.64 1114.52 100.64L1114.52 100.64Q1124.76 100.64 1129.19 92.95L1129.19 92.95L1129.19 57.63Q1124.68 49.95 1114.67 49.95L1114.67 49.95Q1106.60 49.95 1101.98 56.55Q1097.36 63.14 1097.36 76.26Z"/></g></g>
+    </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 02 · 자간 (Letter Spacing) intro ════ (1920×766, gray) -->
+  <section class="sec gray" style="height:calc(766/1920*100vw);max-height:766px">
+    <div class="t eyebrow" style="left:calc(96/1920*100%);top:calc((88 - 18*0.45)/766*100%)">Letter Spacing</div>
+    <div class="t title"   style="left:calc(96/1920*100%);top:calc((135 - 40*0.45)/766*100%)">자간</div>
+    <div class="t subcap"  style="left:calc(96/1920*100%);top:calc((471 - 16*0.45)/766*100%)">글자 사이의 밀도와 판독성</div>
+    <div class="t" style="left:calc(679/1920*100%);top:calc((468 - 24*0.45)/766*100%);width:calc(511/1920*100%);font-weight:400;font-size:calc(24/1920*100vw);letter-spacing:-0.02em;line-height:1.6;color:var(--ink)">자간은 글자와 글자 사이의 간격을 의미합니다. 텍스트의 시각적 밀도와 판독성을 결정하는 핵심적인 요소라고 합니다.</div>
+    <div class="t" style="left:calc(1261/1920*100%);top:calc((468 - 24*0.45)/766*100%);width:calc(512/1920*100%);font-weight:400;font-size:calc(24/1920*100vw);letter-spacing:-0.02em;line-height:1.6;color:var(--ink)">자간이 너무 좁거나 넓으면 읽기 힘들어집니다. 따라서 서체의 굵기와 크기에 맞춰 자간을 세밀하게 조정하는 과정이 필요합니다.</div>
+
+    <!-- Letter Spacing 디스플레이 (자간 애니) -->
+    <div style="position:absolute;left:calc(679/1920*100%);top:calc(67/766*100%);width:calc(1145/1920*100%);height:calc(350/1920*100vw)">
+      <div class="hrule" style="left:0;top:calc(86/350*100%);width:100%"></div>
+      <div class="hrule" style="left:0;top:calc(120/350*100%);width:100%"></div>
+      <div class="hrule" style="left:0;top:calc(217/350*100%);width:100%"></div>
+      <div class="hrule" style="left:0;top:calc(254/350*100%);width:100%"></div>
+      <div style="position:absolute;left:calc(20/1145*100%);top:calc(120/350*100%);width:calc(1096/1145*100%);height:calc(96/350*100%);background:#d9d9d9;opacity:.41"></div>
+      <div style="position:absolute;left:0;top:calc((86 - 183.266*0.12)/350*100%);width:100%;font-family:'Roboto',sans-serif;font-weight:500;font-size:calc(183.266/1920*100vw);line-height:1;letter-spacing:-0.02em;color:#f7f8f8;white-space:nowrap;text-align:center;animation:track 4.6s ease-in-out infinite">Letter Spacing</div>
+    </div>
+  </section>
+
+  <!-- ════ 03 · 자간의 응집력 (Negative Spacing) ════ (1920×1080, white) -->
+  <section class="sec" style="height:calc(1080/1920*100vw);max-height:1080px">
+    <div class="t eyebrow" style="left:calc(96/1920*100%);top:calc((88 - 18*0.45)/1080*100%)">Negative Spacing</div>
+    <div class="t title"   style="left:calc(96/1920*100%);top:calc((135 - 40*0.45)/1080*100%)">자간의 응집력</div>
+    <div class="t subcap"  style="left:calc(96/1920*100%);top:calc((207 - 16*0.45)/1080*100%)">제목과 강조문</div>
+    <div class="t body"    style="left:calc(679/1920*100%);top:calc((144 - 18*0.45)/1080*100%);width:calc(1145/1920*100%);font-weight:500">영문 서체인 Roboto는 글자마다 너비가 다른 가변적 구조를 가지고 있습니다. 디지털 스크린 환경에서 기본 자간(0%)은 단어 사이의 응집력을 다소 떨어뜨릴 수 있습니다. 실험 결과, 자간을 -2%로 설정했을 때 알파벳 개별 형태가 하나의 단어로 강력하게 결속되며 시각적 밀도가 높아지는 것을 확인했습니다. 이러한 응집력은 사용자가 문장을 이미지로 인지하게 하여 정보 습득 속도를 높입니다.</div>
+    <div class="t spec" style="left:calc(96/1920*100%);top:calc((430 - 16*0.45)/1080*100%)">48px / 70 / 행간 150%</div>
+
+    <!-- 왼쪽 컬럼 (x96) : 자간 -4% / 0% -->
+    <div class="hrule" style="left:calc(96/1920*100%);top:calc(475/1080*100%);width:calc(840/1920*100%)"></div>
+    <div class="clabel" style="left:calc(96/1920*100%);top:calc((503 - 22*0.45)/1080*100%)">|자간 -4%|</div>
+    <div class="demo-disp" style="left:calc(387/1920*100%);top:calc((499 - 48*0.37)/1080*100%);line-height:1.5;letter-spacing:-0.04em">Time is all we have,<br>don't let it slip away.</div>
+    <div class="hrule" style="left:calc(96/1920*100%);top:calc(687/1080*100%);width:calc(840/1920*100%)"></div>
+    <div class="clabel" style="left:calc(96/1920*100%);top:calc((715 - 22*0.45)/1080*100%)">|자간 0%|</div>
+    <div class="demo-disp" style="left:calc(387/1920*100%);top:calc((711 - 48*0.37)/1080*100%);line-height:1.5;letter-spacing:0">Time is all we have,<br>don't let it slip away.</div>
+    <!-- 오른쪽 컬럼 (x976) : 자간 -2%(권장) / 2% -->
+    <div class="hrule" style="left:calc(976/1920*100%);top:calc(475/1080*100%);width:calc(840/1920*100%)"></div>
+    <div class="clabel rec" style="left:calc(976/1920*100%);top:calc((503 - 22*0.45)/1080*100%)">|자간 -2%|</div>
+    <div class="demo-disp" style="left:calc(1267/1920*100%);top:calc((499 - 48*0.37)/1080*100%);line-height:1.5;letter-spacing:-0.02em">Time is all we have,<br>don't let it slip away.</div>
+    <div class="hrule" style="left:calc(976/1920*100%);top:calc(687/1080*100%);width:calc(840/1920*100%)"></div>
+    <div class="clabel" style="left:calc(976/1920*100%);top:calc((715 - 22*0.45)/1080*100%)">|자간 2%|</div>
+    <div class="demo-disp" style="left:calc(1267/1920*100%);top:calc((711 - 48*0.37)/1080*100%);line-height:1.5;letter-spacing:0.02em">Time is all we have,<br>don't let it slip away.</div>
+  </section>
+
+  <!-- ════ 04 · 자간의 판독성 (Standard Spacing) ════ (1920×1461, white) -->
+  <section class="sec" style="height:calc(1461/1920*100vw);max-height:1461px">
+    <div class="t eyebrow" style="left:calc(96/1920*100%);top:calc((88 - 18*0.45)/1461*100%)">Standard Spacing</div>
+    <div class="t title"   style="left:calc(96/1920*100%);top:calc((135 - 40*0.45)/1461*100%)">자간의 판독성</div>
+    <div class="t subcap"  style="left:calc(96/1920*100%);top:calc((207 - 16*0.45)/1461*100%)">설명문과 캡션</div>
+    <div class="t body"    style="left:calc(679/1920*100%);top:calc((143 - 18*0.45)/1461*100%);width:calc(1145/1920*100%);font-weight:500;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden">세부 정보나 작은 크기의 본문에서는 자간의 디테일이 더욱 중요해집니다. 자간이 너무 넓으면 시선이 글줄 밖으로 새어 나가고, 반대로 너무 좁으면 글자가 뭉쳐 판독성이 떨어집니다. Roboto 본문에서 -2%의 자간은 영문 서체의 어센더와 디센더 사이에서도 명확한 형태를 유지하게 돕습니다.</div>
+    <div class="t spec" style="left:calc(96/1920*100%);top:calc((467 - 16*0.45)/1461*100%)">20px / 50 / 행간 170%</div>
+
+    <div class="hrule" style="left:calc(679/1920*100%);top:calc(474/1461*100%);width:calc(1144/1920*100%)"></div>
+    <div class="clabel" style="left:calc(679/1920*100%);top:calc((506 - 22*0.45)/1461*100%)">|자간 -4%|</div>
+    <div class="demo-body" style="left:calc(969/1920*100%);top:calc((506 - 20*0.47)/1461*100%);width:calc(772/1920*100%);line-height:1.7;letter-spacing:-0.04em">Lucky love, I'm a lucky love. It's a matter of time before I'm back in line. The space between these words defines the depth of our rhythm. When the characters are too close, the emotion gets tangled and lost. By adjusting the spacing to -2%, we find the perfect balance for digital clarity.</div>
+
+    <div class="hrule" style="left:calc(679/1920*100%);top:calc(674/1461*100%);width:calc(1144/1920*100%)"></div>
+    <div class="clabel rec" style="left:calc(679/1920*100%);top:calc((714 - 22*0.45)/1461*100%)">|자간 -2%|</div>
+    <div class="demo-body" style="left:calc(970/1920*100%);top:calc((714 - 20*0.47)/1461*100%);width:calc(772/1920*100%);line-height:1.7;letter-spacing:-0.02em">Lucky love, I'm a lucky love. It's a matter of time before I'm back in line. The space between these words defines the depth of our rhythm. When the characters are too close, the emotion gets tangled and lost. By adjusting the spacing to -2%, we find the perfect balance for digital clarity.</div>
+
+    <div class="hrule" style="left:calc(679/1920*100%);top:calc(890/1461*100%);width:calc(1144/1920*100%)"></div>
+    <div class="clabel" style="left:calc(679/1920*100%);top:calc((930 - 22*0.45)/1461*100%)">|자간 0%|</div>
+    <div class="demo-body" style="left:calc(970/1920*100%);top:calc((930 - 20*0.47)/1461*100%);width:calc(772/1920*100%);line-height:1.7;letter-spacing:0">Lucky love, I'm a lucky love. It's a matter of time before I'm back in line. The space between these words defines the depth of our rhythm. When the characters are too close, the emotion gets tangled and lost. By adjusting the spacing to -2%, we find the perfect balance for digital clarity.</div>
+
+    <div class="hrule" style="left:calc(679/1920*100%);top:calc(1106/1461*100%);width:calc(1144/1920*100%)"></div>
+    <div class="clabel" style="left:calc(679/1920*100%);top:calc((1138 - 22*0.45)/1461*100%)">|자간 2%|</div>
+    <div class="demo-body" style="left:calc(970/1920*100%);top:calc((1138 - 20*0.47)/1461*100%);width:calc(772/1920*100%);line-height:1.7;letter-spacing:0.02em">Lucky love, I'm a lucky love. It's a matter of time before I'm back in line. The space between these words defines the depth of our rhythm. When the characters are too close, the emotion gets tangled and lost. By adjusting the spacing to -2%, we find the perfect balance for digital clarity.</div>
+  </section>
+
+  <!-- ════ 05 · 행간 (Line Spacing) intro ════ (1920×752, gray) -->
+  <section class="sec gray" style="height:calc(752/1920*100vw);max-height:752px">
+    <div class="t eyebrow" style="left:calc(96/1920*100%);top:calc((88 - 18*0.45)/752*100%)">Line Spacing</div>
+    <div class="t title"   style="left:calc(96/1920*100%);top:calc((135 - 40*0.45)/752*100%)">행간</div>
+    <div class="t subcap"  style="left:calc(96/1920*100%);top:calc((459 - 16*0.45)/752*100%)">크기 비교</div>
+    <div class="t" style="left:calc(96/1920*100%);top:calc((498 - 18*0.45)/752*100%);width:calc(247/1920*100%);font-weight:400;font-size:calc(18/1920*100vw);letter-spacing:-0.02em;line-height:1.6;color:var(--ink)">윗줄의 기준선에서 아랫줄의 기준선까지의 수직 거리를 뜻하며, 독자의 시선이 문장을 따라 흐르는 리듬을 만들어냅니다.</div>
+
+    <!-- Line 디스플레이 (행간 애니) -->
+    <div class="leaddisp" style="left:calc(679/1920*100%);top:calc(150/752*100%);width:calc(1145/1920*100%);height:calc(370/1920*100vw)">
+      <div class="lead-band"></div>
+      <div class="lead-measure"></div>
+      <div class="lead-word">Line</div>
+    </div>
+  </section>
+
+  <!-- ════ 06 · 행간의 긴장감 (Tight Leading) ════ (1920×1073, white) -->
+  <section class="sec" style="height:calc(1073/1920*100vw);max-height:1073px">
+    <div class="t eyebrow" style="left:calc(96/1920*100%);top:calc((88 - 18*0.45)/1073*100%)">Tight Leading</div>
+    <div class="t title"   style="left:calc(96/1920*100%);top:calc((135 - 40*0.45)/1073*100%)">행간의 긴장감</div>
+    <div class="t subcap"  style="left:calc(96/1920*100%);top:calc((207 - 16*0.45)/1073*100%)">제목과 강조문</div>
+    <div class="t body"    style="left:calc(679/1920*100%);top:calc((144 - 18*0.45)/1073*100%);width:calc(1145/1920*100%);font-weight:500">제목용 텍스트에서 행간은 단순히 줄 사이의 간격이 아니라 메시지의 에너지를 모으는 장치입니다. Roboto의 굵은 웨이트를 사용할 때 행간을 140% 수준으로 좁게 설정하면, 문장들이 단단하게 맞물리며 압도적인 신뢰감을 줍니다. 너무 넓은 행간은 줄을 분절시켜 정보의 힘을 분산시키지만, 적절히 압축된 행간은 시각적 덩어리감을 극대화하여 강력한 첫인상을 남깁니다.</div>
+    <div class="t spec" style="left:calc(96/1920*100%);top:calc((430 - 16*0.45)/1073*100%)">48px / 70 / 자간 -2%</div>
+
+    <!-- 왼쪽 (x96) : 행간 110% / 150% -->
+    <div class="hrule" style="left:calc(96/1920*100%);top:calc(475/1073*100%);width:calc(840/1920*100%)"></div>
+    <div class="clabel" style="left:calc(96/1920*100%);top:calc((499 - 22*0.45)/1073*100%)">|행간 110%|</div>
+    <div class="demo-disp" style="left:calc(387/1920*100%);top:calc((499 - 48*0.17)/1073*100%);line-height:1.1;letter-spacing:-0.02em">Time is all we have,<br>don't let it slip away.</div>
+    <div class="hrule" style="left:calc(96/1920*100%);top:calc(687/1073*100%);width:calc(840/1920*100%)"></div>
+    <div class="clabel" style="left:calc(96/1920*100%);top:calc((711 - 22*0.45)/1073*100%)">|행간 150%|</div>
+    <div class="demo-disp" style="left:calc(387/1920*100%);top:calc((711 - 48*0.37)/1073*100%);line-height:1.5;letter-spacing:-0.02em">Time is all we have,<br>don't let it slip away.</div>
+    <!-- 오른쪽 (x976) : 행간 140%(권장) / 170% -->
+    <div class="hrule" style="left:calc(976/1920*100%);top:calc(475/1073*100%);width:calc(840/1920*100%)"></div>
+    <div class="clabel rec" style="left:calc(976/1920*100%);top:calc((499 - 22*0.45)/1073*100%)">|행간 140%|</div>
+    <div class="demo-disp" style="left:calc(1267/1920*100%);top:calc((499 - 48*0.32)/1073*100%);line-height:1.4;letter-spacing:-0.02em">Time is all we have,<br>don't let it slip away.</div>
+    <div class="hrule" style="left:calc(976/1920*100%);top:calc(687/1073*100%);width:calc(840/1920*100%)"></div>
+    <div class="clabel" style="left:calc(976/1920*100%);top:calc((711 - 22*0.45)/1073*100%)">|행간 170%|</div>
+    <div class="demo-disp" style="left:calc(1267/1920*100%);top:calc((711 - 48*0.47)/1073*100%);line-height:1.7;letter-spacing:-0.02em">Time is all we have,<br>don't let it slip away.</div>
+  </section>
+
+  <!-- ════ 07 · 행간의 리듬 (Optimal Leading) ════ (1920×1444, white) -->
+  <section class="sec" style="height:calc(1444/1920*100vw);max-height:1444px">
+    <div class="t eyebrow" style="left:calc(96/1920*100%);top:calc((88 - 18*0.45)/1444*100%)">Optimal Leading</div>
+    <div class="t title"   style="left:calc(96/1920*100%);top:calc((135 - 40*0.45)/1444*100%)">행간의 리듬</div>
+    <div class="t subcap"  style="left:calc(96/1920*100%);top:calc((207 - 16*0.45)/1444*100%)">설명문과 캡션</div>
+    <div class="t body"    style="left:calc(679/1920*100%);top:calc((143 - 18*0.45)/1444*100%);width:calc(1145/1920*100%);font-weight:500">장문의 본문에서는 독자의 피로도를 낮추는 유연한 호흡이 필수적입니다. Roboto는 획이 정직하고 기하학적이어서 행간이 좁으면 줄 간의 간섭이 생기기 쉽습니다. 웹 환경에서 최적의 가독성을 위해 행간을 170%로 유지하는 것이 가장 보기 좋았습니다.</div>
+    <div class="t spec" style="left:calc(96/1920*100%);top:calc((467 - 16*0.45)/1444*100%)">20px / 50 / 행간 170%</div>
+
+    <div class="hrule" style="left:calc(679/1920*100%);top:calc(474/1444*100%);width:calc(1144/1920*100%)"></div>
+    <div class="clabel" style="left:calc(679/1920*100%);top:calc((506 - 22*0.45)/1444*100%)">|행간 110%|</div>
+    <div class="demo-body" style="left:calc(969/1920*100%);top:calc((506 - 20*0.17)/1444*100%);width:calc(772/1920*100%);line-height:1.1;letter-spacing:-0.02em">Lucky love, I'm a lucky love. It's a matter of time before I'm back in line. The space between these words defines the depth of our rhythm. When the characters are too close, the emotion gets tangled and lost. By adjusting the spacing to -2%, we find the perfect balance for digital clarity.</div>
+
+    <div class="hrule" style="left:calc(679/1920*100%);top:calc(632/1444*100%);width:calc(1144/1920*100%)"></div>
+    <div class="clabel" style="left:calc(679/1920*100%);top:calc((672 - 22*0.45)/1444*100%)">|행간 130%|</div>
+    <div class="demo-body" style="left:calc(970/1920*100%);top:calc((672 - 20*0.27)/1444*100%);width:calc(772/1920*100%);line-height:1.3;letter-spacing:-0.02em">Lucky love, I'm a lucky love. It's a matter of time before I'm back in line. The space between these words defines the depth of our rhythm. When the characters are too close, the emotion gets tangled and lost. By adjusting the spacing to -2%, we find the perfect balance for digital clarity.</div>
+
+    <div class="hrule" style="left:calc(679/1920*100%);top:calc(820/1444*100%);width:calc(1144/1920*100%)"></div>
+    <div class="clabel" style="left:calc(679/1920*100%);top:calc((860 - 22*0.45)/1444*100%)">|행간 150%|</div>
+    <div class="demo-body" style="left:calc(970/1920*100%);top:calc((860 - 20*0.37)/1444*100%);width:calc(772/1920*100%);line-height:1.5;letter-spacing:-0.02em">Lucky love, I'm a lucky love. It's a matter of time before I'm back in line. The space between these words defines the depth of our rhythm. When the characters are too close, the emotion gets tangled and lost. By adjusting the spacing to -2%, we find the perfect balance for digital clarity.</div>
+
+    <div class="hrule" style="left:calc(679/1920*100%);top:calc(1022/1444*100%);width:calc(1144/1920*100%)"></div>
+    <div class="clabel rec" style="left:calc(679/1920*100%);top:calc((1054 - 22*0.45)/1444*100%)">|행간 160%|</div>
+    <div class="demo-body" style="left:calc(970/1920*100%);top:calc((1054 - 20*0.42)/1444*100%);width:calc(772/1920*100%);line-height:1.6;letter-spacing:-0.02em">Lucky love, I'm a lucky love. It's a matter of time before I'm back in line. The space between these words defines the depth of our rhythm. When the characters are too close, the emotion gets tangled and lost. By adjusting the spacing to -2%, we find the perfect balance for digital clarity.</div>
+  </section>
+
+  <!-- ════ 08 · 비교꼴과 가독성 비교 (Helvetica / Roboto / Inter) ════ (1920×1953, white) -->
+  <section class="sec" style="height:calc(1953/1920*100vw);max-height:1953px">
+    <!-- row 1 · Helvetica (견본 SVG/이미지 오른쪽) -->
+    <img src="../assets/jagan-eng/cmp-helvetica.png" alt="Helvetica 견본 — Softly Spoken (48px / Bold / 자간 -2%)" style="position:absolute;left:calc(960/1920*100%);top:0;width:calc(960/1920*100%);height:calc(651/1953*100%)">
+    <div class="t" style="left:calc(96/1920*100%);top:calc((288 - 18*0.45)/1953*100%);font-weight:500;font-size:calc(18/1920*100vw);letter-spacing:-0.02em;line-height:1.6;color:var(--cmpsub);white-space:nowrap">비교꼴과 가독성 비교 (1)</div>
+    <div class="t" style="left:calc(96/1920*100%);top:calc((325 - 40*0.45)/1953*100%);font-weight:500;font-size:calc(40/1920*100vw);letter-spacing:-0.02em;line-height:1.6;color:var(--ink);white-space:nowrap">Helvetica</div>
+    <div class="t body" style="left:calc(96/1920*100%);top:calc((443 - 22*0.45)/1953*100%);width:calc(799/1920*100%);font-size:calc(22/1920*100vw)">헬베티카는 시대를 초월한 완벽한 균형을 자랑하는 그로테스크 서체의 정점입니다. Roboto와 비교했을 때 자간이 더 좁고 획의 끝이 수평·수직으로 엄격하게 잘려 있어, 매우 단단하고 권위적인 인상을 줍니다.</div>
+
+    <!-- row 2 · Roboto (견본 왼쪽) -->
+    <img src="../assets/jagan-eng/cmp-roboto.png" alt="Roboto 견본 — Softly Spoken (48px / Bold / 자간 -2%)" style="position:absolute;left:0;top:calc(651/1953*100%);width:calc(960/1920*100%);height:calc(651/1953*100%)">
+    <div class="t" style="left:calc(1024/1920*100%);top:calc((939 - 18*0.45)/1953*100%);font-weight:500;font-size:calc(18/1920*100vw);letter-spacing:-0.02em;line-height:1.6;color:var(--cmpsub);white-space:nowrap">비교꼴과 가독성 비교 (2)</div>
+    <div class="t" style="left:calc(1024/1920*100%);top:calc((976 - 40*0.45)/1953*100%);font-weight:500;font-size:calc(40/1920*100vw);letter-spacing:-0.02em;line-height:1.6;color:var(--ink);white-space:nowrap">Roboto</div>
+    <div class="t body" style="left:calc(1024/1920*100%);top:calc((1094 - 22*0.45)/1953*100%);width:calc(799/1920*100%);font-size:calc(22/1920*100vw)">Roboto는 기하학적 골격 위에 인본주의적 곡선을 입혀 디지털 스크린에서의 최적화된 경험을 제공합니다. 헬베티카보다 자간에 미세한 여유가 있고 획의 끝이 개방적인 구조를 취하고 있어, 저해상도 환경에서도 글자가 뭉치지 않는 탁월한 식별력을 보여줍니다.</div>
+
+    <!-- row 3 · Inter (견본 오른쪽) -->
+    <img src="../assets/jagan-eng/cmp-inter.png" alt="Inter 견본 — Softly Spoken (48px / Bold / 자간 -2%)" style="position:absolute;left:calc(960/1920*100%);top:calc(1302/1953*100%);width:calc(960/1920*100%);height:calc(651/1953*100%)">
+    <div class="t" style="left:calc(96/1920*100%);top:calc((1601 - 18*0.45)/1953*100%);font-weight:500;font-size:calc(18/1920*100vw);letter-spacing:-0.02em;line-height:1.6;color:var(--cmpsub);white-space:nowrap">비교꼴과 가독성 비교 (3)</div>
+    <div class="t" style="left:calc(96/1920*100%);top:calc((1638 - 40*0.45)/1953*100%);font-weight:500;font-size:calc(40/1920*100vw);letter-spacing:-0.02em;line-height:1.6;color:var(--ink);white-space:nowrap">Inter</div>
+    <div class="t body" style="left:calc(96/1920*100%);top:calc((1752 - 22*0.45)/1953*100%);width:calc(799/1920*100%);font-size:calc(22/1920*100vw)">Inter는 픽셀의 정밀함을 극대화한 '엔지니어적' 서체라면, Roboto는 구글이 안드로이드라는 방대한 생태계를 위해 만든 '범용적' 서체입니다. 두 서체는 비슷해 보여도 자간(Tracking)의 여유와 행간(Leading)의 리듬에서 완전히 다른 전략을 취합니다.</div>
+  </section>
+
+  <!-- ════ 09 · Spacing & White Space — 포스터 ════ (1920×1523, white) -->
+  <section class="sec" style="height:calc(1523/1920*100vw);max-height:1523px">
+    <div class="t eyebrow" style="left:calc(96/1920*100%);top:calc((251 - 18*0.45)/1523*100%)">Spacing &amp; White Space</div>
+    <div class="t title"   style="left:calc(96/1920*100%);top:calc((298 - 40*0.45)/1523*100%)">타이포그래피 메시지 표현</div>
+    <div class="t subcap"  style="left:calc(96/1920*100%);top:calc((370 - 16*0.45)/1523*100%)">자간, 행간 연출을 통한 포스터 제작</div>
+    <div class="t" style="left:calc(96/1920*100%);top:calc((1219 - 22*0.45)/1523*100%);width:calc(742/1920*100%);font-weight:400;font-size:calc(22/1920*100vw);letter-spacing:-0.02em;line-height:1.6;color:var(--ink)">본 포스터는 구글의 대표 서체인 Roboto를 활용하여, 노래 '수파도파'의 가사 전달보다는 시각적 운율에 집중했습니다. 로보토 특유의 기하학적이고 중립적인 서체꼴을 해체하고 재조합하여, 가사의 청각적 리듬을 시각적 텍스처로 치환해보았습니다.</div>
+
+    <div style="position:absolute;left:calc(915/1920*100%);top:calc(251/1523*100%);width:calc(1503/1920*100%);height:calc(1103/1523*100%);overflow:hidden;mix-blend-mode:darken">
+      <img src="../assets/jagan-eng/poster.png" alt="SUPADOPA — 자간·행간 포스터" style="position:absolute;left:-34.52%;top:-45.72%;width:124.6%;height:194.02%;max-width:none">
+    </div>
+  </section>
+
+</main>
+
+<button class="btn-top" id="btnTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOP</button>
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -10% 0px',threshold:0.03});
+const secs=[...document.querySelectorAll('.sec')]; secs.forEach(s=>io.observe(s));
+requestAnimationFrame(()=>requestAnimationFrame(()=>{ if(secs[0]){secs[0].classList.add('in');io.unobserve(secs[0]);} }));
+addEventListener('scroll',()=>document.getElementById('btnTop').classList.toggle('on',scrollY>innerHeight*0.8),{passive:true});
+
+/* ── 히어로 Letter ↔ Line 프로토타입 ──
+   진입 시 Letter 상태(자간 애니 autoplay). Line 라벨 호버 시 색 변화(CSS),
+   클릭하면 Line 상태로 전환(행간 애니 autoplay). 라벨 클릭으로만 상태 전환. */
+(function(){
+  const stage=document.getElementById('hStage');
+  if(!stage) return;
+  const labs=[...document.querySelectorAll('.h-lab')];
+  function setMode(m){ stage.dataset.mode=m; labs.forEach(b=>{ const on=b.dataset.m===m; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on);}); }
+  labs.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.m)));
+})();
+</script>
+<script src="../assets/site-nav.js"></script>
+</body>
+</html>

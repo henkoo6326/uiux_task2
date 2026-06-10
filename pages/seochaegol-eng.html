@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서체꼴 — 영문 · Roboto | 비주얼커뮤니케이션</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root{ --bg:#f5f5f5; --ink:#171919; --title:#0d0d0d; --sub:#6e6e6e; }
+html { scroll-behavior: smooth; }
+body{
+  font-family:'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+  background:var(--bg); color:var(--ink);
+  overflow-x:hidden; max-width:1920px; margin:0 auto;
+}
+img{ display:block; }
+
+/* ── TOP NAV ── */
+.top-nav{
+  position:fixed; top:0; left:0; right:0; max-width:1920px; margin:0 auto;
+  height:48px; background:rgba(245,245,245,0.86);
+  border-bottom:1px solid rgba(0,0,0,0.08);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 5vw; z-index:100;
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+}
+.nav-back{ font-size:13px; font-weight:500; color:#171919; text-decoration:none; letter-spacing:-0.01em; }
+.nav-back:hover{ opacity:0.5; }
+.nav-center{ display:flex; gap:28px; }
+.nav-center a{ font-size:12px; font-weight:400; color:rgba(0,0,0,0.4); text-decoration:none; letter-spacing:0.04em; transition:color .2s; }
+.nav-center a:hover{ color:#171919; }
+.nav-center a.active{ font-weight:600; color:#171919; }
+.nav-lang a{ font-size:11px; font-weight:400; color:rgba(0,0,0,0.35); text-decoration:none; letter-spacing:0.08em; transition:color .2s; }
+.nav-lang a.active{ color:#171919; font-weight:600; }
+.nav-lang span{ color:rgba(0,0,0,0.15); margin:0 6px; }
+
+main{ padding-top:48px; }
+
+/* ── SECTION SYSTEM ── */
+.sec{
+  position:relative; width:100%; background:var(--bg); overflow:hidden;
+  opacity:0; transform:translateY(30px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+  will-change:opacity, transform;
+}
+.sec.in{ opacity:1; transform:none; }
+.sec.white{ background:#fff; }
+
+.t{ position:absolute; }
+.eyebrow { font-weight:500; font-size:calc(18/1920*100vw); letter-spacing:.01em; color:var(--ink); white-space:nowrap; }
+.title   { font-weight:700; font-size:calc(52/1920*100vw); letter-spacing:-.04em; line-height:1.15; color:var(--title); white-space:nowrap; }
+.subcap  { font-weight:400; font-size:calc(18/1920*100vw); letter-spacing:-.01em; line-height:1.55; color:var(--sub); }
+.body    { font-weight:400; font-size:calc(18/1920*100vw); letter-spacing:-.012em; line-height:1.72; color:var(--ink); }
+.captitle{ font-weight:600; font-size:calc(18/1920*100vw); letter-spacing:-.012em; line-height:1.4; color:var(--title); }
+.capbody { font-weight:400; font-size:calc(15/1920*100vw); letter-spacing:-.012em; line-height:1.65; color:var(--sub); }
+.spec{ position:absolute; }
+
+/* hero white panel (left card) + #f5f5f5 field holding the giant R */
+.hero-panel{ position:absolute; left:0; top:0; height:100%; width:calc(1254/1920*100%); background:#fff; }
+.brand{ font-weight:600; font-size:calc(20/1920*100vw); letter-spacing:-.02em; color:var(--title); white-space:nowrap; }
+.brand-meta{ font-weight:400; font-size:calc(13/1920*100vw); letter-spacing:.01em; line-height:1.7; color:var(--sub); white-space:nowrap; }
+.menu-ico{ position:absolute; display:flex; flex-direction:column; gap:calc(6/1920*100vw); cursor:pointer; }
+.menu-ico span{ display:block; width:calc(34/1920*100vw); height:calc(2.5/1920*100vw); background:var(--title);
+  transition:transform .4s cubic-bezier(.16,1,.3,1), opacity .3s; }
+.menu-ico:hover span:nth-child(1){ transform:translateY(calc(8.5/1920*100vw)) rotate(45deg); }
+.menu-ico:hover span:nth-child(2){ opacity:0; transform:scaleX(.2); }
+.menu-ico:hover span:nth-child(3){ transform:translateY(calc(-8.5/1920*100vw)) rotate(-45deg); }
+
+/* ── HERO ENTRANCE ── */
+.hero{ opacity:1 !important; transform:none !important; }
+.hero .brand, .hero .brand-meta, .hero .menu-ico, .hero .eyebrow, .hero .body{
+  opacity:0; transform:translateY(18px);
+  transition:opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+}
+.hero .title{ overflow:hidden; }
+.hero .title .ti{ display:inline-block; transform:translateY(116%); transition:transform 1s cubic-bezier(.16,1,.3,1); }
+.hero .glyph-wrap{ position:absolute; will-change:transform; }
+.hero .glyph-wrap .spec{ position:static; width:100%; height:100%;
+  opacity:0; clip-path:inset(0 0 100% 0);
+  transition:opacity .55s ease, clip-path 1.2s cubic-bezier(.16,1,.3,1); }
+.hero.in .brand{ transition-delay:.10s } .hero.in .brand-meta{ transition-delay:.16s }
+.hero.in .menu-ico{ transition-delay:.22s } .hero.in .eyebrow{ transition-delay:.34s }
+.hero.in .body{ transition-delay:.62s }
+.hero.in .brand, .hero.in .brand-meta, .hero.in .menu-ico, .hero.in .eyebrow, .hero.in .body{ opacity:1; transform:none; }
+.hero.in .title .ti{ transition-delay:.46s; transform:none; }
+.hero.in .spec{ transition-delay:.30s; opacity:1; clip-path:inset(0 0 0% 0); }
+
+/* ── R HOVER · "typographic blueprint" (Figma prototype "Frame 272":
+   Default → Variant2 white-panel recedes / R fully presents
+           → Variant3 R dims to a ghost + orange construction grid draws in) ── */
+.hero .glyph-wrap{ z-index:1; }
+.hero .hero-panel{ z-index:2; transition:width .6s cubic-bezier(.16,1,.3,1); }
+.hero .brand, .hero .brand-meta, .hero .menu-ico,
+.hero .eyebrow, .hero .title, .hero .body{ z-index:3; }
+.hero.glyph-hover .hero-panel{ width:calc(970/1920*100%); }   /* gray field expands left (Variant2) */
+.hero.glyph-hover .glyph-wrap .spec{ opacity:.12; }           /* R fades to a faint ghost (Variant3) */
+
+.blueprint{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.blueprint line{
+  stroke:#FF6D50; stroke-width:1.6; vector-effect:non-scaling-stroke; opacity:0;
+  transition:opacity .3s ease, stroke-dashoffset .7s cubic-bezier(.16,1,.3,1);
+}
+.blueprint .hl{ stroke-dasharray:605; stroke-dashoffset:605; }
+.blueprint .vl{ stroke-dasharray:777; stroke-dashoffset:777; }
+.hero.glyph-hover .blueprint line{ opacity:1; stroke-dashoffset:0; }
+.hero.glyph-hover .blueprint .hl:nth-of-type(1){ transition-delay:.02s }
+.hero.glyph-hover .blueprint .hl:nth-of-type(2){ transition-delay:.06s }
+.hero.glyph-hover .blueprint .hl:nth-of-type(3){ transition-delay:.10s }
+.hero.glyph-hover .blueprint .hl:nth-of-type(4){ transition-delay:.14s }
+.hero.glyph-hover .blueprint .hl:nth-of-type(5){ transition-delay:.18s }
+.hero.glyph-hover .blueprint .vl{ transition-delay:.16s }
+
+/* ── TOP BUTTON ── */
+.btn-top{
+  position:fixed; right:2.6vw; bottom:2.6vw;
+  background:rgba(255,255,255,0.84); border:1px solid rgba(0,0,0,0.1); border-radius:2px;
+  padding:6px 16px; font-size:11px; font-weight:500; letter-spacing:0.1em; color:#171919;
+  cursor:pointer; opacity:0; transition:opacity 0.35s; z-index:100;
+  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+}
+.btn-top.on{ opacity:1; }
+
+@media (prefers-reduced-motion: reduce){
+  .sec{ transition:none; opacity:1; transform:none; }
+  .hero .brand, .hero .brand-meta, .hero .menu-ico, .hero .eyebrow,
+  .hero .body, .hero .title .ti, .hero .spec{
+    opacity:1 !important; transform:none !important; clip-path:none !important; transition:none !important;
+  }
+  .hero-panel, .blueprint line{ transition:none !important; }
+  html{ scroll-behavior:auto; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="../비주얼커뮤니케이션.html" class="nav-back">← 돌아가기</a>
+  <div class="nav-center">
+    <a href="seochaegol-eng.html" class="active">서체꼴</a>
+    <a href="jagan-eng.html">자간·행간</a>
+    <a href="keumo-eng.html">크기·무게</a>
+  </div>
+  <div class="nav-lang">
+    <a href="seochaegol-han.html">한</a>
+    <span>/</span>
+    <a href="seochaegol-eng.html" class="active">EN</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ════ 01 · HERO — ROBOTO ════ (1920×1080) -->
+  <section class="sec hero" style="height:calc(1080/1920*100vw);max-height:1080px">
+    <div class="hero-panel"></div>
+    <div class="t brand"      style="left:calc(96/1920*100%);top:calc(53/1080*100%)">Typeface Archive</div>
+    <div class="t brand-meta" style="left:calc(432/1920*100%);top:calc(46/1080*100%)">Roboto / Google (Christian Robertson)<br>Neo-Grotesque / Dual-nature Design</div>
+    <div class="menu-ico"     style="left:calc(1786/1920*100%);top:calc(50/1080*100%)"><span></span><span></span><span></span></div>
+
+    <div class="t eyebrow"    style="left:calc(96/1920*100%);top:calc(425/1080*100%)">Typeface</div>
+    <div class="t title"      style="left:calc(96/1920*100%);top:calc(474/1080*100%);font-size:calc(60/1920*100vw)"><span class="ti">ROBOTO</span></div>
+    <div class="t body"       style="left:calc(96/1920*100%);top:calc(612/1080*100%);width:calc(550/1920*100%)">This concept highlights Roboto’s unique geometry—where rigid mechanical shapes meet open, friendly curves. It focuses on Roboto’s origin as the typeface for Android—the most-seen.</div>
+
+    <!-- full R glyph as vector (Roboto Bold) — no clipping; reveals on hover -->
+    <div class="glyph-wrap" style="left:calc(1191/1920*100%);top:calc(163/1080*100%);width:calc(605/1920*100%);height:calc(777/1080*100%)">
+      <img class="spec" src="../images/final-frames/specimens/seochaegol-eng/hero-R.svg" alt="Roboto — R">
+      <svg class="blueprint" viewBox="0 0 605 777" preserveAspectRatio="none" aria-hidden="true">
+        <line class="hl" x1="0" y1="0.5"   x2="605" y2="0.5"/>
+        <line class="hl" x1="0" y1="125.2" x2="605" y2="125.2"/>
+        <line class="hl" x1="0" y1="366.6" x2="605" y2="366.6"/>
+        <line class="hl" x1="0" y1="489.4" x2="605" y2="489.4"/>
+        <line class="hl" x1="0" y1="776.7" x2="605" y2="776.7"/>
+        <line class="vl" x1="0.5"   y1="0" x2="0.5"   y2="777"/>
+        <line class="vl" x1="160.2" y1="0" x2="160.2" y2="777"/>
+        <line class="vl" x1="286.9" y1="0" x2="286.9" y2="777"/>
+        <line class="vl" x1="433.8" y1="0" x2="433.8" y2="777"/>
+        <line class="vl" x1="576.5" y1="0" x2="576.5" y2="777"/>
+        <line class="vl" x1="604.5" y1="0" x2="604.5" y2="777"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ════ 02 · BACKGROUND — 제작 스토리 ════ (1920×753) -->
+  <section class="sec" style="height:calc(753/1920*100vw);max-height:753px">
+    <div class="t eyebrow" style="left:calc(95/1920*100%);top:calc(108/753*100%)">Background</div>
+    <div class="t title"   style="left:calc(94/1920*100%);top:calc(155/753*100%)">제작 스토리</div>
+    <div class="t subcap"  style="left:calc(95/1920*100%);top:calc(232/753*100%);width:calc(450/1920*100%)">기억해? 모든 화면이 하나의 언어로 연결되기 시작한 그해 여름을.</div>
+    <div class="t body"    style="left:calc(686/1920*100%);top:calc(523/753*100%);width:calc(1139/1920*100%)">모바일이라는 낯선 규격과 다양한 해상도 속에서 길을 잃지 않도록, 구글의 새로운 이정표가 된 Roboto는 수많은 안드로이드 기기 위에서 비로소 완성된 ‘디지털 네이티브’의 정석입니다. 기존 시스템 폰트의 딱딱한 기하학적 골격을 유지하면서도, 획의 끝부분을 부드럽게 굴리고 열린 구조를 채택하여 스크린 위에서도 사용자의 시선이 흐르도록 최적화된 가독성을 구현했습니다.</div>
+  </section>
+
+  <!-- ════ 03 · CHARACTER ANATOMY — 자형 특징 ════ (1920×1316) -->
+  <section class="sec white" style="height:calc(1316/1920*100vw);max-height:1316px">
+    <div class="t eyebrow"  style="left:calc(95/1920*100%);top:calc(108/1316*100%)">Character Anatomy</div>
+    <div class="t title"    style="left:calc(94/1920*100%);top:calc(155/1316*100%)">자형 특징</div>
+
+    <div class="t captitle" style="left:calc(96/1920*100%);top:calc(331/1316*100%)">획의 분리</div>
+    <div class="t body"     style="left:calc(685/1920*100%);top:calc(396/1316*100%);width:calc(1139/1920*100%)">철저하게 계산된 직선적 골격은 디지털 환경에서 흔들림 없는 기계적 안정감을 제공하며 시스템의 견고한 신뢰를 시각화합니다. 동시에 ‘b, d, p’의 어깨 곡선에는 자연스러운 필기의 리듬을 섬세하게 반영하여, 딱딱한 스크린 위에서도 사용자의 시선이 피로감 없이 매끄럽게 흐르도록 다정한 인상을 완성합니다.</div>
+    <img class="spec" src="../images/final-frames/specimens/seochaegol-eng/anat-row1.png" alt="A g Q e 자형 분석"
+         style="left:calc(660/1920*100%);top:calc(517/1316*100%);width:calc(1150/1920*100%);height:calc(250/1316*100%)">
+
+    <div class="t captitle" style="left:calc(96/1920*100%);top:calc(800/1316*100%)">가변 폭 설계</div>
+    <div class="t body"     style="left:calc(685/1920*100%);top:calc(865/1316*100%);width:calc(1139/1920*100%)">‘B’의 닫힌 구조를 깨고 나온 ‘R’의 다리(Leg)는 서체에 생동감을 부여하며, 기계적인 수치 속에 숨겨진 인본주의적 리듬을 드러내는 본질적인 요소입니다. 직선으로 뻗어 내려오는 단호한 획의 마무리는 자칫 딱딱해질 수 있는 그로테스크 서체의 한계를 넘어, 문장 전체에 유연한 가독성의 흐름을 불어넣습니다.</div>
+    <img class="spec" src="../images/final-frames/specimens/seochaegol-eng/anat-row2.png" alt="BOX → ROM, R의 다리 설계"
+         style="left:calc(660/1920*100%);top:calc(986/1316*100%);width:calc(1160/1920*100%);height:calc(230/1316*100%)">
+  </section>
+
+  <!-- ════ 04 · FONT FAMILY — 서체가족 ════ (1920×1953) -->
+  <section class="sec white" style="height:calc(1953/1920*100vw);max-height:1953px">
+    <div class="t eyebrow" style="left:calc(95/1920*100%);top:calc(108/1953*100%)">Font Family</div>
+    <div class="t title"   style="left:calc(94/1920*100%);top:calc(155/1953*100%)">서체가족</div>
+    <div class="t subcap"  style="left:calc(95/1920*100%);top:calc(232/1953*100%);width:calc(450/1920*100%)">변함없는 마음에도 9가지 표정이 필요하니까.</div>
+
+    <img class="spec" src="../images/final-frames/specimens/seochaegol-eng/ramp.png" alt="Roboto 710–790 — From Thin to Black"
+         style="left:calc(821/1920*100%);top:calc(151/1953*100%);width:calc(1003/1920*100%);height:calc(1549/1953*100%)">
+
+    <div class="t captitle" style="left:calc(386/1920*100%);top:calc(701/1953*100%)">유연한 폭의 확장</div>
+    <div class="t capbody"  style="left:calc(386/1920*100%);top:calc(749/1953*100%);width:calc(246/1920*100%)">동일 포인트에서 Roboto는 다양한 화면 환경에 맞춰 시각적으로 가장 안정적인 폭을 가집니다.</div>
+    <div class="t captitle" style="left:calc(96/1920*100%);top:calc(1249/1953*100%)">규격의 통일</div>
+    <div class="t capbody"  style="left:calc(96/1920*100%);top:calc(1297/1953*100%);width:calc(257/1920*100%)">다양한 두께군에서 Roboto는 서체 고유의 기하학적 뼈대를 유지하며 일관된 인상을 제공합니다.</div>
+  </section>
+
+  <!-- ════ 비교꼴 분석 — 호버 인터랙션(프로토타입 재현) ════
+       rest=솔리드 Qeg(네이티브 폰트), hover=외곽선 Qeg + 자형 주석 마크(#FF6D50)
+       마크는 Figma 좌표/회전 그대로(Q 꼬리·e 조리개/막대·g 귀 지점). -->
+  <style>
+    .cmpE-tile{ position:absolute; top:0; height:100%; width:calc(960/1920*100%); background:#f7f8f8; overflow:hidden; cursor:pointer; }
+    .cmpE-tile .g{ position:absolute; left:0; top:0; width:100%; height:100%; display:block; transition:opacity .5s cubic-bezier(.16,1,.3,1); }
+    .cmpE-tile .g.ana{ opacity:0; }
+    .cmpE-tile:hover .g.rest{ opacity:0; }
+    .cmpE-tile:hover .g.ana{ opacity:1; }
+    .cmp-hint{ position:absolute; bottom:calc(34/651*100%); font-family:'Montserrat',sans-serif; font-size:calc(12/1920*100vw); font-weight:600; letter-spacing:.14em; color:#b3b3b3; pointer-events:none; transition:opacity .3s; white-space:nowrap; }
+    .cmpE-tile:hover .cmp-hint{ opacity:0; }
+    @media (hover:none){ .cmpE-tile .g.rest{ opacity:0; } .cmpE-tile .g.ana{ opacity:1; } .cmp-hint{ display:none; } }
+    @media (prefers-reduced-motion:reduce){ .cmpE-tile .g{ transition:none; } }
+  </style>
+
+  <!-- 05 · 비교꼴 분석 (1) — Helvetica (글자 우측 타일) -->
+  <section class="sec white" style="height:calc(651/1920*100vw);max-height:651px">
+    <div class="t eyebrow" style="left:calc(96/1920*100%);top:calc(303/651*100%)">비교꼴 분석 (1)</div>
+    <div class="t title"   style="left:calc(96/1920*100%);top:calc(340/651*100%)">Helvetica</div>
+    <div class="t body"    style="left:calc(96/1920*100%);top:calc(454/651*100%);width:calc(799/1920*100%)">헬베티카는 직선으로 뻗은 꼬리를 가진 대문자 Q와 입구의 폭이 좁고 폐쇄적인 소문자 e를 통해 기하학적인 완결성을 추구합니다. 자소 g는 상하 루프가 꽉 짜인 2층 구조를 유지하며 직선으로 뻗은 귀를 통해 인쇄 기반의 전통적인 산세리프 미학을 여실히 보여줍니다.</div>
+
+    <div class="cmpE-tile" style="left:calc(960/1920*100%)" title="호버하면 자형 분석">
+      <img class="g rest" src="../images/final-frames/specimens/seochaegol-eng/cmp-hel-rest.svg" alt="Helvetica — Q e g">
+      <img class="g ana"  src="../images/final-frames/specimens/seochaegol-eng/cmp-hel-analysis.svg" alt="" aria-hidden="true">
+      <span class="cmp-hint" style="right:calc(48/960*100%)">HOVER · 자형 분석</span>
+    </div>
+  </section>
+
+  <!-- 06 · 비교꼴 분석 (2) — Roboto (글자 좌측 타일) -->
+  <section class="sec white" style="height:calc(651/1920*100vw);max-height:651px">
+    <div class="cmpE-tile" style="left:0" title="호버하면 자형 분석">
+      <img class="g rest" src="../images/final-frames/specimens/seochaegol-eng/cmp-rob-rest.svg" alt="Roboto — Q e g">
+      <img class="g ana"  src="../images/final-frames/specimens/seochaegol-eng/cmp-rob-analysis.svg" alt="" aria-hidden="true">
+      <span class="cmp-hint" style="left:calc(48/960*100%)">HOVER · 자형 분석</span>
+    </div>
+
+    <div class="t eyebrow" style="left:calc(1025/1920*100%);top:calc(290/651*100%)">비교꼴 분석 (2)</div>
+    <div class="t title"   style="left:calc(1025/1920*100%);top:calc(327/651*100%)">Roboto</div>
+    <div class="t body"    style="left:calc(1025/1920*100%);top:calc(454/651*100%);width:calc(799/1920*100%)">로보토는 부드러운 곡선형 꼬리의 Q와 개방적인 구조를 취한 e를 통해 저해상도 디지털 화면에서도 가독성을 확보합니다. 소문자 g는 같은 2층 구조임에도 하단 루프를 타원형에 가깝게 설계하여 기계적인 골격 속에 인문학적인 유연함을 적절히 배분했습니다.</div>
+  </section>
+
+  <!-- ════ 07 · SPACING & WHITE SPACE — 타이포그래피 메시지 포스터 ════ (1920×1523) -->
+  <section class="sec white" style="height:calc(1523/1920*100vw);max-height:1523px">
+    <div class="t eyebrow" style="left:calc(96/1920*100%);top:calc(251/1523*100%)">Spacing &amp; White Space</div>
+    <div class="t title"   style="left:calc(96/1920*100%);top:calc(298/1523*100%)">타이포그래피 메시지 표현</div>
+    <div class="t subcap"  style="left:calc(96/1920*100%);top:calc(370/1523*100%);width:calc(300/1920*100%)">자간, 행간 연출을 통한 포스터 제작</div>
+    <div class="t body"    style="left:calc(96/1920*100%);top:calc(1183/1523*100%);width:calc(742/1920*100%)">원형과 직선이 만나는 지점의 좌표를 시각화하여, 이 서체가 단순히 그려진 것이 아니라 ‘구축된 것’임을 강조합니다. 중앙의 붉은색 원형 그래픽은 완벽한 원처럼 보이지만, 사실 인간의 눈이 느끼는 착시를 보정하기 위해 미세하게 조정된 곡선을 가지고 있습니다. 포스터 속 ‘Refined arcs counteract visual distortion’이라는 문구는 바로 이 지점을 설명합니다.</div>
+    <img class="spec" src="../images/final-frames/specimens/seochaegol-eng/poster.png" alt="ROBOTO TYPE — 기하 구조 포스터"
+         style="left:calc(970/1920*100%);top:calc(290/1523*100%);width:calc(734/1920*100%);height:calc(1038/1523*100%)">
+  </section>
+
+</main>
+
+<button class="btn-top" id="btnTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOP</button>
+
+<script>
+/* ── SECTION SCROLL REVEAL ── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { rootMargin: '0px 0px -12% 0px', threshold: 0.04 });
+const secs = Array.from(document.querySelectorAll('.sec'));
+secs.forEach(el => io.observe(el));
+requestAnimationFrame(() => requestAnimationFrame(() => {
+  if (secs[0]){ secs[0].classList.add('in'); io.unobserve(secs[0]); }
+}));
+
+/* ── HERO · R ambient parallax ── */
+const hero = document.querySelector('.hero');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer  = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+if (hero && !reduceMotion && finePointer){
+  const wrap = hero.querySelector('.glyph-wrap');
+  let tx=0, ty=0, cx=0, cy=0;
+  hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width  - 0.5) * 24;
+    ty = ((e.clientY - r.top)  / r.height - 0.5) * 18;
+  });
+  hero.addEventListener('mouseleave', () => { tx = 0; ty = 0; });
+  (function loop(){
+    cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+    if (wrap) wrap.style.transform = `translate3d(${cx.toFixed(2)}px, ${cy.toFixed(2)}px, 0)`;
+    requestAnimationFrame(loop);
+  })();
+
+  /* hover the R → typographic-blueprint state (Figma prototype) */
+  if (wrap){
+    wrap.addEventListener('mouseenter', () => hero.classList.add('glyph-hover'));
+    wrap.addEventListener('mouseleave', () => hero.classList.remove('glyph-hover'));
+  }
+}
+
+/* ── TOP BUTTON ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('btnTop').classList.toggle('on', window.scrollY > window.innerHeight * 0.8);
+}, { passive: true });
+</script>
+<script src="../assets/site-nav.js"></script>
+</body>
+</html>

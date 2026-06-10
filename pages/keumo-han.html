@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>크기·무게 — 한글 · 윤고딕 | 비주얼커뮤니케이션</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root{
+  --bg:#ffffff;
+  --ink:#171919;
+  --title:#0d0d0d;
+  --sub:#6e6e6e;
+}
+html { scroll-behavior: smooth; }
+body{
+  font-family:'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  overflow-x:hidden;
+  max-width:1920px;
+  margin:0 auto;
+}
+img{ display:block; }
+
+/* ── TOP NAV (site chrome, consistent with sibling pages) ── */
+.top-nav{
+  position:fixed; top:0; left:0; right:0;
+  max-width:1920px; margin:0 auto;
+  height:48px;
+  background:rgba(255,255,255,0.86);
+  border-bottom:1px solid rgba(0,0,0,0.08);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 5vw; z-index:100;
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+}
+.nav-back{ font-size:13px; font-weight:500; color:#171919; text-decoration:none; letter-spacing:-0.01em; }
+.nav-back:hover{ opacity:0.5; }
+.nav-center{ display:flex; gap:28px; }
+.nav-center a{ font-size:12px; font-weight:400; color:rgba(0,0,0,0.4); text-decoration:none; letter-spacing:0.04em; transition:color .2s; }
+.nav-center a:hover{ color:#171919; }
+.nav-center a.active{ font-weight:600; color:#171919; }
+.nav-lang a{ font-size:11px; font-weight:400; color:rgba(0,0,0,0.35); text-decoration:none; letter-spacing:0.08em; transition:color .2s; }
+.nav-lang a.active{ color:#171919; font-weight:600; }
+.nav-lang span{ color:rgba(0,0,0,0.15); margin:0 6px; }
+
+main{ padding-top:48px; }
+
+/* ── SECTION SYSTEM (1920-wide frames, fluid via vw, capped at px) ── */
+.sec{
+  position:relative;
+  width:100%;
+  background:#fff;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+             transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  will-change:opacity, transform;
+}
+.sec.in{ opacity:1; transform:none; }
+
+/* positioned primitives */
+.t{ position:absolute; }
+.eyebrow { font-weight:500; font-size:calc(18/1920*100vw); letter-spacing:0.01em; color:var(--ink); white-space:nowrap; }
+.label   { font-weight:600; font-size:calc(15/1920*100vw); letter-spacing:0.01em; color:var(--ink); white-space:nowrap; }
+.title   { font-weight:700; font-size:calc(34/1920*100vw); letter-spacing:-0.04em; line-height:1.18; color:var(--title); white-space:nowrap; }
+.subcap  { font-weight:400; font-size:calc(18/1920*100vw); letter-spacing:-0.01em; line-height:1.55; color:var(--sub); }
+.body    { font-weight:400; font-size:calc(18/1920*100vw); letter-spacing:-0.012em; line-height:1.72; color:var(--ink); }
+.subhead { font-weight:500; font-size:calc(30/1920*100vw); letter-spacing:-0.03em; line-height:1.28; color:var(--title); }
+.capbody { font-weight:400; font-size:calc(15/1920*100vw); letter-spacing:-0.012em; line-height:1.65; color:var(--sub); }
+.minib   { font-weight:400; font-size:calc(13/1920*100vw); letter-spacing:-0.01em; line-height:1.6; color:var(--sub); }
+.col2    { font-weight:400; font-size:calc(18/1920*100vw); letter-spacing:-0.02em; line-height:1.6; color:#171919; white-space:nowrap; }
+.spec{ position:absolute; }
+
+/* big display headlines (native Pretendard) */
+.disp     { font-weight:500; letter-spacing:-0.045em; line-height:1.06; color:var(--title); white-space:nowrap; }
+.disp-thin{ font-weight:200; letter-spacing:-0.03em;  line-height:1.10; color:var(--title); white-space:nowrap; }
+
+/* divider line for comparison captions */
+.hl{ position:absolute; height:1px; background:rgba(0,0,0,0.14); }
+
+/* ── SPECIMEN HOVER DEMOS (Figma prototype interaction) ──
+   Boxed Yoon-Gothic specimens whose size / weight transitions on hover.
+   Glyphs are vector SVGs extracted from Yoon Gothic 700 10–90, so they
+   scale and crossfade without rasterising. Hover the box or a value label
+   to play the comparison; default rest state matches the export. */
+.demo{ position:absolute; }
+.demo .opt{
+  position:absolute; left:0;
+  font-weight:800; font-size:calc(84/1920*100vw); line-height:1;
+  letter-spacing:-0.02em; color:rgba(0,0,0,0.12); white-space:nowrap;
+  cursor:pointer; transition:color .45s ease;
+}
+.demo .box{
+  position:absolute; top:0; height:100%;
+  background:#fff; border:1px solid rgba(0,0,0,0.13);
+  overflow:hidden; cursor:pointer;
+}
+.demo .glyph{
+  position:absolute; left:50%; top:50%; height:84%;
+  transform:translate(-50%,-50%);
+  transition:transform .65s cubic-bezier(.16,1,.3,1), opacity .5s ease;
+}
+/* size demo (웅): small 60pt at rest → grows to 408pt on hover */
+.sdemo .glyph{ transform:translate(-50%,-50%) scale(0.37); }      /* rest ≈ 60pt (31% of box) */
+.sdemo:has(.box:hover) .glyph,
+.sdemo:has(.opt-b:hover) .glyph{ transform:translate(-50%,-50%) scale(1); }   /* 408pt fills box */
+.sdemo .opt-a{ color:rgba(0,0,0,0.6); }                           /* 60pt active at rest */
+.sdemo:has(.box:hover) .opt-a,
+.sdemo:has(.opt-b:hover) .opt-a{ color:rgba(0,0,0,0.12); }
+.sdemo:has(.box:hover) .opt-b,
+.sdemo:has(.opt-b:hover) .opt-b{ color:rgba(0,0,0,0.6); }
+/* weight demo (헿): bold 790 at rest → thins to 710 on hover */
+.wdemo .glyph{ height:63%; top:52%; }                             /* match export box fit */
+.wdemo .g-thin{ opacity:0; } .wdemo .g-bold{ opacity:1; }
+.wdemo:has(.box:hover) .g-thin,
+.wdemo:has(.opt-a:hover) .g-thin{ opacity:1; }
+.wdemo:has(.box:hover) .g-bold,
+.wdemo:has(.opt-a:hover) .g-bold{ opacity:0; }
+.wdemo .opt-b{ color:rgba(0,0,0,0.6); }                           /* 790 active at rest */
+.wdemo:has(.box:hover) .opt-b,
+.wdemo:has(.opt-a:hover) .opt-b{ color:rgba(0,0,0,0.12); }
+.wdemo:has(.box:hover) .opt-a,
+.wdemo:has(.opt-a:hover) .opt-a{ color:rgba(0,0,0,0.6); }
+
+/* ── HERO ── */
+.hero{ opacity:1 !important; transform:none !important; }
+/* hero — all Pretendard. big glyphs display weight, labels light. */
+.hglyph{ position:absolute; font-weight:500; font-size:calc(240/1920*100vw); line-height:1; letter-spacing:-0.04em; color:var(--title); white-space:nowrap; }
+.hero .eyebrow{ font-weight:300; letter-spacing:0; }
+.hero .minib{ font-weight:400; letter-spacing:0; color:rgba(0,0,0,0.55); }
+.hero .t, .hero .spec{
+  opacity:0; transform:translateY(20px);
+  transition:opacity .85s cubic-bezier(.16,1,.3,1),
+             transform .85s cubic-bezier(.16,1,.3,1);
+}
+.hero.in .t, .hero.in .spec{ opacity:1; transform:none; }
+.hero.in .g1{ transition-delay:.10s } .hero.in .g2{ transition-delay:.20s }
+.hero.in .g3{ transition-delay:.30s } .hero.in .g4{ transition-delay:.40s }
+.hero.in .hl1{ transition-delay:.46s } .hero.in .hl2{ transition-delay:.52s }
+.hero.in .hl3{ transition-delay:.58s }
+
+/* ── TOP BUTTON ── */
+.btn-top{
+  position:fixed; right:2.6vw; bottom:2.6vw;
+  background:rgba(255,255,255,0.84);
+  border:1px solid rgba(0,0,0,0.1);
+  border-radius:2px; padding:6px 16px;
+  font-size:11px; font-weight:500; letter-spacing:0.1em; color:#171919;
+  cursor:pointer; opacity:0; transition:opacity 0.35s; z-index:100;
+  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+}
+.btn-top.on{ opacity:1; }
+
+@media (prefers-reduced-motion: reduce){
+  .sec{ transition:none; opacity:1; transform:none; }
+  .hero .t, .hero .spec{ opacity:1 !important; transform:none !important; transition:none !important; }
+  .demo .glyph{ transition:none !important; }
+  html{ scroll-behavior:auto; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="../비주얼커뮤니케이션.html" class="nav-back">← 돌아가기</a>
+  <div class="nav-center">
+    <a href="seochaegol-han.html">서체꼴</a>
+    <a href="jagan-han.html">자간·행간</a>
+    <a href="keumo-han.html" class="active">크기·무게</a>
+  </div>
+  <div class="nav-lang">
+    <a href="keumo-han.html" class="active">한</a>
+    <span>/</span>
+    <a href="keumo-eng.html">EN</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ════ 00 · HERO — 크 기 와 무게 ════ (1920×1080) -->
+  <section class="sec hero" style="height:calc(1080/1920*100vw);max-height:1080px">
+    <img class="spec g1" src="../images/final-frames/specimens/keumo-han/c-keu.png"  alt="크" style="left:calc(99/1920*100%);top:calc(159/1080*100%);width:calc(233/1920*100%);height:calc(187/1080*100%)">
+    <img class="spec g2" src="../images/final-frames/specimens/keumo-han/c-gi.png"   alt="기" style="left:calc(472/1920*100%);top:calc(412/1080*100%);width:calc(198/1920*100%);height:calc(245/1080*100%)">
+    <img class="spec g3" src="../images/final-frames/specimens/keumo-han/c-wa.png"   alt="와" style="left:calc(823/1920*100%);top:calc(683/1080*100%);width:calc(244/1920*100%);height:calc(237/1080*100%)">
+    <img class="spec g4" src="../images/final-frames/specimens/keumo-han/c-muge.png" alt="무게" style="left:calc(1373/1920*100%);top:calc(412/1080*100%);width:calc(447/1920*100%);height:calc(245/1080*100%)">
+    <img class="spec hl2" src="../images/final-frames/specimens/keumo-han/c-ygL.png" alt="Yoon Gothic" style="left:calc(97/1920*100%);top:calc(693/1080*100%);width:calc(282/1920*100%);height:calc(52/1080*100%)">
+    <img class="spec hl2" src="../images/final-frames/specimens/keumo-han/c-ygM.png" alt="Yoon Gothic" style="left:calc(825/1920*100%);top:calc(151/1080*100%);width:calc(282/1920*100%);height:calc(52/1080*100%)">
+    <img class="spec hl3" src="../images/final-frames/specimens/keumo-han/c-ygR.png" alt="Yoon Gothic" style="left:calc(1371/1920*100%);top:calc(866/1080*100%);width:calc(282/1920*100%);height:calc(52/1080*100%)">
+
+    <div class="t minib hl1" style="left:calc(336/1920*100%);top:calc(149/1080*100%)">(1)</div>
+    <div class="t minib hl3" style="left:calc(826/1920*100%);top:calc(253/1080*100%)">(1) 크기</div>
+    <div class="t minib hl3" style="left:calc(826/1920*100%);top:calc(294/1080*100%)">(2) 무게</div>
+  </section>
+
+  <!-- ════ 01 · SIZE HIERARCHY — 압도적 주인공 ════ (1920×2061) -->
+  <section class="sec" style="height:calc(2061/1920*100vw);max-height:2061px">
+    <div class="t eyebrow" style="left:calc(391/1920*100%);top:calc(116/2061*100%)">Size Hierarchy</div>
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/c-s1a.png" alt="설명하지 않아도 알 수 있는," style="left:calc(392/1920*100%);top:calc(192/2061*100%);width:calc(1149/1920*100%);height:calc(395/2061*100%)">
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/c-s1b.png" alt="압도적 주인공" style="left:calc(811/1920*100%);top:calc(622/2061*100%);width:calc(990/1920*100%);height:calc(168/2061*100%)">
+
+    <div class="t label" style="left:calc(96/1920*100%);top:calc(617/2061*100%)">서체 크기 고찰</div>
+    <div class="t minib" style="left:calc(96/1920*100%);top:calc(662/2061*100%);width:calc(170/1920*100%);white-space:normal">압도적인 크기는 메시지에 권위를 부여하며 시선의 시작점을 강제로 고정함.</div>
+
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/lbl-sizeh.png" alt="Size Hierarchy" style="left:calc(819/1920*100%);top:calc(944/2061*100%);width:calc(127/1920*100%);height:calc(24/2061*100%)">
+    <div class="t subhead" style="left:calc(821/1920*100%);top:calc(984/2061*100%);width:calc(730/1920*100%);white-space:normal">글자의 크기는 시선이 정보를 흡수하는 순서를 결정하며, 시각적 중요도를 뜻합니다.</div>
+    <div class="t col2" style="left:calc(821/1920*100%);top:calc(1125/2061*100%)">글자의 크기는 시선이 정보를 흡수하는<br>순서를 정하며, 단순히 물리적 높낮이만<br>을 의미하는 것이 아니라 시각적</div>
+    <div class="t col2" style="left:calc(1160/1920*100%);top:calc(1125/2061*100%)">무게이기도 하다. 같은 크기라도 서체마다<br>시각적 밀도가 달리 느껴지는 건 글자의 비<br>율과 골격의 차이 때문이다</div>
+
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/lbl-yeogi.png" alt="여기는 왜 봐여!!" style="left:calc(94/1920*100%);top:calc(1397/2061*100%);width:calc(122/1920*100%);height:calc(23/2061*100%)">
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/c-s1c.png" alt="오른쪽을 보세요." style="left:calc(97/1920*100%);top:calc(1453/2061*100%);width:calc(631/1920*100%);height:calc(379/2061*100%)">
+
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/lbl-mit.png" alt="밑을 보세요." style="left:calc(818/1920*100%);top:calc(1709/2061*100%);width:calc(148/1920*100%);height:calc(33/2061*100%)">
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/lbl-cham.png" alt="참 잘했습니다!! 이제 밑으로 스크롤하세요." style="left:calc(819/1920*100%);top:calc(1767/2061*100%);width:calc(162/1920*100%);height:calc(52/2061*100%)">
+  </section>
+
+  <!-- ════ 02 · 크기 비교 — 60pt / 408pt ════ (1920×1080) -->
+  <section class="sec" style="height:calc(1080/1920*100vw);max-height:1080px">
+    <div class="t title" style="left:calc(570/1920*100%);top:calc(120/1080*100%);font-size:calc(40/1920*100vw)">크기 비교</div>
+    <div class="t body" style="left:calc(821/1920*100%);top:calc(125/1080*100%);width:calc(1003/1920*100%);white-space:normal;font-size:calc(15/1920*100vw)">웨이트(Weight)는 텍스트에 물리적인 부피감을 부여하며, 굵은 웨이트는 메시지에 단단한 신뢰감을 실어주고 얇은 웨이트는 공간에 여백을 주어 세련된 인상을 남깁니다. 무게의 적절한 대비는 화면 안에서 시각적 리듬을 만들어내며, 같은 수치의 크기와 무게라도 서체의 골격과 자폭에 따라 전혀 다른 시각적 밀도를 형성하여 정보의 중량감을 재정의합니다.</div>
+
+    <div class="t label" style="left:calc(96/1920*100%);top:calc(364/1080*100%)">시선 유도에 대한 기록</div>
+    <div class="t minib" style="left:calc(96/1920*100%);top:calc(409/1080*100%);width:calc(165/1920*100%);white-space:normal">주인공이 시선을 뺏으면 디테일은 그 뒤를 따라 조용히 정보를 완성.</div>
+
+    <div class="demo sdemo" style="left:calc(569/1920*100%);top:calc(364/1080*100%);width:calc(1255/1920*100%);height:calc(632/1080*100%)">
+      <div class="opt opt-a" style="top:calc(372/632*100%)">60pt</div>
+      <div class="opt opt-b" style="top:calc(512/632*100%)">408pt</div>
+      <div class="box" style="left:calc(626/1255*100%);width:calc(627/1255*100%)">
+        <img class="glyph" src="../images/final-frames/specimens/keumo-han/ung-90.svg" alt="웅 — 크기 비교">
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 03 · 묵직한 존재감 — Size Weight ════ (1920×1519) -->
+  <section class="sec" style="height:calc(1519/1920*100vw);max-height:1519px">
+    <div class="t eyebrow" style="left:calc(821/1920*100%);top:calc(170/1519*100%)">Size Weight</div>
+    <div class="t subhead" style="left:calc(821/1920*100%);top:calc(215/1519*100%);width:calc(300/1920*100%);white-space:normal">서체의 무게는 시선이 머무는 시간의 차이를</div>
+    <div class="t minib" style="left:calc(821/1920*100%);top:calc(351/1519*100%);width:calc(330/1920*100%);white-space:normal">굵기의 대비는 시각적 중량을 조절하여 위계를 형성하며, 이는 단순히 글자의 부피감을 넘어 공간의 질서를 구축하는 핵심입니다.</div>
+
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/c-s3a.png" alt="두께감으로 압도하는," style="left:calc(97/1920*100%);top:calc(346/1519*100%);width:calc(509/1920*100%);height:calc(247/1519*100%)">
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/c-s3b.png" alt="묵직한 존재감" style="left:calc(295/1920*100%);top:calc(593/1519*100%);width:calc(642/1920*100%);height:calc(151/1519*100%)">
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/c-s3c.png" alt="주인공을 뒷받침하는, 가장낮은 목소리" style="left:calc(827/1920*100%);top:calc(895/1519*100%);width:calc(853/1920*100%);height:calc(248/1519*100%)">
+
+    <div class="t minib" style="left:calc(821/1920*100%);top:calc(1200/1519*100%);width:calc(426/1920*100%);white-space:normal">웨이트(Weight)는 텍스트에 물리적인 부피감을 부여하며, 굵은 웨이트는 메시지에 단단한 신뢰감을 실어주고 시각적 중심축.</div>
+    <div class="t minib" style="left:calc(1292/1920*100%);top:calc(1200/1519*100%);width:calc(426/1920*100%);white-space:normal">반면 얇은 웨이트는 공간에 여백을 주어 세련된 인상을 남기며, 정보의 위계를 조절하여 독자의 시선이 편안하게 머물게 함.</div>
+  </section>
+
+  <!-- ════ 04 · 무게의 균형 — Font Weight ════ (1920×1116) -->
+  <section class="sec" style="height:calc(1116/1920*100vw);max-height:1116px">
+    <div class="t title" style="left:calc(570/1920*100%);top:calc(120/1116*100%);font-size:calc(40/1920*100vw)">무게의 균형</div>
+    <div class="t body" style="left:calc(821/1920*100%);top:calc(125/1116*100%);width:calc(1003/1920*100%);white-space:normal;font-size:calc(15/1920*100vw)">무게(Weight)는 활자에 체온과 밀도를 부여하며, 두꺼운 획은 메시지에 단단한 신뢰감을 실어주고 가는 획은 공간에 여백과 긴장감을 동시에 만들어낸다. 무게의 대비는 화면 안에서 시각적 리듬을 형성하며, 같은 크기와 수치라도 서체의 골격과 자폭에 따라 전혀 다른 밀도와 존재감이 빚어진다. 무게는 단순히 획이 두꺼워지는 것을 훨씬 넘어선다.</div>
+
+    <div class="t label" style="left:calc(96/1920*100%);top:calc(364/1116*100%)">Font Weight</div>
+    <div class="t minib" style="left:calc(96/1920*100%);top:calc(409/1116*100%);width:calc(185/1920*100%);white-space:normal">웨이트(Weight)는 활자에 질량과 체온을 부여한다.</div>
+
+    <div class="demo wdemo" style="left:calc(569/1920*100%);top:calc(364/1116*100%);width:calc(1255/1920*100%);height:calc(632/1116*100%)">
+      <div class="opt opt-a" style="top:calc(372/632*100%)">710</div>
+      <div class="opt opt-b" style="top:calc(512/632*100%)">790</div>
+      <div class="box" style="left:calc(626/1255*100%);width:calc(627/1255*100%)">
+        <img class="glyph g-bold" src="../images/final-frames/specimens/keumo-han/heh-90.svg" alt="헿 — 790">
+        <img class="glyph g-thin" src="../images/final-frames/specimens/keumo-han/heh-10.svg" alt="헿 — 710">
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 05 · Scale & Weight — I <3 YOON ════ (1920×1542) -->
+  <section class="sec" style="height:calc(1542/1920*100vw);max-height:1542px">
+    <div class="t eyebrow" style="left:calc(570/1920*100%);top:calc(194/1542*100%);line-height:1.3;white-space:normal">Scale<br>&amp; Weight</div>
+    <div class="t body" style="left:calc(821/1920*100%);top:calc(199/1542*100%);width:calc(1003/1920*100%);white-space:normal;font-size:calc(15/1920*100vw)">크기(Vertical)와 무게(Horizontal)의 조합은 서체가 공간에서 발휘하는 인상의 스펙트럼을 결정한다. 세로축을 따라 크기가 커질수록 조형적 특성이 강해지며, 가로축을 따라 무게가 더해질수록 메시지의 밀도와 중량감이 극대화된다. 아래 매트릭스는 두 서체가 각 조합에서 만들어내는 시각적 온도차를 보여준다. 숫자가 아닌 인상으로 읽어야 한다.</div>
+
+    <div class="t label" style="left:calc(96/1920*100%);top:calc(677/1542*100%)">Font Weight</div>
+    <div class="t minib" style="left:calc(96/1920*100%);top:calc(722/1542*100%);width:calc(165/1920*100%);white-space:normal">웨이트(Weight)는 활자에 질량과 체온 부여</div>
+
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/s5-yoon.png" alt="I <3 YOON — 윤고딕 700 vs 애플 SD"
+         style="left:calc(820/1920*100%);top:calc(614/1542*100%);width:calc(1022/1920*100%);height:calc(600/1542*100%)">
+
+    <!-- bottom comparison captions -->
+    <div class="hl" style="left:calc(570/1920*100%);top:calc(1223/1542*100%);width:calc(563/1920*100%)"></div>
+    <div class="t label" style="left:calc(570/1920*100%);top:calc(1258/1542*100%)">크기 비교</div>
+    <div class="t minib" style="left:calc(681/1920*100%);top:calc(1260/1542*100%);width:calc(409/1920*100%);white-space:normal">동일 포인트에서 윤고딕 700은 Apple SD Gothic Neo보다 시각적으로 더 크게 느껴진다. 엑스하이트 비율이 높고 자폭이 넓어 같은 크기에서도 존재감이 더 강하다.</div>
+
+    <div class="hl" style="left:calc(1159/1920*100%);top:calc(1223/1542*100%);width:calc(556/1920*100%)"></div>
+    <div class="t label" style="left:calc(1159/1920*100%);top:calc(1258/1542*100%)">무게 비교</div>
+    <div class="t minib" style="left:calc(1270/1920*100%);top:calc(1260/1542*100%);width:calc(429/1920*100%);white-space:normal">윤고딕 700과 Apple SD Gothic Neo Bold는 유사한 시각적 무게를 지니지만, 윤고딕 700의 획은 더 균일하고 구조적이어서 단단한 인상을 남긴다.</div>
+  </section>
+
+  <!-- ════ 06 · Size & Weight — 와삭 포스터 ════ (1920×1523) -->
+  <section class="sec" style="height:calc(1523/1920*100vw);max-height:1523px">
+    <div class="t eyebrow" style="left:calc(96/1920*100%);top:calc(251/1523*100%)">Size &amp; Weight</div>
+    <div class="t title" style="left:calc(96/1920*100%);top:calc(298/1523*100%);font-size:calc(40/1920*100vw)">타이포그래피 메시지 표현</div>
+    <div class="t subcap" style="left:calc(96/1920*100%);top:calc(370/1523*100%)">크기와 무게 연출을 통한 포스터 제작</div>
+
+    <div class="t minib" style="left:calc(96/1920*100%);top:calc(1059/1523*100%);width:calc(742/1920*100%);white-space:normal">화면의 70% 이상을 차지하는 거대한 ‘와삭’ 타이포그래피를 배치하여 시각적 무게감을 확보했습니다. 시각적 그리드에 맞춰 작은 텍스트 뭉텅이들을 빽빽하게 배치하여, 거대한 메인 타이포와 대비되는 3을 연출했습니다.</div>
+    <div class="t label" style="left:calc(96/1920*100%);top:calc(1175/1523*100%)">Gemini Prompt</div>
+    <div class="t minib" style="left:calc(96/1920*100%);top:calc(1220/1523*100%);width:calc(742/1920*100%);white-space:normal;font-style:italic">“High-resolution close-up texture of a ripe red watermelon with black seeds and glistening juice, organic and fresh, vibrant red and dark green contrast, macro photography style, hyper-realistic, 8k resolution.”</div>
+
+    <img class="spec" src="../images/final-frames/specimens/keumo-han/s6-poster.png" alt="와삭 — 크기·무게 포스터"
+         style="left:calc(966/1920*100%);top:calc(302/1523*100%);width:calc(860/1920*100%);height:calc(1221/1523*100%)">
+  </section>
+
+</main>
+
+<button class="btn-top" id="btnTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOP</button>
+
+<script>
+/* ── SECTION SCROLL REVEAL ── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { rootMargin: '0px 0px -12% 0px', threshold: 0.04 });
+
+const secs = Array.from(document.querySelectorAll('.sec'));
+secs.forEach(el => io.observe(el));
+/* hero reveals immediately */
+requestAnimationFrame(() => requestAnimationFrame(() => {
+  if (secs[0]){ secs[0].classList.add('in'); io.unobserve(secs[0]); }
+}));
+
+/* ── TOP BUTTON ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('btnTop').classList.toggle('on', window.scrollY > window.innerHeight * 0.8);
+}, { passive: true });
+</script>
+<script src="../assets/site-nav.js"></script>
+</body>
+</html>

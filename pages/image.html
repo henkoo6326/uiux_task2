@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이미지 — The Power Of Real Visual | 비주얼커뮤니케이션</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;1,900&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════════════════
+   이미지최종 (Figma 840:5429, 1920×6499) — 손코딩 클론
+   배치 시스템: 각 섹션 = 1920-wide 프레임 1개.
+   자식 left/width = 1920 대비 %, top = 섹션높이 대비 %, font = vw.
+   섹션 배경: Hero/Meaning/Process = 흰색, Keyword/Series = #171919.
+   ════════════════════════════════════════════════════════════════ */
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+:root{ --ink:#171919; --title:#0d0d0d; --sub:#6e6e6e; --lime:#DFFF87; --paper:#fff; --dark:#171919; --on-dark:#F8F8F8; --on-dark-sub:#c9c9c9; }
+html{ scroll-behavior:smooth; overflow-x:hidden; }
+body{ font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
+      background:#fff; color:var(--ink); max-width:1920px; margin:0 auto; }
+img{ display:block; }
+
+/* ── 섹션 공통 ── */
+.sec{ position:relative; width:100%; overflow:hidden; background:#fff;
+      opacity:0; transform:translateY(26px);
+      transition:opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1); }
+.sec.in{ opacity:1; transform:none; }
+.sec.dark{ background:var(--dark); color:var(--on-dark); }
+.t{ position:absolute; }
+.clip{ position:absolute; overflow:hidden; }
+.clip img{ position:absolute; max-width:none; }
+
+/* 공통 텍스트 프리미티브 (1920 기준 vw) */
+.eyebrow{ font-weight:500; font-size:calc(18/1920*100vw); letter-spacing:.01em; line-height:1.6; white-space:nowrap; }
+.body{ font-weight:400; font-size:calc(18/1920*100vw); letter-spacing:-.012em; line-height:1.6; }
+
+/* ── 1) HERO (Frame 307, h1222) ── */
+/* overflow:visible 로 배경이 섹션(1920) 밖 화면 끝까지 나가도록 허용.
+   인물 사진은 별도 클립(.portrait-clip)으로 히어로 범위 안에 가둠. */
+.s-hero{ height:calc(1222/1920*100vw); max-height:1222px; overflow:visible; }
+.s-hero .portrait-clip{ position:absolute; left:0; top:0; width:100%; height:100%; overflow:hidden; z-index:2; }
+/* 배경은 1920 컨테이너 마진을 무시하고 화면 양옆 끝까지 풀블리드(100vw) */
+.s-hero .bg-wrap{ left:50%; transform:translateX(-50%); top:calc(110.95/1222*100%); width:100vw; height:calc(881.75/1222*100%); }
+.s-hero .bg-wrap img{ left:0; top:calc(-62.55/881.75*100%); width:100%; height:calc(1212.65/881.75*100%); object-fit:cover; object-position:center; }
+.s-hero .portrait{ left:calc(491.63/1920*100%); top:calc(176.53/1222*100%); width:calc(1007.4/1920*100%); height:calc(1084/1222*100%); object-fit:cover; object-position:26.9% 10.5%; z-index:2; }
+.s-hero .hl{ z-index:1; font-family:'Montserrat',sans-serif; font-weight:700; font-size:calc(141.24/1920*100vw); color:var(--lime); letter-spacing:-.1em; line-height:1.6; white-space:nowrap; }
+.s-hero .hl1{ left:calc(912/1920*100%); top:calc(119.02/1222*100%); }
+.s-hero .hl2{ left:calc(1170.27/1920*100%); top:calc(258.24/1222*100%); }
+
+/* ── 2) MEANING (Frame 315, h719) ── */
+.s-meaning{ height:calc(719/1920*100vw); max-height:719px; }
+.s-meaning .side{ left:calc(1164/1920*100%); top:calc(116/719*100%); width:calc(660/1920*100%); height:calc(487/719*100%); }
+.s-meaning .side img{ left:0; top:calc(-443/487*100%); width:100%; height:calc(930/487*100%); object-fit:cover; object-position:center; }
+.s-meaning .label{ left:calc(97/1920*100%); top:calc(110/719*100%); color:var(--ink); }
+.s-meaning .mtitle{ position:absolute; font-weight:600; font-size:calc(108.08/1920*100vw); letter-spacing:-.02em; line-height:1.3; color:var(--title); white-space:nowrap; }
+.s-meaning .mt1{ left:calc(95/1920*100%); top:calc(157/719*100%); }
+.s-meaning .mt2{ left:calc(275/1920*100%); top:calc(281.5/719*100%); }
+.s-meaning .mbody{ left:calc(95/1920*100%); top:calc(470/719*100%); width:calc(716/1920*100%); font-size:calc(24/1920*100vw); line-height:1.6; letter-spacing:-.02em; color:var(--ink); }
+
+/* ── 3) PROCESS (Frame 316, h1991) ── */
+.s-process{ height:calc(1991/1920*100vw); max-height:1991px; margin-top:calc(220/1920*100vw); }
+.s-process .label{ left:calc(97/1920*100%); top:calc(110/1991*100%); color:var(--ink); }
+.s-process .ptitle{ left:calc(96/1920*100%); top:calc(157/1991*100%); font-weight:500; font-size:calc(40/1920*100vw); letter-spacing:-.02em; line-height:1.3; color:var(--ink); white-space:nowrap; }
+.s-process .p1{ left:calc(685/1920*100%); top:calc(161/1991*100%); width:calc(1139/1920*100%); color:var(--ink); }
+.s-process .p2{ left:calc(685/1920*100%); top:calc(1630/1991*100%); width:calc(1139/1920*100%); color:var(--ink); white-space:pre-line; }
+.s-process .pimg{ object-fit:cover; }
+.s-process .pi1{ left:calc(96/1920*100%);  top:calc(446/1991*100%); width:calc(549/1920*100%); height:calc(824/1991*100%); }
+.s-process .pi2{ left:calc(685/1920*100%); top:calc(515/1991*100%); width:calc(549/1920*100%); height:calc(825/1991*100%); }
+.s-process .pi3{ left:calc(1274/1920*100%); top:calc(585/1991*100%); width:calc(549/1920*100%); height:calc(824/1991*100%); }
+.s-process .pn{ font-family:'Montserrat',sans-serif; font-weight:700; font-size:calc(24/1920*100vw); color:var(--ink); }
+.s-process .pn1{ left:calc(97/1920*100%);  top:calc(1288/1991*100%); }
+.s-process .pn2{ left:calc(685/1920*100%); top:calc(1358/1991*100%); }
+.s-process .pn3{ left:calc(1274/1920*100%); top:calc(1427/1991*100%); }
+
+/* ── 4) VISUAL KEYWORD (Frame 325) — 다크 · 풀폭 스펙 그리드 ── */
+.s-keyword{ height:auto; max-height:none;
+  padding:calc(120/1920*100vw) calc(96/1920*100%) calc(150/1920*100vw); }
+.s-keyword .kw-label{ position:static; display:block; margin-bottom:calc(96/1920*100vw);
+  color:var(--on-dark); text-transform:uppercase; }
+.kw-grid{ position:static; display:grid; grid-template-columns:1fr 1fr;
+  column-gap:calc(120/1920*100vw); width:100%; max-width:none; }
+.kw-cell{ display:flex; flex-direction:column; align-items:flex-start;
+  border-top:1px solid rgba(255,255,255,.18);
+  padding:calc(36/1920*100vw) 0 calc(56/1920*100vw); }
+.kw-code{ font-family:'Montserrat',sans-serif; font-weight:600; font-size:calc(20/1920*100vw);
+  letter-spacing:.06em; color:var(--on-dark-sub); }
+.kw-title{ margin-top:calc(22/1920*100vw); font-weight:600; font-size:calc(46.46/1920*100vw);
+  line-height:1.2; letter-spacing:-.02em; color:var(--on-dark); }
+.kw-value{ margin-top:calc(18/1920*100vw); font-weight:400; font-size:calc(30/1920*100vw);
+  line-height:1.4; letter-spacing:-.02em; color:var(--on-dark-sub); }
+
+/* ── 5) SH!!! SERIES (Frame 326, h1710) — 다크 ── */
+.s-series{ height:calc(1710/1920*100vw); max-height:1710px; }
+.s-series .label{ left:calc(97/1920*100%); top:calc(110/1710*100%); color:var(--on-dark); text-transform:uppercase; }
+.s-series .stitle{ left:calc(96/1920*100%); top:calc(139/1710*100%); font-family:'Montserrat',sans-serif; font-weight:900; font-style:italic; font-size:calc(88/1920*100vw); line-height:1.15; letter-spacing:-.02em; color:var(--on-dark); white-space:nowrap; }
+.s-series .sdesc{ left:calc(685/1920*100%); top:calc(153/1710*100%); width:calc(1139/1920*100%); font-size:calc(22/1920*100vw); line-height:1.6; letter-spacing:-.02em; color:var(--on-dark-sub); }
+.s-series .poster{ object-fit:cover; top:calc(360/1710*100%); height:calc(1234.39/1710*100%); }
+.s-series .pleft{ left:calc(97/1920*100%); width:calc(822.1/1920*100%); }
+.s-series .pright{ left:calc(947.15/1920*100%); width:calc(876.85/1920*100%); }
+
+/* ── TOP 버튼 ── */
+.btn-top{ position:fixed; right:2.6vw; bottom:2.6vw; z-index:90; background:rgba(20,20,20,.84); color:#fff;
+  border:none; border-radius:40px; padding:11px 20px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700;
+  letter-spacing:.12em; cursor:pointer; opacity:0; transition:opacity .35s; backdrop-filter:blur(4px); }
+.btn-top.on{ opacity:1; }
+
+@media (prefers-reduced-motion:reduce){ .sec{ opacity:1; transform:none; transition:none; } html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<main>
+  <!-- 1) HERO -->
+  <section class="sec s-hero">
+    <div class="clip bg-wrap"><img src="../assets/images/image-1.png" alt="콘서트 에너지 — 배경"></div>
+    <div class="t hl hl1">The Power Of</div>
+    <div class="t hl hl2">Real Visual</div>
+    <div class="portrait-clip"><img class="t portrait" src="../assets/images/image-2.png" alt="퍼포먼스 오버레이"></div>
+  </section>
+
+  <!-- 2) MEANING -->
+  <section class="sec s-meaning">
+    <div class="clip side"><img src="../assets/images/image-3.png" alt="퍼포먼스 사진"></div>
+    <div class="t eyebrow label">MEANING</div>
+    <div class="mtitle mt1">이미지가</div>
+    <div class="mtitle mt2">주는 힘</div>
+    <div class="t mbody">이미지는 텍스트보다 먼저 몸에 닿는다. 기타 픽이 렌즈를 향해 날아오는 순간, 보는 사람은 피할 틈이 없다. 언어가 의미를 설명하는 동안 이미지는 이미 충격을 끝낸다. 이 시리즈는 그 찰나를 설계한다 — 공중에 뜬 몸, 공간으로 해체되는 오브젝트, 화면을 점령하는 타이포가 동시에 충돌하며 하나의 야생적인 에너지를 만든다.</div>
+  </section>
+
+  <!-- 3) PROCESS -->
+  <section class="sec s-process">
+    <div class="t eyebrow label">PROCESS</div>
+    <div class="t ptitle">이미지 생성 과정</div>
+    <div class="t body p1">(1) A male vocalist in extreme mid-performance motion — body twisting forward with full kinetic energy, microphone extended toward the camera. Background: vibrant urban street with colorful graffiti walls and blown-out sky. Low-angle worm's-eye shot that gives the subject monumental, overwhelming presence. Editorial concert photography meets street fashion. High contrast, saturated color. Cinematic.</div>
+    <img class="t pimg pi1" src="../assets/images/image-4.png" alt="ChatGPT 생성 이미지">
+    <img class="t pimg pi2" src="../assets/images/image-5.png" alt="Adobe Firefly 생성 이미지">
+    <img class="t pimg pi3" src="../assets/images/image-6.png" alt="Gemini 생성 이미지">
+    <div class="t pn pn1">(1)</div>
+    <div class="t pn pn2">(2)</div>
+    <div class="t pn pn3">(3)</div>
+    <div class="t body p2">(2) Revise composition: shift the microphone to the LEFT side of frame, intentionally cropped at the left edge — the cut-off creates tension and instability. The subject's body should show more extreme torsion, as if mid-air or violently off-balance. The crop amplifies raw energy; the viewer shouldn't feel safe.
+(3) Add guitar picks exploding through the air around the subject — multiple sizes, some sharply in-focus in the foreground, others motion-blurred in the distance. Match the reference palette: lime yellow, red, translucent white, with picks catching harsh light. The picks aren't decorative — they radiate outward from the performer like shrapnel, extending the sense of sonic explosion beyond the body.</div>
+  </section>
+
+  <!-- 4) VISUAL KEYWORD (dark) -->
+  <section class="sec dark s-keyword">
+    <div class="eyebrow kw-label">VISUAL KEYWORD</div>
+    <div class="kw-grid">
+      <div class="kw-cell"><span class="kw-code">ⓐ-4</span><div class="kw-title">사진유형</div><div class="kw-value">매우 역동적인 움직임</div></div>
+      <div class="kw-cell"><span class="kw-code">ⓑ-3</span><div class="kw-title">디자인요소</div><div class="kw-value">컬러풀 배색</div></div>
+      <div class="kw-cell"><span class="kw-code">ⓒ-5</span><div class="kw-title">타이포그래피</div><div class="kw-value">여러가지 서체꼴 활용 / 혼합하여</div></div>
+      <div class="kw-cell"><span class="kw-code">ⓓ-6</span><div class="kw-title">비주얼랭귀지</div><div class="kw-value">strong / wild</div></div>
+    </div>
+  </section>
+
+  <!-- 5) SH!!! SERIES (dark) -->
+  <section class="sec dark s-series">
+    <div class="t eyebrow label">SERIES</div>
+    <div class="t stitle">SH!!!</div>
+    <div class="t sdesc">마이크를 향해 몸 전체를 던지는 순간. 화면 왼쪽으로 잘려나간 마이크는 프레임 밖에서 당기고, 피사체는 그쪽으로 빨려들 듯 뻗는다. 기타 피크들이 공중에 흩어지면서 소리가 눈에 보이는 것처럼 만들어진다. 하단의 손글씨 같은 대사 — "뭐라고? 다시말해봐. 안들려!!" — 가 이미지의 에너지를 언어로 받는다. SCREAM. 지르는 것에 대한 포스터.</div>
+    <img class="t poster pleft" src="../assets/images/image-poster-scream.png" alt="SH!!! 시리즈 — SCREAM 포스터">
+    <img class="t poster pright" src="../assets/images/image-poster-shred.png" alt="SH!!! 시리즈 — SHRED 포스터">
+  </section>
+</main>
+
+<button class="btn-top" id="btnTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOP</button>
+
+<script>
+/* 섹션 스크롤 reveal (첫 섹션 즉시) */
+(function(){
+  var secs=document.querySelectorAll('.sec');
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){ secs.forEach(function(s){s.classList.add('in');}); return; }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin:'0px 0px -12% 0px', threshold:0.05 });
+  secs.forEach(function(s){ io.observe(s); });
+  requestAnimationFrame(function(){ if(secs[0]) secs[0].classList.add('in'); });
+})();
+/* TOP 버튼 */
+window.addEventListener('scroll',function(){ document.getElementById('btnTop').classList.toggle('on', window.scrollY>window.innerHeight*0.8); }, {passive:true});
+
+/* HERO 마우스 패럴랙스 — 커서 움직임에 따라 인물·배경 사진이 깊이감 있게 미세하게 움직임 */
+(function(){
+  var hero=document.querySelector('.s-hero');
+  if(!hero) return;
+  var bg=hero.querySelector('.bg-wrap img');
+  var portrait=hero.querySelector('.portrait');
+  var hls=hero.querySelectorAll('.hl');
+  if(!bg||!portrait) return;
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return; /* 터치 기기 제외 */
+  var BG_BASE='scale(1.05)';                 /* 배경은 살짝 확대해 이동 여백 확보(가장자리 빈틈 방지) */
+  bg.style.transform=BG_BASE;
+  bg.style.willChange='transform';
+  portrait.style.willChange='transform';
+  var tX=0,tY=0,cX=0,cY=0,raf=null;          /* t=목표, c=현재(부드럽게 추격) */
+  function render(){
+    cX+=(tX-cX)*0.09; cY+=(tY-cY)*0.09;
+    bg.style.transform=BG_BASE+' translate('+(cX*-12)+'px,'+(cY*-10)+'px)';      /* 배경: 가장 적게(원경) */
+    for(var i=0;i<hls.length;i++){ hls[i].style.transform='translate('+(cX*-20)+'px,'+(cY*-17)+'px)'; } /* 헤드라인: 중간 */
+    portrait.style.transform='translate('+(cX*-32)+'px,'+(cY*-28)+'px)';         /* 인물: 가장 많이(근경) */
+    if(Math.abs(tX-cX)>0.0004||Math.abs(tY-cY)>0.0004){ raf=requestAnimationFrame(render); } else { raf=null; }
+  }
+  hero.addEventListener('mousemove',function(e){
+    var r=hero.getBoundingClientRect();
+    tX=(e.clientX-r.left)/r.width-0.5;       /* -0.5 ~ 0.5 */
+    tY=(e.clientY-r.top)/r.height-0.5;
+    if(!raf) raf=requestAnimationFrame(render);
+  });
+  hero.addEventListener('mouseleave',function(){ tX=0; tY=0; if(!raf) raf=requestAnimationFrame(render); });
+})();
+</script>
+<script src="../assets/site-nav.js"></script>
+</body>
+</html>

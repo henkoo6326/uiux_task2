@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서체꼴 — 한글 · 윤고딕 700 | 비주얼커뮤니케이션</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root{
+  --bg:#f5f5f5;
+  --ink:#171919;
+  --title:#0d0d0d;
+  --sub:#6e6e6e;
+}
+html { scroll-behavior: smooth; }
+body{
+  font-family:'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  overflow-x:hidden;
+  max-width:1920px;
+  margin:0 auto;
+}
+img{ display:block; }
+
+/* ── TOP NAV (site chrome, consistent with sibling pages) ── */
+.top-nav{
+  position:fixed; top:0; left:0; right:0;
+  max-width:1920px; margin:0 auto;
+  height:48px;
+  background:rgba(245,245,245,0.86);
+  border-bottom:1px solid rgba(0,0,0,0.08);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 5vw; z-index:100;
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+}
+.nav-back{ font-size:13px; font-weight:500; color:#171919; text-decoration:none; letter-spacing:-0.01em; }
+.nav-back:hover{ opacity:0.5; }
+.nav-center{ display:flex; gap:28px; }
+.nav-center a{ font-size:12px; font-weight:400; color:rgba(0,0,0,0.4); text-decoration:none; letter-spacing:0.04em; transition:color .2s; }
+.nav-center a:hover{ color:#171919; }
+.nav-center a.active{ font-weight:600; color:#171919; }
+.nav-lang a{ font-size:11px; font-weight:400; color:rgba(0,0,0,0.35); text-decoration:none; letter-spacing:0.08em; transition:color .2s; }
+.nav-lang a.active{ color:#171919; font-weight:600; }
+.nav-lang span{ color:rgba(0,0,0,0.15); margin:0 6px; }
+
+main{ padding-top:48px; }
+
+/* ── SECTION SYSTEM ──
+   Each section reproduces a 1920-wide Figma frame. Height scales with
+   viewport width (vw), capped at the real pixel height. Children are
+   positioned with left/width as % of 1920 and top as % of the frame
+   height — so the whole composition scales fluidly yet stays exact. */
+.sec{
+  position:relative;
+  width:100%;
+  background:var(--bg);
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+             transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  will-change:opacity, transform;
+}
+.sec.in{ opacity:1; transform:none; }
+/* some frames sit on a pure-white field (the gray specimen blocks then read
+   against white); others stay on the #f5f5f5 page field. */
+.sec.white{ background:#fff; }
+
+/* positioned primitives */
+.t{ position:absolute; }
+.eyebrow{ font-weight:500; font-size:calc(18/1920*100vw); letter-spacing:0.01em; color:var(--ink); white-space:nowrap; }
+.title{ font-weight:700; font-size:calc(52/1920*100vw); letter-spacing:-0.04em; line-height:1.15; color:var(--title); white-space:nowrap; }
+.subcap{ font-weight:400; font-size:calc(18/1920*100vw); letter-spacing:-0.01em; line-height:1.55; color:var(--sub); }
+.body{ font-weight:400; font-size:calc(18/1920*100vw); letter-spacing:-0.012em; line-height:1.72; color:var(--ink); }
+.captitle{ font-weight:600; font-size:calc(18/1920*100vw); letter-spacing:-0.012em; line-height:1.4; color:var(--title); }
+.capbody{ font-weight:400; font-size:calc(15/1920*100vw); letter-spacing:-0.012em; line-height:1.65; color:var(--sub); }
+.spec{ position:absolute; }
+
+/* hero white panel — in the original, the left ~66% is a white card,
+   the right is the #f5f5f5 field that holds the giant 윤 */
+.hero-panel{ position:absolute; left:0; top:0; height:100%; width:calc(1261/1920*100%); background:#fff; }
+
+/* ── HERO MOTION & INTERACTION ── */
+.hero{ opacity:1 !important; transform:none !important; }   /* children animate individually */
+
+/* entrance — hidden initial states */
+.hero .brand, .hero .brand-meta, .hero .menu-ico,
+.hero .eyebrow, .hero .body{
+  opacity:0; transform:translateY(18px);
+  transition:opacity .85s cubic-bezier(.16,1,.3,1),
+             transform .85s cubic-bezier(.16,1,.3,1);
+}
+.hero .title{ overflow:hidden; }
+.hero .title .ti{
+  display:inline-block; transform:translateY(116%);
+  transition:transform 1s cubic-bezier(.16,1,.3,1);
+}
+.hero .yun-wrap{ position:absolute; will-change:transform; z-index:1; }
+/* white panel sits ABOVE the glyph so it clips 윤's left at rest;
+   recedes on hover to reveal the full letterform. Text stays on top. */
+.hero .hero-panel{ z-index:2; }
+.hero .brand, .hero .brand-meta, .hero .menu-ico,
+.hero .eyebrow, .hero .title, .hero .body{ z-index:3; }
+.hero .yun-wrap .spec{
+  position:static; width:100%; height:100%;
+  opacity:0; clip-path:inset(0 0 100% 0);
+  transition:opacity .55s ease,
+             clip-path 1.2s cubic-bezier(.16,1,.3,1);
+}
+
+/* entrance — revealed (section gets .in immediately) */
+.hero.in .brand{ transition-delay:.10s; }
+.hero.in .brand-meta{ transition-delay:.16s; }
+.hero.in .menu-ico{ transition-delay:.22s; }
+.hero.in .eyebrow{ transition-delay:.34s; }
+.hero.in .body{ transition-delay:.62s; }
+.hero.in .brand, .hero.in .brand-meta, .hero.in .menu-ico,
+.hero.in .eyebrow, .hero.in .body{ opacity:1; transform:none; }
+.hero.in .title .ti{ transition-delay:.46s; transform:none; }
+.hero.in .spec{ transition-delay:.30s; opacity:1; clip-path:inset(0 0 0% 0); }
+
+/* hover — hamburger morphs into an X */
+.hero .menu-ico{ cursor:pointer; }
+.hero .menu-ico span{ transition:transform .4s cubic-bezier(.16,1,.3,1), opacity .3s; }
+.hero .menu-ico:hover span:nth-child(1){ transform:translateY(calc(8.5/1920*100vw)) rotate(45deg); }
+.hero .menu-ico:hover span:nth-child(2){ opacity:0; transform:scaleX(.2); }
+.hero .menu-ico:hover span:nth-child(3){ transform:translateY(calc(-8.5/1920*100vw)) rotate(-45deg); }
+
+/* ── 윤 HOVER · "typographic blueprint" (replicating the Figma prototype:
+   Default → Variant2 white-panel recedes / 윤 fully presents
+           → Variant3 윤 dims to a ghost + cyan construction grid draws in) ── */
+.hero-panel{ transition:width .6s cubic-bezier(.16,1,.3,1); }
+.hero.yun-hover .hero-panel{ width:calc(964/1920*100%); }   /* gray field expands left (Variant2) */
+.hero.yun-hover .yun-wrap .spec{ opacity:.12; }             /* 윤 fades to a faint ghost (Variant3) */
+
+.blueprint{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.blueprint line{
+  stroke:#09D3FF; stroke-width:1.6; vector-effect:non-scaling-stroke; opacity:0;
+  transition:opacity .3s ease, stroke-dashoffset .7s cubic-bezier(.16,1,.3,1);
+}
+.blueprint .hl{ stroke-dasharray:765; stroke-dashoffset:765; }   /* draw-in from left  */
+.blueprint .vl{ stroke-dasharray:771; stroke-dashoffset:771; }   /* draw-in from top   */
+.hero.yun-hover .blueprint line{ opacity:1; stroke-dashoffset:0; }
+/* staggered draw */
+.hero.yun-hover .blueprint .hl:nth-of-type(1){ transition-delay:.02s }
+.hero.yun-hover .blueprint .hl:nth-of-type(2){ transition-delay:.06s }
+.hero.yun-hover .blueprint .hl:nth-of-type(3){ transition-delay:.10s }
+.hero.yun-hover .blueprint .hl:nth-of-type(4){ transition-delay:.14s }
+.hero.yun-hover .blueprint .hl:nth-of-type(5){ transition-delay:.18s }
+.hero.yun-hover .blueprint .hl:nth-of-type(6){ transition-delay:.22s }
+.hero.yun-hover .blueprint .vl{ transition-delay:.18s }
+
+/* hero brand bar (part of the original composition) */
+.brand{ font-weight:600; font-size:calc(20/1920*100vw); letter-spacing:-0.02em; color:var(--title); white-space:nowrap; }
+.brand-meta{ font-weight:400; font-size:calc(13/1920*100vw); letter-spacing:0.01em; line-height:1.7; color:var(--sub); white-space:nowrap; }
+.menu-ico{ position:absolute; display:flex; flex-direction:column; gap:calc(6/1920*100vw); }
+.menu-ico span{ display:block; width:calc(34/1920*100vw); height:calc(2.5/1920*100vw); background:var(--title); }
+
+/* ── TOP BUTTON ── */
+.btn-top{
+  position:fixed; right:2.6vw; bottom:2.6vw;
+  background:rgba(255,255,255,0.84);
+  border:1px solid rgba(0,0,0,0.1);
+  border-radius:2px; padding:6px 16px;
+  font-size:11px; font-weight:500; letter-spacing:0.1em; color:#171919;
+  cursor:pointer; opacity:0; transition:opacity 0.35s; z-index:100;
+  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+}
+.btn-top.on{ opacity:1; }
+
+@media (prefers-reduced-motion: reduce){
+  .sec{ transition:none; opacity:1; transform:none; }
+  .hero .brand, .hero .brand-meta, .hero .menu-ico, .hero .eyebrow,
+  .hero .body, .hero .title .ti, .hero .spec{
+    opacity:1 !important; transform:none !important;
+    clip-path:none !important; transition:none !important;
+  }
+  .hero-panel, .blueprint line{ transition:none !important; }
+  html{ scroll-behavior:auto; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="../비주얼커뮤니케이션.html" class="nav-back">← 돌아가기</a>
+  <div class="nav-center">
+    <a href="seochaegol-han.html" class="active">서체꼴</a>
+    <a href="jagan-han.html">자간·행간</a>
+    <a href="keumo-han.html">크기·무게</a>
+  </div>
+  <div class="nav-lang">
+    <a href="seochaegol-han.html" class="active">한</a>
+    <span>/</span>
+    <a href="seochaegol-eng.html">EN</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ════ 01 · HERO — 윤고딕 700 ════ (1920×1080) -->
+  <section class="sec hero" style="height:calc(1080/1920*100vw);max-height:1080px">
+    <div class="hero-panel"></div>
+    <div class="t brand"        style="left:calc(96/1920*100%);top:calc(53/1080*100%)">Typeface Archive</div>
+    <div class="t brand-meta"   style="left:calc(432/1920*100%);top:calc(46/1080*100%)">2012 / YOONDESIGN GROUP<br>Sans-serif / Neo-Grotesque</div>
+    <div class="menu-ico"       style="left:calc(1786/1920*100%);top:calc(50/1080*100%)"><span></span><span></span><span></span></div>
+
+    <div class="t eyebrow"      style="left:calc(96/1920*100%);top:calc(425/1080*100%)">Typeface</div>
+    <div class="t title"        style="left:calc(96/1920*100%);top:calc(474/1080*100%)"><span class="ti">윤고딕 700</span></div>
+    <div class="t body"         style="left:calc(96/1920*100%);top:calc(612/1080*100%);width:calc(550/1920*100%)">윤고딕 700은 이름 없는 정보에 신뢰라는 옷을 입히는 서체입니다. 화려한 수식어 없이도 묵직한 존재감을 드러내는 이 서체는, 현대 한국 타이포그래피가 도달한 가장 합리적인 지점입니다.</div>
+
+    <!-- full 윤 glyph as vector (extracted from Yoon Gothic 700 90) — no clipping -->
+    <div class="yun-wrap" style="left:calc(1057/1920*100%);top:calc(170/1080*100%);width:calc(765/1920*100%);height:calc(771/1080*100%)">
+      <img class="spec" src="../images/final-frames/specimens/seochaegol-han/hero-yun.svg" alt="윤고딕 700 — 윤">
+      <svg class="blueprint" viewBox="0 0 765 771" preserveAspectRatio="none" aria-hidden="true">
+        <line class="hl" x1="0" y1="0.5"   x2="765" y2="0.5"/>
+        <line class="hl" x1="0" y1="332.2" x2="765" y2="332.2"/>
+        <line class="hl" x1="0" y1="375.0" x2="765" y2="375.0"/>
+        <line class="hl" x1="0" y1="486.6" x2="765" y2="486.6"/>
+        <line class="hl" x1="0" y1="536.4" x2="765" y2="536.4"/>
+        <line class="hl" x1="0" y1="770.5" x2="765" y2="770.5"/>
+        <line class="vl" x1="1.5"   y1="0" x2="1.5"   y2="771"/>
+        <line class="vl" x1="88.3"  y1="0" x2="88.3"  y2="771"/>
+        <line class="vl" x1="233.9" y1="0" x2="233.9" y2="771"/>
+        <line class="vl" x1="255.8" y1="0" x2="255.8" y2="771"/>
+        <line class="vl" x1="397.5" y1="0" x2="397.5" y2="771"/>
+        <line class="vl" x1="460.3" y1="0" x2="460.3" y2="771"/>
+        <line class="vl" x1="599.9" y1="0" x2="599.9" y2="771"/>
+        <line class="vl" x1="675.7" y1="0" x2="675.7" y2="771"/>
+        <line class="vl" x1="698.7" y1="0" x2="698.7" y2="771"/>
+        <line class="vl" x1="764.5" y1="0" x2="764.5" y2="771"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ════ 02 · BACKGROUND — 제작 스토리 ════ (1920×1080) -->
+  <section class="sec" style="height:calc(1080/1920*100vw);max-height:1080px">
+    <div class="t eyebrow"  style="left:calc(95/1920*100%);top:calc(108/1080*100%)">Background</div>
+    <div class="t title"    style="left:calc(94/1920*100%);top:calc(155/1080*100%)">제작 스토리</div>
+    <div class="t subcap"   style="left:calc(95/1920*100%);top:calc(232/1080*100%);width:calc(450/1920*100%)">기억해? 종이보다 화면이 더<br>익숙해지기 시작한 그해 겨울을.</div>
+    <div class="t body"     style="left:calc(821/1920*100%);top:calc(163/1080*100%);width:calc(1004/1920*100%)">고해상도라는 낯선 풍경 속에서 길을 잃지 않도록 선명한 이정표가 되어준 윤고딕 700은, 끊임없는 자기 갱신과 정제를 거듭한 끝에 비로소 따뜻한 디지털의 온기를 입었습니다. 기존의 서늘한 모던함을 단단하게 유지하면서도 자간과 속 공간을 오밀조밀하게 재설계해, 다정한 인상을 완성했어요.</div>
+
+    <img class="spec" src="../images/final-frames/specimens/seochaegol-han/story-weights.png" alt="윤고딕 100→700 굵기 변화"
+         style="left:calc(96/1920*100%);top:calc(621/1080*100%);width:calc(1730/1920*100%);height:calc(292/1080*100%)">
+  </section>
+
+  <!-- ════ 03 · CHARACTER ANATOMY — 자형 특징 ════ (1920×1338) -->
+  <section class="sec white" style="height:calc(1338/1920*100vw);max-height:1338px">
+    <div class="t eyebrow"  style="left:calc(95/1920*100%);top:calc(108/1338*100%)">Character Anatomy</div>
+    <div class="t title"    style="left:calc(94/1920*100%);top:calc(155/1338*100%)">자형 특징</div>
+    <div class="t body"     style="left:calc(821/1920*100%);top:calc(164/1338*100%);width:calc(1003/1920*100%)">획의 끝이 수직·수평으로 명확하게 마감되어 있어, 픽셀 단위로 표현되는 모바일 환경에서 글꼴이 번져 보이지 않고 칼같이 떨어지는 ‘샤프함’을 유지합니다. ‘최적화’처럼 복잡한 글자와 ‘모바일’처럼 단순한 글자가 나란히 배열되어도, 전체적인 글자의 덩어리감이 일정하게 느껴집니다. 이런 디테일 덕분에 웹사이트나 앱에서 윤고딕 700을 볼 때 ‘읽기 편하다’라고 느끼게 됩니다.</div>
+
+    <img class="spec" src="../images/final-frames/specimens/seochaegol-han/anatomy-choi.png" alt="최적화"
+         style="left:calc(96/1920*100%);top:calc(437/1338*100%);width:calc(793/1920*100%);height:calc(337/1338*100%)">
+    <img class="spec" src="../images/final-frames/specimens/seochaegol-han/anatomy-mo.png" alt="모"
+         style="left:calc(1123/1920*100%);top:calc(437/1338*100%);width:calc(337/1920*100%);height:calc(337/1338*100%)">
+    <img class="spec" src="../images/final-frames/specimens/seochaegol-han/anatomy-ba.png" alt="바"
+         style="left:calc(1123/1920*100%);top:calc(797/1338*100%);width:calc(337/1920*100%);height:calc(337/1338*100%)">
+    <img class="spec" src="../images/final-frames/specimens/seochaegol-han/anatomy-il.png" alt="일"
+         style="left:calc(1487/1920*100%);top:calc(797/1338*100%);width:calc(337/1920*100%);height:calc(337/1338*100%)">
+
+    <div class="t captitle" style="left:calc(384/1920*100%);top:calc(958/1338*100%);width:calc(300/1920*100%)">균형 잡힌 공간의 효율적 활용</div>
+    <div class="t capbody"  style="left:calc(384/1920*100%);top:calc(1006/1338*100%);width:calc(433/1920*100%)">받침 ‘ㄹ’과 ‘ㅎ’이 포함된 글자들입니다. 윤고딕 700은 네모틀 구조를 탄탄하게 채우면서도, 복잡한 초성과 종성 사이의 시각적 흐름을 세밀하게 조절했습니다.</div>
+  </section>
+
+  <!-- ════ 04 · FONT FAMILY — 서체가족 ════ (1920×1953) -->
+  <section class="sec white" style="height:calc(1953/1920*100vw);max-height:1953px">
+    <div class="t eyebrow"  style="left:calc(95/1920*100%);top:calc(108/1953*100%)">Font Family</div>
+    <div class="t title"    style="left:calc(94/1920*100%);top:calc(155/1953*100%)">서체가족</div>
+    <div class="t subcap"   style="left:calc(95/1920*100%);top:calc(232/1953*100%);width:calc(450/1920*100%)">변함없는 마음에도 9가지 표정이 필요하니까.</div>
+
+    <img class="spec" src="../images/final-frames/specimens/seochaegol-han/family-ramp.png" alt="윤고딕 710–790 굵기 견본"
+         style="left:calc(821/1920*100%);top:calc(168/1953*100%);width:calc(1003/1920*100%);height:calc(1535/1953*100%)">
+
+    <div class="t captitle" style="left:calc(386/1920*100%);top:calc(706/1953*100%);width:calc(200/1920*100%)">일관된 시각적 흐름</div>
+    <div class="t capbody"  style="left:calc(386/1920*100%);top:calc(754/1953*100%);width:calc(278/1920*100%)">글자가 차지하는 가로폭의 변화를 최소화해 두께를 변경해도 문단의 레이아웃이 크게 틀어지지 않습니다.</div>
+    <div class="t captitle" style="left:calc(96/1920*100%);top:calc(1229/1953*100%);width:calc(200/1920*100%)">정교한 설계 원칙</div>
+    <div class="t capbody"  style="left:calc(96/1920*100%);top:calc(1277/1953*100%);width:calc(278/1920*100%)">가장 얇은 710과 가장 두꺼운 790은 획의 굵기 차이가 뚜렷함에도 불구하고, 서체가 가진 고유의 골격과 중심축을 엄격하게 유지합니다.</div>
+  </section>
+
+  <!-- ════ 비교꼴 분석 — 호버 인터랙션(프로토타입 재현) ════
+       rest=솔리드 글자 SVG, hover=자소 분석(시안 #09D3FF 하이라이트) SVG 크로스페이드.
+       글자는 Figma 벡터에서 직접 SVG 추출. -->
+  <style>
+    .cmp-tile{ position:absolute; top:0; height:100%; width:calc(960/1920*100%); background:#f7f8f8; overflow:hidden; cursor:pointer; }
+    .cmp-tile .g{ position:absolute; display:block; transition:opacity .5s cubic-bezier(.16,1,.3,1); }
+    .cmp-tile .g.ana{ opacity:0; }
+    .cmp-tile:hover .g.rest{ opacity:0; }
+    .cmp-tile:hover .g.ana{ opacity:1; }
+    .cmp-hint{ position:absolute; bottom:calc(34/651*100%); font-family:'Montserrat',sans-serif; font-size:calc(12/1920*100vw); font-weight:600; letter-spacing:.14em; color:#b3b3b3; pointer-events:none; transition:opacity .3s; white-space:nowrap; }
+    .cmp-tile:hover .cmp-hint{ opacity:0; }
+    @media (hover:none){ .cmp-tile .g.ana{ opacity:1; } .cmp-tile .g.rest{ opacity:0; } .cmp-hint{ display:none; } }
+    @media (prefers-reduced-motion:reduce){ .cmp-tile .g{ transition:none; } }
+  </style>
+
+  <!-- 05 · 비교꼴 분석 (1) — Apple SD Gothic Neo (글자 우측 타일) -->
+  <section class="sec white" style="height:calc(651/1920*100vw);max-height:651px">
+    <div class="t eyebrow"  style="left:calc(96/1920*100%);top:calc(303/651*100%)">비교꼴 분석 (1)</div>
+    <div class="t title"    style="left:calc(96/1920*100%);top:calc(340/651*100%)">Apple SD Gothic Neo</div>
+    <div class="t body"     style="left:calc(96/1920*100%);top:calc(454/651*100%);width:calc(799/1920*100%)">애플 산돌고딕은 자소 사이의 여백을 넉넉하게 배분하여 현대적인 시원한 공간감을 제공합니다. 획의 끝처리가 간결하고 유연하게 마감되어 있어 시각적인 날렵한 속도감을 전달하며, 이는 디지털 스크린 환경에서 탁월한 가독성과 경쾌한 인상을 완성합니다.</div>
+
+    <div class="cmp-tile" style="left:calc(960/1920*100%)" title="호버하면 자소 분석">
+      <img class="g rest" src="../images/final-frames/specimens/seochaegol-han/cmp-apple-rest.svg" alt="Apple SD Gothic Neo — ㅊ ㅆ ㅙ"
+           style="left:calc(62/960*100%);top:calc(221/651*100%);width:calc(817/960*100%);height:calc(269/651*100%)">
+      <img class="g ana" src="../images/final-frames/specimens/seochaegol-han/cmp-apple-analysis.svg" alt="" aria-hidden="true"
+           style="left:calc(62/960*100%);top:calc(221/651*100%);width:calc(817/960*100%);height:calc(269/651*100%)">
+      <span class="cmp-hint" style="right:calc(48/960*100%)">HOVER · 자소 분석</span>
+    </div>
+  </section>
+
+  <!-- 06 · 비교꼴 분석 (2) — Yoon Gothic 700 (글자 좌측 타일) -->
+  <section class="sec white" style="height:calc(651/1920*100vw);max-height:651px">
+    <div class="cmp-tile" style="left:0" title="호버하면 자소 분석">
+      <img class="g rest" src="../images/final-frames/specimens/seochaegol-han/cmp-yoon-rest.svg" alt="윤고딕 700 — ㅊ ㅆ ㅙ"
+           style="left:calc(76/960*100%);top:calc(215/651*100%);width:calc(783/960*100%);height:calc(235.409/651*100%)">
+      <img class="g ana" src="../images/final-frames/specimens/seochaegol-han/cmp-yoon-analysis.svg" alt="" aria-hidden="true"
+           style="left:calc(76/960*100%);top:calc(215/651*100%);width:calc(783/960*100%);height:calc(235.409/651*100%)">
+      <span class="cmp-hint" style="left:calc(48/960*100%)">HOVER · 자소 분석</span>
+    </div>
+
+    <div class="t eyebrow"  style="left:calc(1025/1920*100%);top:calc(290/651*100%)">비교꼴 분석 (2)</div>
+    <div class="t title"    style="left:calc(1025/1920*100%);top:calc(327/651*100%)">Yoon Gothic 700</div>
+    <div class="t body"     style="left:calc(1025/1920*100%);top:calc(454/651*100%);width:calc(799/1920*100%)">윤고딕 700은 ‘ㅊ’, ‘ㅆ’, ‘ㅙ’ 등의 자소에서 획들이 만나는 지점이 단단하고 옹골차게 맞물려 있어 묵직한 밀도감을 줍니다. 특히 ‘ㅍ’의 가로획과 세로획, ‘ㅊ’의 꺾임 부분 등에서 이러한 단단함이 잘 드러나 인쇄 매체 기반의 묵직한 안정감을 구현합니다.</div>
+  </section>
+
+  <!-- ════ 07 · SPACING & WHITE SPACE — 타이포그래피 메시지 포스터 ════ (1920×1523) -->
+  <section class="sec white" style="height:calc(1523/1920*100vw);max-height:1523px">
+    <div class="t eyebrow"  style="left:calc(96/1920*100%);top:calc(251/1523*100%)">Spacing &amp; White Space</div>
+    <div class="t title"    style="left:calc(96/1920*100%);top:calc(298/1523*100%)">타이포그래피 메시지 표현</div>
+    <div class="t subcap"   style="left:calc(96/1920*100%);top:calc(370/1523*100%);width:calc(300/1920*100%)">자간, 행간 연출을 통한 포스터 제작</div>
+    <div class="t body"     style="left:calc(96/1920*100%);top:calc(1218/1523*100%);width:calc(742/1920*100%)">“왜 초성과 중성을 붙였을까요?”라는 질문에 대한 해답을 시각적으로 제시합니다. 획과 획 사이의 불필요한 틈을 줄여 완성한 단단한 밀도는 사용자의 망막에 맺히는 상을 더욱 또렷하게 만듭니다. 복잡한 모바일 환경에서도 글자가 뭉치지 않고 ‘쏙’ 들어오는 이유입니다.</div>
+
+    <img class="spec" src="../images/final-frames/specimens/seochaegol-han/poster.png" alt="‘쏙’ — 자간·행간 포스터"
+         style="left:calc(970/1920*100%);top:calc(290/1523*100%);width:calc(735/1920*100%);height:calc(1040/1523*100%)">
+  </section>
+
+</main>
+
+<button class="btn-top" id="btnTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOP</button>
+
+<script>
+/* ── SECTION SCROLL REVEAL ── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { rootMargin: '0px 0px -12% 0px', threshold: 0.04 });
+
+const secs = Array.from(document.querySelectorAll('.sec'));
+secs.forEach(el => io.observe(el));
+/* hero reveals immediately */
+requestAnimationFrame(() => requestAnimationFrame(() => {
+  if (secs[0]){ secs[0].classList.add('in'); io.unobserve(secs[0]); }
+}));
+
+/* ── HERO · 윤 magnetic parallax + hover scale ── */
+const hero = document.querySelector('.hero');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer  = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+if (hero && !reduceMotion && finePointer){
+  const wrap = hero.querySelector('.yun-wrap');
+
+  /* ambient magnetic drift */
+  let tx=0, ty=0, cx=0, cy=0;
+  hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width  - 0.5) * 24;
+    ty = ((e.clientY - r.top)  / r.height - 0.5) * 18;
+  });
+  hero.addEventListener('mouseleave', () => { tx = 0; ty = 0; });
+  (function loop(){
+    cx += (tx - cx) * 0.08;
+    cy += (ty - cy) * 0.08;
+    if (wrap) wrap.style.transform =
+      `translate3d(${cx.toFixed(2)}px, ${cy.toFixed(2)}px, 0)`;
+    requestAnimationFrame(loop);
+  })();
+
+  /* hover the 윤 → typographic-blueprint state (Figma prototype) */
+  if (wrap){
+    wrap.addEventListener('mouseenter', () => hero.classList.add('yun-hover'));
+    wrap.addEventListener('mouseleave', () => hero.classList.remove('yun-hover'));
+  }
+}
+
+/* ── TOP BUTTON ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('btnTop').classList.toggle('on', window.scrollY > window.innerHeight * 0.8);
+}, { passive: true });
+</script>
+<script src="../assets/site-nav.js"></script>
+</body>
+</html>

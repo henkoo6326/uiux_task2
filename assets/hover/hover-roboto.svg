@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 376.228 427.711" width="376.228" height="427.711" aria-label="Roboto R 설계">
+<defs><clipPath id="cR"><rect width="376.228" height="427.711"/></clipPath></defs>
+<g clip-path="url(#cR)">
+<rect width="376.228" height="427.711" fill="#f5f5f5"/>
+<svg x="-55.44400000000002" y="64.16" width="431.672" height="308.111" viewBox="0 0 431.672 308.507" preserveAspectRatio="none"><g id="Frame 247">
+<line id="Line 76" x1="1.7311e-08" y1="308.309" x2="431.672" y2="308.309" stroke="var(--stroke-0, #FF6D50)" stroke-width="0.396029"/>
+<line id="Line 77" x1="1.7311e-08" y1="194.252" x2="431.672" y2="194.252" stroke="var(--stroke-0, #FF6D50)" stroke-width="0.396029"/>
+<line id="Line 78" x1="1.7311e-08" y1="0.198052" x2="431.672" y2="0.198015" stroke="var(--stroke-0, #FF6D50)" stroke-width="0.396029"/>
+<line id="Line 79" x1="1.7311e-08" y1="145.541" x2="431.672" y2="145.541" stroke="var(--stroke-0, #FF6D50)" stroke-width="0.396029"/>
+<line id="Line 80" x1="1.7311e-08" y1="49.7017" x2="431.672" y2="49.7017" stroke="var(--stroke-0, #FF6D50)" stroke-width="0.396029"/>
+</g></svg>
+<svg x="87.52599999999998" y="0" width="239.598" height="427.711" viewBox="0 0 239.994 427.711" preserveAspectRatio="none"><g id="Frame 246">
+<line id="Line 81" x1="0.198015" y1="8.65549e-09" x2="0.198033" y2="427.711" stroke="var(--stroke-0, #FF6D50)" stroke-width="0.396029"/>
+<line id="Line 82" x1="63.5627" y1="8.65549e-09" x2="63.5627" y2="427.711" stroke="var(--stroke-0, #FF6D50)" stroke-width="0.396029"/>
+<line id="Line 83" x1="113.858" y1="8.65549e-09" x2="113.858" y2="427.711" stroke="var(--stroke-0, #FF6D50)" stroke-width="0.396029"/>
+<line id="Line 84" x1="172.075" y1="8.65549e-09" x2="172.075" y2="427.711" stroke="var(--stroke-0, #FF6D50)" stroke-width="0.396029"/>
+<line id="Line 85" x1="228.707" y1="8.65549e-09" x2="228.707" y2="427.711" stroke="var(--stroke-0, #FF6D50)" stroke-width="0.396029"/>
+<line id="Line 86" x1="239.796" y1="8.65549e-09" x2="239.796" y2="427.711" stroke="var(--stroke-0, #FF6D50)" stroke-width="0.396029"/>
+</g></svg>
+<path transform="translate(60.011,372.27) scale(0.21145,-0.21145)" d="M669 533H430V0H130V1456H671Q929 1456 1069.0 1341.0Q1209 1226 1209 1016Q1209 867 1144.5 767.5Q1080 668 949 609L1264 14V0H942ZM430 776H672Q785 776 847.0 833.5Q909 891 909 992Q909 1095 850.5 1154.0Q792 1213 671 1213H430Z" fill="none" stroke="#FF6D50" stroke-width="33.1" stroke-linejoin="round"/>
+</g></svg>
