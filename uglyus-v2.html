@@ -1242,6 +1242,11 @@ body {
 .iphone-wrap .iphone-frame{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;display:block;}
 .iphone-wrap .iphone-screen{position:absolute;left:5%;top:3%;width:90%;height:94%;border-radius:44px;overflow:hidden;}
 .iphone-wrap .iphone-screen iframe{width:100%;height:100%;border:none;display:block;}
+/* ── END section phone grid (vw-scaled) ── */
+.iphone-end{position:relative;width:20.3125vw;height:41.51vw;flex-shrink:0;}
+.iphone-end .iphone-frame{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;display:block;}
+.iphone-end .iphone-screen{position:absolute;left:5%;top:3%;width:90%;height:94%;border-radius:2.292vw;overflow:hidden;}
+.iphone-end .iphone-screen iframe{width:444px;height:900px;border:none;display:block;transform:scale(calc(100vw*0.203125/444));transform-origin:top left;}
 </style>
 </head>
 <body>
@@ -1693,8 +1698,13 @@ body {
 <section style="position:relative; width:100%; height:69.479vw; background:#fff; overflow:hidden;">
   <!-- 배경 사진: Image frame(opacity:0.8) × rect(opacity:0.4) = 최종 0.32 -->
   <div style="position:absolute; left:-0.698vw; top:0; width:104.573vw; height:72.656vw; background:url('assets/figma/end-bg.png') center/cover no-repeat; opacity:0.32;"></div>
-  <!-- 목업 스크린샷: x:85→4.427vw, y:159→8.281vw, w:1750→91.146vw (full opacity) -->
-  <img src="assets/figma/end-mockups.png" alt="" style="position:absolute; left:4.427vw; top:8.281vw; width:91.146vw; height:auto; display:block;">
+  <!-- 목업 4화면: x:85→4.427vw, y:159→8.281vw, w:1750→91.146vw -->
+  <div style="position:absolute; left:4.427vw; top:8.281vw; width:91.146vw; display:flex; justify-content:space-between; align-items:flex-start;">
+    <div class="iphone-end"><img class="iphone-frame" src="아이폰 목업/iPhone 17 Pro - Silver - Portrait.png" alt=""><div class="iphone-screen"><iframe src="prototype-as-is.html?screen=s-home" title="홈"></iframe></div></div>
+    <div class="iphone-end"><img class="iphone-frame" src="아이폰 목업/iPhone 17 Pro - Silver - Portrait.png" alt=""><div class="iphone-screen"><iframe src="prototype-as-is.html?screen=s-plan" title="채소 플랜"></iframe></div></div>
+    <div class="iphone-end"><img class="iphone-frame" src="아이폰 목업/iPhone 17 Pro - Silver - Portrait.png" alt=""><div class="iphone-screen"><iframe src="prototype-as-is.html?screen=s-delivery" title="배송·결제"></iframe></div></div>
+    <div class="iphone-end"><img class="iphone-frame" src="아이폰 목업/iPhone 17 Pro - Silver - Portrait.png" alt=""><div class="iphone-screen"><iframe src="prototype-as-is.html?screen=s-myinfo" title="내 정보"></iframe></div></div>
+  </div>
   <!-- 크레딧 텍스트 (Image frame opacity:0.8 반영) -->
   <div style="position:absolute; inset:0; opacity:0.8; pointer-events:none;">
     <!-- Row 1 — 레이블 (Medium 500, 20px, UPPERCASE) | y:1182 → 61.563vw -->

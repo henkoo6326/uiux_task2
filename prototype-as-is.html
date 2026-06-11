@@ -1753,6 +1753,15 @@ body.embed .screen-wrap {
 </div>
 
 <script>
+/* ── URL param: ?screen=s-xxx jumps to that screen on load ── */
+(function(){
+  const p = new URLSearchParams(location.search).get('screen');
+  if(p && document.getElementById(p)){
+    document.querySelector('.screen.active')?.classList.remove('active');
+    document.getElementById(p).classList.add('active');
+  }
+})();
+
 /* ── Navigation ────────────────────────────────── */
 let history = ['s-home'];
 
