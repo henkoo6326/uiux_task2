@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UGLYUS Renewal 2026 — 고해은</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS — Figma node 722:13932 "Group 2"
+   1920px baseline. All vw units = px/1920*100
+   ============================================================ */
+:root {
+  --white:   #FFFFFF;
+  --black:   #000000;
+  --text:    #262626;
+  --dark:    #050505;
+  --brown:   #42322E;
+  --yellow:  #FEDE00;
+  --mint:    #7DF9B7;
+  --coral:   #FE7755;
+  --lime:    #C1F149;
+  --gray:    #D9D9D9;
+  --beige:   #F1F0EE;
+  --orange:  #FF6741;
+  --red:     #FF4F27;
+  /* ── v3 renewal tokens ── */
+  --ivory:   #FCFBF7;
+  --cream:   #FCFBF7;
+  --carrot:  #FF4F27;
+  --ink:     #1A1714;
+  --sub:     #6E665B;
+  --mute:    #948A7E;
+  --faint:   #B4AB9E;
+  --line:    #ECEAE3;
+  --tomato:  #FF7D5D;
+  --butter:  #FBF0C6;
+  --surf:    #F0F0F0;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400; font-style: normal;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, sans-serif;
+  background: var(--white);
+  overflow-x: clip; /* clip 대신 hidden 시 sticky가 깨짐 */
+  color: var(--black);
+}
+
+/* ============================================================
+   NAV — fixed overlay (placeholder items removed)
+   ============================================================ */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: 5.052vw;
+  pointer-events: none;
+}
+
+/* ============================================================
+   SHARED HELPERS
+   ============================================================ */
+.section-label {
+  font-size: 1.042vw; /* 20px */
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--black);
+}
+.section-h2 {
+  font-size: 1.667vw; /* 32px */
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  color: var(--black);
+}
+.section-body {
+  font-size: 0.9375vw; /* 18px */
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  color: var(--black);
+}
+
+/* Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(2.083vw);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.on { opacity: 1; transform: none; }
+.reveal.d1 { transition-delay: 0.1s; }
+.reveal.d2 { transition-delay: 0.22s; }
+.reveal.d3 { transition-delay: 0.34s; }
+
+/* ============================================================
+   1. HERO — 1920 × 1334
+   ============================================================ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 69.479vw; /* 1334/1920 */
+  background: var(--white);
+  overflow: hidden;
+}
+/* Background image frame (Frame 55) at x=-13.4 w=2007.8 h=1395 */
+.hero__bg {
+  position: absolute;
+  left: -0.698vw; /* -13.4/1920 */
+  top: 0;
+  width: 104.573vw; /* 2007.8/1920 */
+  height: 72.656vw; /* 1395/1920 */
+  background: url('images/uglyus-web/hero-bg.png') center/cover no-repeat;
+  opacity: 0.8;
+}
+/* UGLYUS wordmark SVG at x=85 y=159 w=1750 h=969 */
+.hero__wordmark {
+  position: absolute;
+  left: 4.427vw;  /* 85/1920 × 100 */
+  top: 8.281vw;   /* 159/1920 × 100 */
+  width: 91.146vw; /* 1750/1920 × 100 */
+}
+.hero__wordmark img { width: 100%; height: auto; display: block; }
+
+/* 히어로 라벨 쌍 — 724:14121, 724:14122
+   부모 프레임(722:13939) x=85 y=159 기준 자식 좌표를 히어로 절대좌표로 변환
+   Label1: x=(85+200)/1920, y=(159+318)/1920
+   Label2: x=(85+459)/1920, y=(159+318)/1920 */
+.hero__label1 {
+  position: absolute;
+  left: 14.844vw;  /* 285/1920 */
+  top: 24.844vw;   /* 477/1920 */
+  font-size: 1.146vw; /* 22/1920 */
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  color: #000000;
+}
+.hero__label2 {
+  position: absolute;
+  left: 28.333vw;  /* 544/1920 */
+  top: 24.844vw;   /* 477/1920 */
+  font-size: 1.146vw;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  color: #000000;
+}
+
+/* ============================================================
+   2. OVER VIEW — 1920 × 1381
+   ============================================================ */
+.overview {
+  position: relative;
+  width: 100%;
+  height: 71.927vw; /* 1381/1920 */
+  background: var(--white);
+}
+/* "OVER VIEW" label at x=909 y=164 (centered on page) */
+.overview__label {
+  position: absolute;
+  left: 0; right: 0;
+  top: 8.537vw;   /* 164/1920 */
+  text-align: center;
+  font-size: 1.042vw;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+/* Heading "못생겨도 괜찮아! / 못난이 농산물..." at x=773 y=209 w=373 h=90 centered */
+.overview__h2 {
+  position: absolute;
+  left: 0; right: 0;
+  top: 10.885vw;   /* 209/1920 */
+  text-align: center;
+  font-size: 1.667vw;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.overview__h2 em { font-style: normal; color: var(--red); }
+/* Body text at x=554 y=331 w=812 centered */
+.overview__body {
+  position: absolute;
+  left: calc(554/1920 * 100%);
+  top: 17.24vw;    /* 331/1920 */
+  width: calc(812/1920 * 100%);
+  text-align: center;
+  font-size: 0.9375vw;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+/* Overview image at x=280 y=274 w=1358 h=943 */
+.overview__img {
+  position: absolute;
+  left: 14.583vw;  /* 280/1920 */
+  top: 14.271vw;   /* 274/1920 */
+  width: 70.729vw; /* 1358/1920 */
+  border-radius: 1.667vw;
+  overflow: hidden;
+  opacity: 0.9;
+}
+.overview__img img { width: 100%; height: auto; display: block; }
+
+/* ============================================================
+   3. THE REALITY — sticky two-column (총 2067px = 107.656vw)
+   left-col: sticky text  |  right-col: 3 stat cards 스크롤
+   ============================================================ */
+.reality {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  background: var(--white);
+}
+
+/* 좌측 sticky 패널 */
+.reality__left-col {
+  flex: 0 0 62.917vw;       /* 1208/1920 — 카드 시작 x */
+  position: sticky;
+  top: 8vw;
+  align-self: flex-start;
+  padding-left: 14.583vw;   /* 280/1920 */
+  padding-top: 8.854vw;     /* 170/1920 */
+}
+.reality__label {
+  font-size: 1.042vw;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--black);
+  margin-bottom: 1.25vw;    /* 24/1920 */
+}
+/* statement block — Union SVG 절대 배치를 위한 relative 컨테이너 */
+.reality__statement {
+  position: relative;
+  width: 28.542vw;          /* 548/1920 */
+}
+/* Union 웨이브 SVG 722:13970: x=280/548=51.09%, y=76.24 → "달라서" 장식 */
+.reality__deco {
+  position: absolute;
+  left: 51.09%;
+  top: 3.971vw;             /* 76.24/1920 */
+  width: 6.053vw;           /* 116.22/1920 */
+  pointer-events: none;
+}
+.reality__deco img { width: 100%; height: auto; display: block; }
+.reality__h2 {
+  font-size: 1.667vw;       /* 32/1920 */
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin-bottom: 1.667vw;   /* 32/1920 */
+  position: relative; z-index: 1;
+}
+.reality__body {
+  font-size: 0.9375vw;      /* 18/1920 */
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin-bottom: 15.677vw;  /* = right-col padding-bottom → release 시 카드 하단 정렬 */
+}
+
+/* 우측 카드 컬럼: padding-top(346)+cards(1420)+padding-bottom(301)=2067px */
+.reality__right-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.667vw;             /* 32/1920 */
+  padding-top: 18.021vw;    /* 346/1920 */
+  padding-bottom: 15.677vw; /* 301/1920 */
+}
+.stat-card {
+  width: 22.5vw;            /* 432/1920 */
+  height: 23.542vw;         /* 452/1920 */
+  border-radius: 1.667vw;
+  position: relative;
+  flex-shrink: 0;
+}
+.stat-card--y { background: var(--yellow); }
+.stat-card--m { background: var(--mint); }
+.stat-card--c { background: var(--coral); }
+/* 통계 숫자: x=41 y=91 / 30%는 x=33 center */
+.stat-num {
+  position: absolute;
+  left: 2.135vw;            /* 41/1920 */
+  top: 4.74vw;              /* 91/1920 */
+  font-size: 7.236vw;       /* 138.94/1920 */
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--brown);
+}
+.stat-card--y .stat-num {
+  left: 1.719vw;            /* 33/1920 */
+  width: 16.094vw;          /* 309/1920 */
+  text-align: center;
+}
+/* 설명: layout_1YTWRZ — x=41 y=359 w=383 */
+.stat-desc {
+  position: absolute;
+  left: 2.135vw;            /* 41/1920 */
+  top: 18.698vw;            /* 359/1920 (카드 내 상대값) */
+  width: 19.948vw;          /* 383/1920 */
+  font-size: 1.042vw;       /* 20/1920 */
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--dark);
+}
+.stat-desc small {
+  display: block;
+  opacity: 0.3;
+  font-size: 0.9375vw;
+  font-weight: 400;
+  margin-top: 0.208vw;
+}
+
+/* ============================================================
+   4. CURRENT STATE — 1920 × 2551
+   ============================================================ */
+.current {
+  position: relative;
+  width: 100%;
+  height: 132.865vw; /* 2551/1920 */
+  background: var(--white);
+  overflow: hidden;
+}
+/* 3D char hand at x=797 y=1349 w=1087 h=913 opacity=0.9 */
+.current__char {
+  position: absolute;
+  left: calc(797/1920 * 100%);
+  top: calc(1349/2551 * 100%);
+  width: calc(1087/1920 * 100%);
+  opacity: 0.9;
+}
+.current__char img { width: 100%; height: auto; display: block; }
+/* Left text at x=280 y=170 w=432 */
+.current__text {
+  position: absolute;
+  left: 14.583vw;
+  top: calc(170/2551 * 100%);
+  width: calc(432/1920 * 100%);
+}
+.current__text .section-label { margin-bottom: 0.833vw; }
+.current__text .section-h2 { margin-bottom: 1.667vw; }
+.current__text .section-h2 em { font-style: normal; color: var(--red); }
+/* Photo 1 (IMG_6521) at x=1121 y=224 w=499.56 h=1083.02; brown border stroke=14.59, r=58.34 */
+.current__before {
+  position: absolute;
+  left: calc(1121/1920 * 100%);
+  top: calc(224/2551 * 100%);
+  width: calc(499.56/1920 * 100%);
+  height: calc(1083.02/2551 * 100%);
+  border: 0.760vw solid var(--brown); /* 14.59/1920 */
+  border-radius: 3.039vw;             /* 58.34/1920 */
+  overflow: hidden;
+}
+.current__before img { width: 100%; height: 100%; object-fit: cover; }
+/* Photo 2 (IMG_6522) at x=297 y=1172 w=499.56 h=1083.02; same border */
+.current__after {
+  position: absolute;
+  left: calc(297/1920 * 100%);
+  top: calc(1172/2551 * 100%);
+  width: calc(499.56/1920 * 100%);
+  height: calc(1083.02/2551 * 100%);
+  border: 0.760vw solid var(--brown);
+  border-radius: 3.039vw;
+  overflow: hidden;
+}
+.current__after img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ============================================================
+   5. PROBLEM DEFINITION — 1920 × 1835
+   ============================================================ */
+.problem {
+  position: relative;
+  width: 100%;
+  height: 95.573vw; /* 1835/1920 */
+  background: var(--white);
+  overflow: hidden;
+}
+/* Union: absolute within right text block (x=1208+289, y=1198+34) */
+.problem__deco {
+  position: absolute;
+  left: calc(1497/1920 * 100%);
+  top: calc(1232/1835 * 100%);
+  width: 6.053vw;
+}
+.problem__deco img { width: 100%; }
+/* Left column at x=280 y=209 w=405 */
+.problem__left {
+  position: absolute;
+  left: 14.583vw;
+  top: calc(209/1835 * 100%);
+  width: calc(405/1920 * 100%);
+}
+.problem__left .section-label { margin-bottom: 1.25vw; }
+.problem__left .section-h2 { margin-bottom: 1.667vw; }
+.problem__left .section-h2 em { font-style: normal; }
+/* Right column at x=1208 y=1198 w=405 */
+.problem__right {
+  position: absolute;
+  left: calc(1208/1920 * 100%);
+  top: calc(1198/1835 * 100%);
+  width: calc(405/1920 * 100%);
+}
+.problem__right .section-h2 { margin-bottom: 1.25vw; }
+.problem__right .section-h2 em { font-style: normal; }
+/* Problem images (all opacity 0.9) */
+.problem__img1 { /* x=182 y=1062 w=824 h=564 */
+  position: absolute;
+  left: calc(182/1920 * 100%);
+  top: calc(1062/1835 * 100%);
+  width: calc(824/1920 * 100%);
+  opacity: 0.9;
+}
+.problem__img2 { /* x=534 y=665 w=349 h=337 */
+  position: absolute;
+  left: calc(534/1920 * 100%);
+  top: calc(665/1835 * 100%);
+  width: calc(349/1920 * 100%);
+  opacity: 0.9;
+}
+.problem__img3 { /* x=909 y=259 w=1011 h=529 */
+  position: absolute;
+  left: calc(909/1920 * 100%);
+  top: calc(259/1835 * 100%);
+  width: calc(1011/1920 * 100%);
+  opacity: 0.9;
+}
+.problem__img1 img,
+.problem__img2 img,
+.problem__img3 img { width: 100%; height: auto; display: block; border-radius: 1vw; }
+
+/* ============================================================
+   6. PERSONA — 1920 × 1326
+   All elements absolutely positioned within section frame
+   ============================================================ */
+.persona {
+  position: relative;
+  width: 100%;
+  height: 69.063vw; /* 1326/1920 */
+  background: var(--white);
+  overflow: hidden;
+}
+/* Decorative bg images at opacity 0.2 — Figma 728:14927(x=1466 y=106), 728:14928(x=-156 y=687) */
+.p-bgimg1 {
+  position: absolute;
+  left: calc(1466/1920 * 100%);
+  top: calc(106/1326 * 100%);
+  width: calc(551.15/1920 * 100%);
+  opacity: 0.2;
+  pointer-events: none;
+}
+.p-bgimg2 {
+  position: absolute;
+  left: calc(-156/1920 * 100%);
+  top: calc(687/1326 * 100%);
+  width: calc(544.04/1920 * 100%);
+  opacity: 0.2;
+  pointer-events: none;
+}
+.p-bgimg1 img, .p-bgimg2 img { width: 100%; height: auto; display: block; }
+/* Label at x=280 y=170 */
+.p-label {
+  position: absolute;
+  left: calc(280/1920 * 100%);
+  top: calc(170/1326 * 100%);
+  font-size: 1.042vw;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+/* h2 at x=280 y=224 — nowrap to keep on one line */
+.p-h2 {
+  position: absolute;
+  left: calc(280/1920 * 100%);
+  top: calc(224/1326 * 100%);
+  white-space: nowrap;
+  font-size: 1.667vw;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+/* Card 1 background: Rectangle 117 at x=280 y=483 w=664 h=690 r=28 */
+.p-card1 {
+  position: absolute;
+  left: calc(280/1920 * 100%);
+  top: calc(483/1326 * 100%);
+  width: calc(664/1920 * 100%);
+  height: calc(690/1326 * 100%);
+  background: var(--beige);
+  border-radius: calc(28/1920 * 100vw);
+}
+/* Card 2 background: Rectangle 118 at x=976 y=483 w=664 h=690 r=28 */
+.p-card2 {
+  position: absolute;
+  left: calc(976/1920 * 100%);
+  top: calc(483/1326 * 100%);
+  width: calc(664/1920 * 100%);
+  height: calc(690/1326 * 100%);
+  background: var(--beige);
+  border-radius: calc(28/1920 * 100vw);
+}
+/* Subtract photo (card 1 image): x=378 y=483 w=467 h=449 */
+.p-subtract {
+  position: absolute;
+  left: calc(378/1920 * 100%);
+  top: calc(483/1326 * 100%);
+  width: calc(467/1920 * 100%);
+  height: calc(449/1326 * 100%);
+  overflow: hidden;
+  border-radius: calc(28/1920 * 100vw) calc(28/1920 * 100vw) 0 0;
+  z-index: 2;
+}
+.p-subtract img { width: 100%; height: 100%; object-fit: cover; }
+/* Image 15 (card 2 image): x=1149 y=285 w=317 h=647 */
+.p-img15 {
+  position: absolute;
+  left: calc(1149/1920 * 100%);
+  top: calc(285/1326 * 100%);
+  width: calc(317/1920 * 100%);
+  height: calc(647/1326 * 100%);
+  overflow: hidden;
+  border-radius: calc(20/1920 * 100vw);
+  z-index: 2;
+}
+.p-img15 img { width: 100%; height: 100%; object-fit: cover; }
+/* Union deco 1: x=365 y=1023 w=116.22 h=27.91 */
+.p-deco1 {
+  position: absolute;
+  left: calc(365/1920 * 100%);
+  top: calc(1023/1326 * 100%);
+  width: calc(116.22/1920 * 100%);
+  z-index: 3;
+}
+.p-deco1 img { width: 100%; }
+/* Union deco 2: x=1060 y=1023 */
+.p-deco2 {
+  position: absolute;
+  left: calc(1060/1920 * 100%);
+  top: calc(1023/1326 * 100%);
+  width: calc(116.22/1920 * 100%);
+  z-index: 3;
+}
+.p-deco2 img { width: 100%; }
+/* User 01 label: x=338 y=1001 w=92 — fontSize 26.94 SemiBold center */
+.p-user1 {
+  position: absolute;
+  left: calc(338/1920 * 100%);
+  top: calc(1001/1326 * 100%);
+  width: calc(92/1920 * 100%);
+  text-align: center;
+  font-size: calc(26.94/1920 * 100vw);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  z-index: 3;
+}
+/* User 02 label: x=1031 y=1001 w=96 — left align */
+.p-user2 {
+  position: absolute;
+  left: calc(1031/1920 * 100%);
+  top: calc(1001/1326 * 100%);
+  width: calc(96/1920 * 100%);
+  font-size: calc(26.94/1920 * 100vw);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  z-index: 3;
+}
+/* Quote 1: x=338 y=1068.32 w=454 h=47 — 29.64px Regular center */
+.p-quote1 {
+  position: absolute;
+  left: calc(338/1920 * 100%);
+  top: calc(1068.32/1326 * 100%);
+  width: calc(454/1920 * 100%);
+  text-align: center;
+  font-size: calc(29.64/1920 * 100vw);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  z-index: 3;
+}
+/* Quote 2: x=1031 y=1068.32 w=379 — left align */
+.p-quote2 {
+  position: absolute;
+  left: calc(1031/1920 * 100%);
+  top: calc(1068.32/1326 * 100%);
+  width: calc(379/1920 * 100%);
+  font-size: calc(29.64/1920 * 100vw);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  z-index: 3;
+}
+
+/* ============================================================
+   7. RENEWAL DIRECTION — 1920 × 1140
+   Inner frame 2982 × 1140 (overflows right)
+   ============================================================ */
+/* renewal-wrap: section height + horizontal scroll distance (55.313vw = 2982-1920 = 1062/1920) */
+.renewal-wrap {
+  position: relative;
+  height: calc(59.375vw + 55.313vw); /* 114.688vw */
+}
+.renewal {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 59.375vw; /* 1140/1920 */
+  background: var(--white);
+  overflow: hidden;
+}
+/* Inner frame stretches to 2982px (155.313% of 1920) — driven by translateX */
+.renewal__inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 155.313vw; /* 2982/1920 */
+  height: 100%;
+  will-change: transform;
+}
+/* image 13 at x=913 y=296 w=694 h=674 */
+.renewal__img13 {
+  position: absolute;
+  left: calc(913/2982 * 100%);
+  top: calc(296/1140 * 100%);
+  width: calc(694/2982 * 100%);
+}
+.renewal__img13 img { width: 100%; height: auto; display: block; border-radius: 2vw; }
+/* Text stays fixed to .renewal (1920px), not .renewal__inner (2982px) */
+.renewal__text {
+  position: absolute;
+  left: calc(280/1920 * 100%);
+  top: calc(170/1140 * 100%);
+  width: calc(548/1920 * 100%);
+  z-index: 2;
+}
+.renewal__text .section-label { margin-bottom: 1.25vw; }
+/* image 14 at x=1607 y=170 w=1393 h=998 */
+.renewal__img14 {
+  position: absolute;
+  left: calc(1607/2982 * 100%);
+  top: calc(170/1140 * 100%);
+  width: calc(1393/2982 * 100%);
+}
+.renewal__img14 img { width: 100%; height: auto; display: block; border-radius: 2.5vw; }
+/* Pills — lime green, border-radius 999px, padding 8 26 */
+.pill {
+  position: absolute;
+  background: var(--lime);
+  border-radius: 999px;
+  padding: 0.417vw 1.354vw; /* 8/1920, 26/1920 */
+  font-size: 0.9375vw;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+/* Pill 1: x=1066 y=507 */
+.pill-1 { left: calc(1066/2982 * 100%); top: calc(507/1140 * 100%); }
+/* Pill 2: x=1567 y=351 */
+.pill-2 { left: calc(1567/2982 * 100%); top: calc(351/1140 * 100%); }
+/* Pill 3: x=2438 y=766 */
+.pill-3 { left: calc(2438/2982 * 100%); top: calc(766/1140 * 100%); }
+
+/* ============================================================
+   8. DESIGN CONCEPT — 1920 × 854
+   ============================================================ */
+.concept {
+  position: relative;
+  width: 100%;
+  height: 44.479vw; /* 854/1920 */
+  background: var(--white);
+}
+/* "Goals" label at x=934 y=244 */
+.concept__goals {
+  position: absolute;
+  left: calc(934/1920 * 100%);
+  top: calc(244/854 * 100%);
+  font-size: 1.042vw;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+/* "브랜드 경험의 일관성 부여" at x=731 y=335 w=459 h=69 — 46px SemiBold center, 1줄 */
+.concept__sub {
+  position: absolute;
+  left: calc(731/1920 * 100%);
+  top: calc(335/854 * 100%);
+  width: calc(459/1920 * 100%);
+  text-align: center;
+  font-size: 2.396vw; /* 46/1920 */
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+/* Keywords: Figma x=624/858/1071 y=418 개별 절대 배치 */
+.concept__kw {
+  position: absolute;
+  top: calc(418/854 * 100%);
+  font-size: 1.25vw; /* 24/1920 */
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.65;
+  color: var(--coral);
+  text-align: center;
+  white-space: nowrap;
+}
+.concept__kw-1 { left: calc(624/1920 * 100%); width: calc(183/1920 * 100%); }
+.concept__kw-2 { left: calc(858/1920 * 100%); width: calc(162/1920 * 100%); }
+.concept__kw-3 { left: calc(1071/1920 * 100%); width: calc(225/1920 * 100%); }
+/* Body text at x=316 y=520 w=1288 center */
+.concept__body {
+  position: absolute;
+  left: calc(316/1920 * 100%);
+  top: calc(520/854 * 100%);
+  width: calc(1288/1920 * 100%);
+  text-align: center;
+  font-size: 1.25vw;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.65;
+  color: var(--dark);
+}
+
+/* ============================================================
+   9. DESIGN SYSTEM — 1920 × 1920
+   ============================================================ */
+.design {
+  position: relative;
+  width: 100%;
+  height: 100vw; /* 1920/1920 */
+  background: var(--white);
+}
+/* "UI ELEMENTS" label at x=280 y=117 */
+.design__label {
+  position: absolute;
+  left: 14.583vw;
+  top: calc(117/1920 * 100%);
+  font-size: 1.042vw;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+/* title at x=280 y=171 w=251 */
+.design__h2 {
+  position: absolute;
+  left: 14.583vw;
+  top: calc(171/1920 * 100%);
+  width: calc(251/1920 * 100%);
+  font-size: 1.667vw;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+.design__h2 em { font-style: normal; color: var(--orange); }
+/* Body text at x=744 y=171 w=905 */
+.design__body {
+  position: absolute;
+  left: calc(744/1920 * 100%);
+  top: calc(171/1920 * 100%);
+  width: calc(905/1920 * 100%);
+  font-size: 0.9375vw;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+}
+/* "TYPOGRAPHY" at x=280 y=476 */
+.design__typo-lbl {
+  position: absolute;
+  left: 14.583vw;
+  top: calc(476/1920 * 100%);
+  font-size: 1.042vw;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+/* Typography frame at x=744 y=476 w=457 */
+.design__typo-frame {
+  position: absolute;
+  left: calc(744/1920 * 100%);
+  top: calc(476/1920 * 100%);
+  width: calc(457/1920 * 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 3.75vw;
+}
+.design__typo-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2.135vw;
+}
+.design__typo-name {
+  font-size: 1.042vw;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+}
+.design__typo-sample-balsam {
+  font-family: 'Balsamiq Sans', cursive;
+  font-size: 3.767vw;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--brown);
+}
+.design__typo-sample-pre {
+  font-size: 2.5vw;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--text);
+  white-space: pre-line;
+}
+/* "COLOR" at x=280 y=1246 */
+.design__color-lbl {
+  position: absolute;
+  left: 14.583vw;
+  top: calc(1246/1920 * 100%);
+  font-size: 1.042vw;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+/* Color swatches */
+.design__swatch {
+  position: absolute;
+  border-radius: 0.833vw;
+}
+.design__swatch-1 { left:calc(744/1920*100%); top:calc(1248/1920*100%); width:calc(432/1920*100%); height:calc(123/1920*100%); background:#FE7755; }
+.design__swatch-2 { left:calc(744/1920*100%); top:calc(1385/1920*100%); width:calc(432/1920*100%); height:calc(88/1920*100%); background:#7DF9B7; }
+.design__swatch-3 { left:calc(1208/1920*100%); top:calc(1385/1920*100%); width:calc(432/1920*100%); height:calc(88/1920*100%); background:#161616; }
+.design__swatch-4 { left:calc(744/1920*100%); top:calc(1487/1920*100%); width:calc(432/1920*100%); height:calc(89/1920*100%); background:#FEDE00; }
+.design__swatch-5 { left:calc(1208/1920*100%); top:calc(1487/1920*100%); width:calc(432/1920*100%); height:calc(89/1920*100%); background:#CBCBCB; }
+.design__swatch-6 { left:calc(744/1920*100%); top:calc(1590/1920*100%); width:calc(432/1920*100%); height:calc(88/1920*100%); background:#C8B5FC; }
+.design__swatch-7 { left:calc(1208/1920*100%); top:calc(1590/1920*100%); width:calc(432/1920*100%); height:calc(88/1920*100%); background:#F6F6F6; }
+/* 3D 캐릭터 손 모델링 at x=1176 y=1149 w=281 h=236 */
+.design__3d-char {
+  position: absolute;
+  left: calc(1176/1920 * 100%);
+  top: calc(1149/1920 * 100%);
+  width: calc(281/1920 * 100%);
+}
+.design__3d-char img { width: 100%; height: auto; display: block; }
+
+/* ============================================================
+   10. BRAND IDENTITY — 1920 × 1080
+   ============================================================ */
+.brand {
+  position: relative;
+  width: 100%;
+  height: 56.25vw; /* 1080/1920 */
+  background: var(--white);
+  overflow: hidden;
+}
+/* Card 1: cream #FCFBF7, stroke #727272, x=280 y=72 w=896 h=452 r=32 */
+.brand__card1 {
+  position: absolute;
+  left: calc(280/1920 * 100%);
+  top: calc(72/1080 * 100%);
+  width: calc(896/1920 * 100%);
+  height: calc(452/1080 * 100%);
+  background: #FCFBF7;
+  border: 1px solid #727272;
+  border-radius: 1.667vw;
+  overflow: hidden;
+}
+/* Card 1 — brand-img-794e03 at x=-65 y=139 w=339.7 (overflow left) */
+.brand__c1-img-left {
+  position: absolute;
+  left: calc(-65/896 * 100%);
+  top: calc(139/452 * 100%);
+  width: calc(339.7/896 * 100%);
+}
+.brand__c1-img-left img { width: 100%; height: auto; display: block; }
+/* Card 1 — brand-img-756b1b at x=566 y=-17 w=455.69 (overflow top) */
+.brand__c1-img-right {
+  position: absolute;
+  left: calc(566/896 * 100%);
+  top: calc(-17/452 * 100%);
+  width: calc(455.69/896 * 100%);
+}
+.brand__c1-img-right img { width: 100%; height: auto; display: block; }
+/* Card 1 — UGLYUS symbol at x=165 y=139 w=565 */
+.brand__c1-logo {
+  position: absolute;
+  left: calc(165/896 * 100%);
+  top: calc(139/452 * 100%);
+  width: calc(565/896 * 100%);
+}
+.brand__c1-logo img { width: 100%; height: auto; display: block; }
+/* Card 1 — "We're not perfect." text at x=441 y=313, Pretendard Regular 28px */
+.brand__c1-text {
+  position: absolute;
+  left: calc(441/896 * 100%);
+  top: calc(313/452 * 100%);
+  font-size: 1.458vw; /* 28/1920 */
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--brown);
+  white-space: nowrap;
+}
+/* Card 2: purple #C8B6FC, stroke #B89FFD, x=280 y=556 w=432 h=452 r=32 */
+.brand__card2 {
+  position: absolute;
+  left: calc(280/1920 * 100%);
+  top: calc(556/1080 * 100%);
+  width: calc(432/1920 * 100%);
+  height: calc(452/1080 * 100%);
+  background: #C8B6FC;
+  border: 1px solid #B89FFD;
+  border-radius: 1.667vw;
+  overflow: hidden;
+}
+/* Card 2 — "Not perfect? That's okay!" Balsamiq Sans 72.33px, x=14 y=132 */
+.brand__c2-text {
+  position: absolute;
+  left: calc(14/432 * 100%);
+  top: calc(132/452 * 100%);
+  width: calc(405/432 * 100%);
+  font-family: 'Balsamiq Sans', cursive;
+  font-size: 3.767vw;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--brown);
+}
+/* Card 3: pink #FCDEE4, stroke #FAB4C2, x=744 y=556 w=432 h=452 r=32 */
+.brand__card3 {
+  position: absolute;
+  left: calc(744/1920 * 100%);
+  top: calc(556/1080 * 100%);
+  width: calc(432/1920 * 100%);
+  height: calc(452/1080 * 100%);
+  background: #FCDEE4;
+  border: 1px solid #FAB4C2;
+  border-radius: 1.667vw;
+  overflow: hidden;
+}
+/* Card 3 — design-img28 at x=-48 y=21 w=433 (overflow left) */
+.brand__c3-img {
+  position: absolute;
+  left: calc(-48/432 * 100%);
+  top: calc(21/452 * 100%);
+  width: calc(433/432 * 100%);
+}
+.brand__c3-img img { width: 100%; height: auto; display: block; }
+/* Card 4: yellow #FEDE00, stroke #FFC500, x=1208 y=556 w=432 h=452 r=32 */
+.brand__card4 {
+  position: absolute;
+  left: calc(1208/1920 * 100%);
+  top: calc(556/1080 * 100%);
+  width: calc(432/1920 * 100%);
+  height: calc(452/1080 * 100%);
+  background: #FEDE00;
+  border: 1px solid #FFC500;
+  border-radius: 1.667vw;
+  overflow: hidden;
+}
+/* Card 4 — brand-char at x=-215 y=-36 w=582 (overflow) */
+.brand__c4-char {
+  position: absolute;
+  left: calc(-215/432 * 100%);
+  top: calc(-36/452 * 100%);
+  width: calc(582/432 * 100%);
+}
+.brand__c4-char img { width: 100%; height: auto; display: block; }
+/* Card 5: orange #FF7D5D, stroke #F97154, x=1208 y=72 w=432 h=452 r=32 */
+.brand__card5 {
+  position: absolute;
+  left: calc(1208/1920 * 100%);
+  top: calc(72/1080 * 100%);
+  width: calc(432/1920 * 100%);
+  height: calc(452/1080 * 100%);
+  background: #FF7D5D;
+  border: 1px solid #F97154;
+  border-radius: 1.667vw;
+  overflow: hidden;
+}
+/* Card 5 — "Messy\nWeird\nWonderful" Balsamiq Sans 87.61px, x=22 y=55 color=#402012 */
+.brand__c5-text {
+  position: absolute;
+  left: calc(22/432 * 100%);
+  top: calc(55/452 * 100%);
+  width: calc(388/432 * 100%);
+  font-family: 'Balsamiq Sans', cursive;
+  font-size: 4.563vw; /* 87.61/1920 */
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: #402012;
+}
+/* Card 2 — Vector 42 (x=255.51 y=309.17 w=160.22) Vector 43 (x=295.79 y=321.77 w=114.36) */
+.brand__c2-v42 {
+  position: absolute;
+  left: calc(255.51/432 * 100%);
+  top: calc(309.17/452 * 100%);
+  width: calc(160.22/432 * 100%);
+}
+.brand__c2-v43 {
+  position: absolute;
+  left: calc(295.79/432 * 100%);
+  top: calc(321.77/452 * 100%);
+  width: calc(114.36/432 * 100%);
+}
+.brand__c2-v42 img, .brand__c2-v43 img { width: 100%; height: auto; display: block; }
+/* Card 5 — Vector 40 (x=33.98 y=77.93 w=58.27) Vector 41 (x=155.63 y=247.32 w=241.28) */
+.brand__c5-v40 {
+  position: absolute;
+  left: calc(33.98/432 * 100%);
+  top: calc(77.93/452 * 100%);
+  width: calc(58.27/432 * 100%);
+}
+.brand__c5-v41 {
+  position: absolute;
+  left: calc(155.63/432 * 100%);
+  top: calc(247.32/452 * 100%);
+  width: calc(241.28/432 * 100%);
+}
+.brand__c5-v40 img, .brand__c5-v41 img { width: 100%; height: auto; display: block; }
+
+/* ============================================================
+   11. ICONS — 1920 × 1080
+   ============================================================ */
+.icons {
+  position: relative;
+  width: 100%;
+  height: 56.25vw; /* 1080/1920 */
+  background: var(--white);
+  overflow: hidden;
+}
+/* "ICON" label at x=280 y=225 */
+.icons__label {
+  position: absolute;
+  left: 14.583vw;
+  top: calc(225/1080 * 100%);
+  font-size: 1.042vw;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+}
+/* Container at x=729 y=211 w=911 h=657.26 */
+.icons__wrap {
+  position: absolute;
+  left: calc(729/1920 * 100%);
+  top: calc(211/1080 * 100%);
+  width: calc(911/1920 * 100%);
+  height: calc(657.26/1080 * 100%);
+}
+/* All children are absolute within wrap */
+/* Small icons row absolute positions (row at y=0, row x=60.35):
+   img29: x=46, y=15, w=84 | img28: x=283, y=12, w=106
+   img27: x=532, y=18, w=101 | img26: x=765, y=22, w=123  */
+.icons__sm-29 { position:absolute; left:calc(46/911*100%); top:calc(15/657.26*100%); width:calc(84/911*100%); }
+.icons__sm-28 { position:absolute; left:calc(283/911*100%); top:calc(12/657.26*100%); width:calc(106/911*100%); }
+.icons__sm-27 { position:absolute; left:calc(532/911*100%); top:calc(18/657.26*100%); width:calc(101/911*100%); }
+.icons__sm-26 { position:absolute; left:calc(765/911*100%); top:calc(22/657.26*100%); width:calc(123/911*100%); }
+.icons__wrap img { height: auto; display: block; width: 100%; }
+/* Image squares (y=213.96):
+   img25: x=34.29, y=252.36, w=104.24 | chatgpt1: x=235.91, y=213.96, w=203.28
+   chatgpt2: x=484.16, y=218.08, w=203.28 | frame50: x=709.09, y=216.7, w=203.28 */
+.icons__sq-25 { position:absolute; left:calc(34.29/911*100%); top:calc(252.36/657.26*100%); width:calc(104.24/911*100%); }
+.icons__sq-c1 { position:absolute; left:calc(235.91/911*100%); top:calc(213.96/657.26*100%); width:calc(203.28/911*100%); aspect-ratio:1; overflow:hidden; }
+.icons__sq-c1 img { position:absolute; width:calc(161.63/203.28*100%); left:calc(25.41/203.28*100%); top:calc(59.29/203.28*100%); height:auto; }
+.icons__sq-c2 { position:absolute; left:calc(484.16/911*100%); top:calc(218.08/657.26*100%); width:calc(203.28/911*100%); aspect-ratio:1; overflow:hidden; }
+.icons__sq-c2 img { position:absolute; width:calc(94.02/203.28*100%); left:calc(50.82/203.28*100%); top:calc(33.88/203.28*100%); height:auto; }
+.icons__sq-f5 { position:absolute; left:calc(709.09/911*100%); top:calc(216.7/657.26*100%); width:calc(203.28/911*100%); }
+/* Icon grid SVG at y=453.98 within wrap */
+.icons__grid { position:absolute; left:0; top:calc(453.98/657.26*100%); width:100%; }
+
+/* ══════════════════════════════════════
+   FW — 리뉴얼 폰 컴포넌트 스코프
+══════════════════════════════════════ */
+.fw .phone{width:375px;background:var(--ivory);border-radius:50px;overflow:hidden;position:relative;flex-shrink:0;box-shadow:0 32px 72px rgba(26,23,20,.20),0 0 0 10px #15110e,0 0 0 12px #2c2722;}
+.fw .phone.butter-bg{background:var(--butter);}
+.fw .status{height:48px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 9px;font-weight:700;font-size:14px;color:var(--ink);}
+.fw .status .r{display:flex;gap:5px;align-items:center;font-size:12px;}
+.fw .appbar{display:flex;align-items:center;justify-content:space-between;padding:2px 22px 14px;gap:10px;}
+.fw .appbar-l{display:flex;align-items:center;gap:10px;}
+.fw .back-btn{font-size:20px;color:var(--sub);line-height:1;}
+.fw .logo-ring{width:26px;height:26px;border-radius:999px;border:2.5px solid var(--carrot);flex-shrink:0;}
+.fw .crumb{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--faint);}
+.fw .crumb .on{background:var(--ink);color:#fff;padding:4px 12px;border-radius:999px;font-weight:700;}
+.fw .xbtn{font-size:22px;color:var(--sub);}
+.fw .hmenu{display:flex;flex-direction:column;gap:4.5px;}
+.fw .hmenu span{display:block;width:22px;height:2.5px;background:var(--sub);border-radius:2px;}
+.fw .hero{position:static;width:auto;height:auto;overflow:visible;margin:0 16px;border-radius:28px;padding:28px 24px 26px;background:var(--mint);}
+.fw .step-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);opacity:.45;margin-bottom:10px;}
+.fw .hero-q{font-size:29px;font-weight:900;line-height:1.3;letter-spacing:-.4px;color:var(--ink);}
+.fw .hero-sub{font-size:14px;font-weight:500;color:var(--sub);margin-top:10px;line-height:1.65;}
+.fw .sec{padding:22px 20px 0;}
+.fw .sec-kick{font-size:12.5px;font-weight:700;color:var(--carrot);letter-spacing:.04em;margin-bottom:8px;}
+.fw .sec-title{font-size:20px;font-weight:800;color:var(--ink);line-height:1.36;letter-spacing:-.3px;}
+.fw .card{background:var(--white);border-radius:22px;padding:20px;margin-top:14px;}
+.fw .picker{display:flex;flex-direction:column;gap:12px;}
+.fw .prow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;}
+.fw .conj{font-size:14px;font-weight:500;color:var(--mute);}
+.fw .chip{display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:700;padding:10px 17px;border-radius:999px;background:var(--surf);color:var(--mute);white-space:nowrap;}
+.fw .chip .cv{font-size:10px;opacity:.6;}
+.fw .chip.sel{background:var(--mint);color:var(--ink);}
+.fw .chip.sel2{background:var(--butter);color:var(--ink);}
+.fw .hint{font-size:12px;font-weight:500;color:var(--mute);margin-top:14px;line-height:1.65;display:flex;gap:6px;}
+.fw .hint::before{content:'•';color:var(--carrot);}
+.fw .pblock{margin:18px 16px 0;border-radius:26px;padding:22px 22px 20px;background:var(--butter);}
+.fw .tag{font-size:11px;font-weight:800;background:var(--carrot);color:#fff;padding:5px 12px;border-radius:999px;display:inline-block;margin-bottom:12px;letter-spacing:.03em;}
+.fw .pblock-title{font-size:21px;font-weight:900;color:var(--ink);line-height:1.3;letter-spacing:-.35px;}
+.fw .pblock-sub{font-size:13px;font-weight:500;color:var(--sub);margin-top:9px;line-height:1.6;}
+.fw .price{display:flex;align-items:baseline;gap:8px;margin-top:13px;}
+.fw .price .old{font-size:13px;color:var(--mute);text-decoration:line-through;font-weight:600;}
+.fw .price .new{font-size:28px;font-weight:900;color:var(--carrot);letter-spacing:-.5px;}
+.fw .price .won{font-size:15px;font-weight:700;color:var(--carrot);}
+.fw .star{font-size:11px;color:var(--faint);margin-top:5px;}
+.fw .pickrow{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.fw .pickbadge{font-size:10px;font-weight:800;background:var(--carrot);color:#fff;padding:4px 9px;border-radius:6px;letter-spacing:.04em;}
+.fw .vcards{display:flex;gap:10px;overflow-x:auto;padding:12px 20px 4px;margin:0 -20px;}
+.fw .vcards::-webkit-scrollbar{display:none;}
+.fw .vcard{flex:0 0 128px;background:var(--white);border-radius:18px;padding:10px;}
+.fw .vthumb{height:92px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:38px;}
+.fw .vcard.a .vthumb{background:#EAF7F0;}
+.fw .vcard.b .vthumb{background:#F7F3DF;}
+.fw .vcard.c .vthumb{background:#FBEEF1;}
+.fw .vname{font-size:12.5px;font-weight:600;margin-top:9px;color:var(--ink);display:flex;align-items:center;gap:5px;line-height:1.35;}
+.fw .leaf{color:#2BB36B;font-size:9px;}
+.fw .vmeta{display:flex;align-items:baseline;gap:5px;margin-top:4px;}
+.fw .vmeta .pct{font-size:12.5px;font-weight:700;color:var(--carrot);}
+.fw .vmeta .p{font-size:13.5px;font-weight:700;color:var(--ink);}
+.fw .dock{padding:16px 18px 28px;margin-top:20px;}
+.fw .cta{font-size:16.5px;font-weight:800;text-align:center;padding:17px 24px;border-radius:999px;letter-spacing:-.15px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.fw .cta.carrot{background:var(--carrot);color:#fff;}
+.fw .cta.ink{background:var(--ink);color:#fff;}
+.fw .cta.mint{background:var(--mint);color:var(--ink);}
+.fw .nav-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 22px 28px;margin-top:8px;}
+.fw .nav-back{font-size:15px;font-weight:600;color:var(--mute);}
+.fw .nav-next{background:var(--carrot);color:#fff;font-size:15px;font-weight:800;padding:14px 30px;border-radius:999px;display:flex;align-items:center;gap:8px;}
+.fw .form-header{padding:14px 22px 16px;}
+.fw .form-step{font-size:12px;font-weight:700;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+.fw .form-q{font-size:27px;font-weight:900;color:var(--ink);line-height:1.3;letter-spacing:-.4px;}
+.fw .field{padding:0 22px;margin-top:16px;}
+.fw .flabel{font-size:11.5px;font-weight:800;color:var(--mute);margin-bottom:7px;display:block;text-transform:uppercase;letter-spacing:.07em;}
+.fw .frow{display:flex;gap:9px;}
+.fw .input{flex:1;background:var(--white);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;font-size:14.5px;font-weight:500;color:var(--ink);}
+.fw .input.fill{background:#F4F1EA;color:var(--sub);border-color:transparent;}
+.fw .ibtn{flex:0 0 auto;background:var(--ink);color:#fff;font-size:13px;font-weight:700;padding:0 16px;border-radius:16px;display:flex;align-items:center;}
+.fw .dd{display:flex;align-items:center;justify-content:space-between;background:var(--white);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;font-size:14.5px;font-weight:500;color:var(--ink);}
+.fw .dd .cv{color:var(--faint);}
+.fw .seg{display:flex;gap:9px;}
+.fw .seg .opt{flex:1;text-align:center;background:var(--white);border:1.5px solid var(--line);border-radius:999px;padding:12px 0;font-size:13.5px;font-weight:700;color:var(--mute);}
+.fw .seg .opt.on{border-color:var(--carrot);color:var(--carrot);background:#FFF3EF;}
+.fw .radios{display:flex;gap:24px;}
+.fw .radio{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:var(--mute);}
+.fw .rdot{width:22px;height:22px;border-radius:999px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.fw .radio.on{color:var(--ink);}
+.fw .radio.on .rdot{border-color:var(--carrot);}
+.fw .radio.on .rdot::after{content:'';width:11px;height:11px;border-radius:9px;background:var(--carrot);}
+.fw .paycard{background:var(--white);border:1.5px dashed var(--line);border-radius:14px;padding:14px 16px;margin-top:10px;font-size:13.5px;font-weight:600;color:var(--faint);}
+.fw .divider{height:1px;background:var(--line);margin:20px 22px 0;}
+.fw .secform{padding:18px 22px 0;}
+.fw .agree{display:flex;align-items:center;gap:10px;padding:0 4px 12px;font-size:13px;font-weight:500;color:var(--sub);}
+.fw .agree .ck{width:22px;height:22px;border-radius:999px;background:var(--mint);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--ink);font-weight:800;flex-shrink:0;}
+.fw .done{padding:36px 26px 0;text-align:center;}
+.fw .checkc{width:78px;height:78px;border-radius:999px;background:var(--carrot);display:flex;align-items:center;justify-content:center;margin:14px auto 20px;}
+.fw .doneh{font-size:30px;font-weight:900;line-height:1.25;color:var(--ink);letter-spacing:-.45px;}
+.fw .firstpill{font-size:13.5px;font-weight:700;background:var(--white);padding:9px 18px;border-radius:999px;display:inline-block;margin-top:14px;color:var(--ink);}
+.fw .firstpill b{color:var(--carrot);font-weight:800;}
+.fw .receipt{background:var(--white);border-radius:22px;margin:22px 20px 0;padding:4px 18px;}
+.fw .rtitle{font-size:11.5px;font-weight:800;color:var(--mute);padding:14px 0 6px;text-transform:uppercase;letter-spacing:.07em;}
+.fw .rrow{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);}
+.fw .rrow:last-child{border-bottom:0;}
+.fw .rk{font-size:12px;font-weight:700;color:var(--faint);flex:0 0 58px;padding-top:1px;}
+.fw .rv{font-size:13px;font-weight:500;line-height:1.55;color:var(--ink);}
+.fw .rv b{font-weight:700;}
+.fw .sheet-phone{width:375px;height:680px;display:flex;flex-direction:column;border-radius:50px;overflow:hidden;background:var(--mint);flex-shrink:0;box-shadow:0 32px 72px rgba(26,23,20,.20),0 0 0 10px #15110e,0 0 0 12px #2c2722;}
+.fw .sheet-dim{flex:1;}
+.fw .sheetin{background:var(--white);border-radius:26px 26px 0 0;padding:14px 20px 26px;box-shadow:0 -10px 30px rgba(26,23,20,.10);}
+.fw .grab{width:40px;height:4px;background:var(--line);border-radius:9px;margin:2px auto 16px;}
+.fw .sheetin h3{font-size:19px;font-weight:900;color:var(--ink);margin-bottom:14px;letter-spacing:-.3px;}
+.fw .sopt{border:2px solid var(--line);border-radius:18px;padding:15px 16px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;}
+.fw .sopt.on{border-color:var(--carrot);background:#FFF6F3;}
+.fw .sopt .t{font-size:15px;font-weight:700;color:var(--ink);}
+.fw .sopt.on .t{color:var(--carrot);}
+.fw .sopt .ds{font-size:12px;color:var(--mute);margin-top:4px;font-weight:500;}
+.fw .sopt .chk{color:var(--carrot);font-size:18px;font-weight:800;}
+/* UI Kit component cards */
+.fw-kit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.fw-kit-card{background:var(--white);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:14px;}
+.fw-kit-lbl{font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--carrot);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav"></nav>
+
+<!-- ① HERO (y=0, 1920×1334) -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__wordmark">
+    <img src="images/uglyus-web/logo-vector.svg" alt="UGLYUS">
+  </div>
+  <p class="hero__label1">농산물 유통 플랫폼</p>
+  <p class="hero__label2">가치소비 커머스</p>
+</section>
+
+<!-- ② OVER VIEW (y=1334, 1920×1381) -->
+<section class="overview reveal">
+  <!-- Image behind text (renders first → lower z-order) -->
+  <div class="overview__img">
+    <img src="images/uglyus-web/overview-image.png" alt="UGLYUS 앱 화면">
+  </div>
+  <p class="overview__label">Over View</p>
+  <h2 class="overview__h2"><em>못생겨도 괜찮아!</em><br>못난이 농산물 정기배송 서비스</h2>
+  <p class="overview__body">어글리어스는 폐기 위기의 못난이 농산물을 정기배송하는 서비스입니다. 이미 위트 있고 따뜻한 철학을 갖고 있지만, 문제는 앱이 그 철학을 충분히 말하고 있지 않다는 것. 이번 리뉴얼은 단순한 화면 개선이 아닙니다. 채소를 '구출'하는 행위가 사용자에게 일상 속 작은 기쁨이 되도록 — 브랜드 경험 전체를 다시 설계합니다.</p>
+</section>
+
+<!-- ③ THE REALITY (y=2715, 1920×2067) -->
+<section class="reality">
+  <!-- 좌측 sticky 텍스트 패널 -->
+  <div class="reality__left-col">
+    <p class="reality__label reveal">The Reality</p>
+    <div class="reality__statement reveal d1">
+      <div class="reality__deco">
+        <img src="images/uglyus-web/union-stats.svg" alt="">
+      </div>
+      <h2 class="reality__h2">못나서가 아니라 달라서<br>채소는 팔리기도 전에 버려진다</h2>
+      <p class="reality__body">조금 휘었거나 크기가 제각각이라는 이유로 시장에 나가지도 못하는 채소들. 맛도 영양도 그대로지만, 보기 좋지 않다는 기준 하나에 매년 같은 일이 반복됩니다.</p>
+    </div>
+  </div>
+  <!-- 우측 stat 카드 (스크롤) -->
+  <div class="reality__right-col">
+    <div class="stat-card stat-card--y reveal d1">
+      <div class="stat-num">30%</div>
+      <div class="stat-desc">국내 농산물 연간 폐기율<small>Annual produce disposal rate</small></div>
+    </div>
+    <div class="stat-card stat-card--m reveal d2">
+      <div class="stat-num">1/3</div>
+      <div class="stat-desc">전 세계 식품 폐기 비중<small>Global food waste share</small></div>
+    </div>
+    <div class="stat-card stat-card--c reveal d3">
+      <div class="stat-num">1.3T</div>
+      <div class="stat-desc">연간 폐기 경제적 손실<small>Yearly economic loss · KRW</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ CURRENT STATE (y=4782, 1920×2551) -->
+<section class="current">
+  <div class="current__text reveal">
+    <p class="section-label">Current State</p>
+    <h2 class="section-h2">'못생김'에서 <em>'개성'</em>으로</h2>
+    <p class="section-body">어글리어스의 핵심은 폐기 위기 채소의 가치를 재발견하는 것입니다. 기존의 평면적이고 딱딱한 UI가 채소의 싱싱함과 브랜드의 개성을 가리고 있습니다. 클레이모피즘 기반의 3D 비주얼로 이 간극을 메웁니다.</p>
+  </div>
+  <div class="current__before reveal d1">
+    <img src="images/uglyus-web/current-photo1.png" alt="Before">
+  </div>
+  <div class="current__after reveal d2">
+    <img src="images/uglyus-web/current-photo2-788b3b.png" alt="After">
+  </div>
+  <div class="current__char">
+    <img src="images/uglyus-web/char-hand.png" alt="3D 캐릭터">
+  </div>
+</section>
+
+<!-- ⑤ PROBLEM DEFINITION (y=5955, 1920×1835) -->
+<section class="problem">
+  <div class="problem__deco">
+    <img src="images/uglyus-web/problem-union.svg" alt="">
+  </div>
+  <div class="problem__left reveal">
+    <p class="section-label">Problem Definition</p>
+    <h2 class="section-h2">데이터가 아닌 <em>가치로서의 시각화</em></h2>
+    <p class="section-body">기존의 아이콘은 규격화된 신선 식품의 형태만을 보여줄 뿐, 폐기 위기의 채소를 구출한다는 '어글리어스만의 브랜드 철학'을 충분히 담아내지 못하고 있습니다.</p>
+  </div>
+  <div class="problem__right reveal d2">
+    <h2 class="section-h2">기능적 식별을 넘어 <em>정서적 연결</em></h2>
+    <p class="section-body">현재의 정형화된 아이콘 시스템은 기능을 구분하는 기능적 역할에만 충실하여, 어글리어스 특유의 위트와 못난이 채소가 가진 개성 있는 생명력을 전달하기엔 부족함이 있습니다.</p>
+  </div>
+  <div class="problem__img3 reveal">
+    <img src="images/uglyus-web/problem-img12-331b81.png" alt="">
+  </div>
+  <div class="problem__img2 reveal d1">
+    <img src="images/uglyus-web/problem-img11-7b9e84.png" alt="">
+  </div>
+  <div class="problem__img1 reveal d2">
+    <img src="images/uglyus-web/problem-img10-531d8a.png" alt="">
+  </div>
+</section>
+
+<!-- ⑥ PERSONA (y=7790, 1920×1326) -->
+<section class="persona">
+  <!-- Decorative bg images opacity 0.2 -->
+  <div class="p-bgimg1"><img src="images/uglyus-web/design-img27-2cf22b.png" alt=""></div>
+  <div class="p-bgimg2"><img src="images/uglyus-web/design-img29-1e0bf4.png" alt=""></div>
+  <!-- Card backgrounds -->
+  <div class="p-card1 reveal d1"></div>
+  <div class="p-card2 reveal d2"></div>
+  <!-- Photos (on top of cards) -->
+  <div class="p-subtract reveal d1">
+    <img src="images/uglyus-web/persona-subtract-14119b.png" alt="User 01">
+  </div>
+  <div class="p-img15 reveal d2">
+    <img src="images/uglyus-web/persona-img15-1f5ca4.png" alt="User 02">
+  </div>
+  <!-- Decorations -->
+  <div class="p-deco1"><img src="images/uglyus-web/persona-union1.svg" alt=""></div>
+  <div class="p-deco2"><img src="images/uglyus-web/persona-union2.svg" alt=""></div>
+  <!-- User labels -->
+  <p class="p-user1">User 01</p>
+  <p class="p-user2">User 02</p>
+  <!-- Quotes -->
+  <p class="p-quote1">"채소를 구출했다는 느낌이 좋아서 써요"</p>
+  <p class="p-quote2">"아내가 좋아하는 게 더 중요하죠"</p>
+  <!-- Section text -->
+  <p class="p-label reveal">Persona</p>
+  <h2 class="p-h2 reveal">누구를 위한 서비스인가</h2>
+</section>
+
+<!-- ⑦ RENEWAL DIRECTION (y=9116, 1920×1140, inner 2982×1140) -->
+<div class="renewal-wrap">
+<section class="renewal">
+  <div class="renewal__text reveal">
+    <p class="section-label">Renewal Direction</p>
+    <h2 class="section-h2">세 가지를 바꿉니다</h2>
+  </div>
+  <div class="renewal__inner">
+    <div class="renewal__img13 reveal d1">
+      <img src="images/uglyus-web/image13-renewal-28327d.png" alt="">
+    </div>
+    <div class="renewal__img14">
+      <img src="images/uglyus-web/image14-renewal-47614c.png" alt="">
+    </div>
+    <div class="pill pill-1 reveal d1">브랜드 스토리텔링</div>
+    <div class="pill pill-2 reveal d2">구출 여정 완성</div>
+    <div class="pill pill-3 reveal d3">채소 개성 살리기</div>
+  </div>
+</section>
+</div>
+
+<!-- ⑧ DESIGN CONCEPT (y=10256, 1920×854) -->
+<section class="concept">
+  <p class="concept__goals">Goals</p>
+  <h2 class="concept__sub">브랜드 경험의 일관성 부여</h2>
+  <span class="concept__kw concept__kw-1 reveal">Organic (유기적인)</span>
+  <span class="concept__kw concept__kw-2 reveal d1">Witty (위트 있는)</span>
+  <span class="concept__kw concept__kw-3 reveal d2">Cohesive (결속력 있는)</span>
+  <p class="concept__body reveal d1">클레이모피즘의 부드럽고 입체적인 조형과 직관적인 시스템 아이콘을 결합하여, 독창적인 무드를 유지하면서도 모바일 환경에서의 정보 전달력과 조작 편의성을 동시에 만족시킵니다. 불완전함 속에서 발견하는 어글리어스만의 '구출의 가치'를 3D 비주얼에 담아 브랜드 정체성을 강화합니다.</p>
+</section>
+
+<!-- ⑨ DESIGN SYSTEM (y=12488, 1920×1920) -->
+<section class="design">
+  <p class="design__label">UI Elements</p>
+  <h2 class="design__h2"><em>못난이의 개성</em>을<br>시스템으로 정립하다</h2>
+  <p class="design__body reveal">어글리어스의 핵심은 개성입니다. 저는 이를 표현하기 위해 정교한 시스템 아이콘의 구조 위에, 클레이모피즘 특유의 입체감과 부드러운 질감을 더했습니다. 사용자는 이 아이콘들을 보며 단순히 데이터를 소비하는 것이 아니라, 생동감 있고 개성 넘치는 식재료와 소통하는 경험을 하게 될 것입니다.</p>
+  <p class="design__typo-lbl">TYPOGRAPHY</p>
+  <div class="design__typo-frame reveal">
+    <div class="design__typo-block">
+      <p class="design__typo-name">Balsamiq Sans</p>
+      <p class="design__typo-sample-balsam">Not perfect?<br>That's okay!</p>
+    </div>
+    <div class="design__typo-block">
+      <p class="design__typo-name">Pretendard</p>
+      <p class="design__typo-sample-pre">원산지 전남 · 중량 500g&#10;₩3,200</p>
+    </div>
+  </div>
+  <p class="design__color-lbl">COLOR</p>
+  <div class="design__swatch design__swatch-1"></div>
+  <div class="design__swatch design__swatch-2"></div>
+  <div class="design__swatch design__swatch-3"></div>
+  <div class="design__swatch design__swatch-4"></div>
+  <div class="design__swatch design__swatch-5"></div>
+  <div class="design__swatch design__swatch-6"></div>
+  <div class="design__swatch design__swatch-7"></div>
+  <div class="design__3d-char">
+    <img src="images/uglyus-web/design-3d-char.png" alt="">
+  </div>
+</section>
+
+<!-- ⑩ BRAND IDENTITY (y=14408, 1920×1080) -->
+<section class="brand">
+  <!-- Card 1: cream, wide (x=280 y=72 w=896 h=452) -->
+  <div class="brand__card1">
+    <div class="brand__c1-img-left"><img src="images/uglyus-web/brand-img-794e03.png" alt=""></div>
+    <div class="brand__c1-img-right"><img src="images/uglyus-web/brand-img-756b1b.png" alt=""></div>
+    <div class="brand__c1-logo"><img src="images/uglyus-web/uglyus-symbol.svg" alt="UGLYUS"></div>
+    <p class="brand__c1-text">We're not perfect.</p>
+  </div>
+  <!-- Card 2: purple (x=280 y=556 w=432 h=452) -->
+  <div class="brand__card2">
+    <p class="brand__c2-text">Not perfect?<br>That's okay!</p>
+    <div class="brand__c2-v42"><img src="images/uglyus-web/brand-vector42.svg" alt=""></div>
+    <div class="brand__c2-v43"><img src="images/uglyus-web/brand-vector43.svg" alt=""></div>
+  </div>
+  <!-- Card 3: pink (x=744 y=556 w=432 h=452) -->
+  <div class="brand__card3">
+    <div class="brand__c3-img"><img src="images/uglyus-web/design-img28-f9538e.png" alt=""></div>
+  </div>
+  <!-- Card 4: yellow (x=1208 y=556 w=432 h=452) -->
+  <div class="brand__card4">
+    <div class="brand__c4-char"><img src="images/uglyus-web/brand-char-7e3301.png" alt=""></div>
+  </div>
+  <!-- Card 5: orange (x=1208 y=72 w=432 h=452) -->
+  <div class="brand__card5">
+    <p class="brand__c5-text">Messy<br>Weird<br>Wonderful</p>
+    <div class="brand__c5-v40"><img src="images/uglyus-web/brand-vector40.svg" alt=""></div>
+    <div class="brand__c5-v41"><img src="images/uglyus-web/brand-vector41.svg" alt=""></div>
+  </div>
+</section>
+
+<!-- ⑪ ICONS (y=15488, 1920×1080) -->
+<section class="icons">
+  <p class="icons__label">ICON</p>
+  <div class="icons__wrap reveal">
+    <div class="icons__sm-29"><img src="images/uglyus-web/design-img29-1e0bf4.png" alt=""></div>
+    <div class="icons__sm-28"><img src="images/uglyus-web/design-img28-f9538e.png" alt=""></div>
+    <div class="icons__sm-27"><img src="images/uglyus-web/design-img27-2cf22b.png" alt=""></div>
+    <div class="icons__sm-26"><img src="images/uglyus-web/design-img26-6be6fb.png" alt=""></div>
+    <div class="icons__sq-25"><img src="images/uglyus-web/design-img25-7925e1.png" alt=""></div>
+    <div class="icons__sq-c1"><img src="images/uglyus-web/chatgpt-img1-26c140.png" alt=""></div>
+    <div class="icons__sq-c2"><img src="images/uglyus-web/chatgpt-img2-4bc57c.png" alt=""></div>
+    <div class="icons__sq-f5"><img src="images/uglyus-web/icon-frame50.svg" alt=""></div>
+    <div class="icons__grid"><img src="images/uglyus-web/icon-grid-v2.svg" alt="Icon System"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     UI KIT
+══════════════════════════════════════ -->
+<section style="background:var(--beige); padding:96px 120px;">
+  <div style="max-width:1440px; margin:0 auto; display:flex; flex-direction:column; gap:48px;">
+
+    <div>
+      <p class="section-label" style="margin-bottom:10px;">UI Kit</p>
+      <h2 class="section-h2" style="font-size:2.708vw;">UI 컴포넌트</h2>
+      <p class="section-body" style="margin-top:12px;">정기배송 신청 플로우에서 실제 쓰이는 핵심 컴포넌트 세트</p>
+    </div>
+
+    <div class="fw fw-kit-grid">
+
+      <div class="fw-kit-card">
+        <p class="fw-kit-lbl">CTA 버튼</p>
+        <div class="cta carrot">정기배송 신청하기 →</div>
+        <div class="cta ink">신청 내역 확인하기 →</div>
+      </div>
+
+      <div class="fw-kit-card">
+        <p class="fw-kit-lbl">문장형 선택 칩</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="chip sel">밥 먹기 좋은<span class="cv">▾</span></span>
+          <span class="chip sel2">2주<span class="cv">▾</span></span>
+          <span class="chip">금요일<span class="cv">▾</span></span>
+        </div>
+        <p style="font-size:12px;color:var(--mute);line-height:1.6;">선택값을 문장 안에 칩으로 노출 — 폼을 대화처럼.</p>
+      </div>
+
+      <div class="fw-kit-card">
+        <p class="fw-kit-lbl">입력 · 드롭다운</p>
+        <div class="input">Henkoo · 010-6523-1055</div>
+        <div class="dd">문 앞에 놓아주세요.<span class="cv">▾</span></div>
+      </div>
+
+      <div class="fw-kit-card">
+        <p class="fw-kit-lbl">세그먼트 · 라디오</p>
+        <div class="seg"><div class="opt on">자율 출입</div><div class="opt">비밀번호</div></div>
+        <div class="radios"><div class="radio on"><span class="rdot"></span>새벽배송</div><div class="radio"><span class="rdot"></span>택배</div></div>
+      </div>
+
+      <div class="fw-kit-card">
+        <p class="fw-kit-lbl">태그 · 가격</p>
+        <span class="tag" style="margin-bottom:4px;">첫 배송 D-1</span>
+        <div class="price"><span class="old">23,737원</span><span class="new">15,500</span><span class="won">원</span></div>
+        <p class="star">*배송비 미포함</p>
+      </div>
+
+      <div class="fw-kit-card">
+        <p class="fw-kit-lbl">채소 카드</p>
+        <div class="vcard c" style="flex:0 0 auto;">
+          <div class="vthumb">🥕</div>
+          <div class="vname"><span class="leaf">●</span>못난이 당근 200g</div>
+          <div class="vmeta"><span class="pct">41%</span><span class="p">2,100원</span></div>
+        </div>
+      </div>
+
+      <div class="fw-kit-card">
+        <p class="fw-kit-lbl">시트 옵션</p>
+        <div class="sopt on"><div><div class="t">밥 먹기 좋은</div><div class="ds">제철 채소 가득 밥상</div></div><span class="chk">✓</span></div>
+        <div class="sopt"><div><div class="t">가볍게 먹기 좋은</div><div class="ds">조리 없는 샐러드 채소</div></div></div>
+      </div>
+
+      <div class="fw-kit-card" style="align-items:center;justify-content:center;">
+        <p class="fw-kit-lbl" style="align-self:flex-start;">완료 피드백</p>
+        <div class="checkc" style="width:60px;height:60px;margin:8px auto 12px;"><svg width="28" height="28" viewBox="0 0 34 34"><path d="M8 17.5 L14.5 24 L26 11" stroke="#fff" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="firstpill" style="margin-top:0;">첫 배송일 <b>6/5(금)</b></span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SCREEN 01 — 채소 플랜 설정
+══════════════════════════════════════ -->
+<section style="background:var(--white); padding:80px 120px;">
+  <div style="max-width:1440px; margin:0 auto; display:flex; align-items:center; gap:90px; justify-content:center;">
+
+    <div class="fw">
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="r">⌃ ◧ <b>80</b>▮</span></div>
+        <div class="appbar">
+          <div class="appbar-l">
+            <span class="back-btn">←</span>
+            <div class="logo-ring"></div>
+            <div class="crumb"><span class="on">채소 플랜</span><span style="color:var(--faint)">›</span><span>배송·결제</span></div>
+          </div>
+          <div class="hmenu"><span></span><span></span><span></span></div>
+        </div>
+        <div class="hero">
+          <div class="step-label">STEP 01 · 채소 플랜</div>
+          <div class="hero-q">1. 나만의 채소 박스를<br>만들어 드릴게요</div>
+          <p class="hero-sub">버려질 뻔한 친환경 채소를<br>매주 우리집 식탁으로.</p>
+        </div>
+        <div class="sec">
+          <div class="sec-kick">어떻게 보내드릴까요?</div>
+          <div class="card">
+            <div class="picker">
+              <div class="prow">
+                <span class="chip sel">밥 먹기 좋은<span class="cv">▾</span></span>
+                <span class="chip sel">친환경 농산물<span class="cv">▾</span></span>
+                <span class="conj">을</span>
+              </div>
+              <div class="prow">
+                <span class="chip sel2">2주<span class="cv">▾</span></span>
+                <span class="conj">마다</span>
+                <span class="chip sel2">금요일<span class="cv">▾</span></span>
+                <span class="conj">에 보내주세요.</span>
+              </div>
+            </div>
+            <div class="hint">박스 유형 · 배송 주기 · 요일은 이용 중 언제든지 바꿀 수 있어요.</div>
+          </div>
+        </div>
+        <div class="pblock">
+          <span class="tag">첫 배송 D-1</span>
+          <div class="pblock-title">6/5(금)에 첫 채소박스 도착!</div>
+          <p class="pblock-sub">7~8가지 친환경 농산물을 한 박스에<br>담아 문 앞까지 보내드려요.</p>
+          <div class="price"><span class="old">23,737원</span><span class="new">15,500</span><span class="won">원</span></div>
+          <p class="star">*배송비 미포함</p>
+        </div>
+        <div class="sec">
+          <div class="pickrow"><span class="pickbadge">PICK</span><div class="sec-kick" style="margin:0">이번 주 추천 구성</div></div>
+          <div class="sec-title">못난이라 더 알찬 한 상자</div>
+          <div class="vcards">
+            <div class="vcard a"><div class="vthumb">🥬</div><div class="vname"><span class="leaf">●</span>무농약 쑥갓 100g</div><div class="vmeta"><span class="pct">32%</span><span class="p">1,490원</span></div></div>
+            <div class="vcard b"><div class="vthumb">🍄</div><div class="vname"><span class="leaf">●</span>무농약 새송이 150g</div><div class="vmeta"><span class="pct">28%</span><span class="p">1,890원</span></div></div>
+            <div class="vcard c"><div class="vthumb">🥕</div><div class="vname"><span class="leaf">●</span>못난이 당근 200g</div><div class="vmeta"><span class="pct">41%</span><span class="p">2,100원</span></div></div>
+          </div>
+          <div class="hint">신청 후 추천 구성을 확인하고 내 마음대로 바꿀 수 있어요.</div>
+        </div>
+        <div class="dock"><div class="cta carrot">배송·결제 정보 입력하기 →</div></div>
+      </div>
+    </div>
+
+    <div style="max-width:520px;">
+      <p class="section-label" style="margin-bottom:10px;">Screen 01 · Renewal</p>
+      <h2 class="section-h2" style="font-size:2.292vw; line-height:1.3;">채소 플랜 —<br>문장으로 고른다</h2>
+      <p class="section-body" style="margin-top:20px; word-break:keep-all;">딱딱한 폼 대신 <strong style="font-weight:600;">한 문장</strong>으로 구독을 구성한다. 박스 유형·주기·요일을 칩으로 고르면 그대로 문장이 되어, 설정이 곧 대화가 된다.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SCREEN 02 — 배송·결제
+══════════════════════════════════════ -->
+<section style="background:var(--beige); padding:80px 120px;">
+  <div style="max-width:1440px; margin:0 auto; display:flex; align-items:center; gap:90px; justify-content:center;">
+
+    <div style="max-width:520px;">
+      <p class="section-label" style="margin-bottom:10px;">Screen 02 · Renewal</p>
+      <h2 class="section-h2" style="font-size:2.292vw; line-height:1.3;">배송·결제 —<br>한 화면에서 끝낸다</h2>
+      <p class="section-body" style="margin-top:20px; word-break:keep-all;">여러 단계로 흩어져 있던 입력을 <strong style="font-weight:600;">한 흐름</strong>으로 묶는다. 받는 사람·주소·배송·결제까지 스크롤 한 번에 마치도록 설계했다.</p>
+    </div>
+
+    <div class="fw">
+      <div class="phone">
+        <div class="status"><span>9:41</span><span class="r">⌃ ◧ <b>80</b>▮</span></div>
+        <div class="appbar">
+          <div class="appbar-l">
+            <span class="back-btn">←</span>
+            <div class="logo-ring"></div>
+            <div class="crumb"><span>채소 플랜</span><span style="color:var(--faint)">›</span><span class="on">배송·결제</span></div>
+          </div>
+          <div class="hmenu"><span></span><span></span><span></span></div>
+        </div>
+        <div class="form-header">
+          <div class="form-step">STEP 02 · 배송·결제</div>
+          <div class="form-q">2. 배송지와 결제수단을<br>알려주세요</div>
+        </div>
+        <div class="field"><label class="flabel">받는 사람</label>
+          <div class="frow"><div class="input">Henkoo · 010-6523-1055</div><div class="ibtn">수정</div></div></div>
+        <div class="field"><label class="flabel">주소</label>
+          <div class="input fill" style="margin-bottom:8px;">경기 의왕시 계원대학로 31</div>
+          <div class="frow"><div class="input">1010호</div><div class="ibtn">재검색</div></div></div>
+        <div class="field"><label class="flabel">배송 요청사항 <span style="font-weight:500;opacity:.7">(선택)</span></label>
+          <div class="dd">문 앞에 놓아주세요.<span class="cv">▾</span></div></div>
+        <div class="field"><label class="flabel">공동현관 출입 여부</label>
+          <div class="seg"><div class="opt">비밀번호 입력</div><div class="opt on">자율 출입 가능</div></div></div>
+        <div class="field"><label class="flabel">배송 방법</label>
+          <div class="radios"><div class="radio on"><span class="rdot"></span>새벽배송</div><div class="radio"><span class="rdot"></span>택배배송</div></div></div>
+        <div class="divider"></div>
+        <div class="secform">
+          <div class="sec-kick">정기결제 수단</div>
+          <div class="sec-title" style="font-size:18px;">결제 수단을 등록해 주세요</div>
+          <div style="margin-top:14px;">
+            <div class="radio on" style="font-size:14.5px;"><span class="rdot"></span>어글리어스페이</div>
+            <div class="paycard">＋ 자주 쓰는 결제 수단 추가</div>
+            <div class="radio" style="font-size:14.5px; margin-top:13px;"><span class="rdot"></span>간편 계좌이체</div>
+          </div>
+        </div>
+        <div style="padding:16px 22px 0;">
+          <div class="agree"><span class="ck">✓</span><span>결제수단 등록 및 정기결제에 동의합니다.</span></div>
+        </div>
+        <div class="nav-bar" style="padding-top:0;">
+          <span class="nav-back">이전</span>
+          <div class="nav-next">정기배송 신청하기 →</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SCREEN 03 — 신청 완료
+══════════════════════════════════════ -->
+<section style="background:var(--white); padding:80px 120px;">
+  <div style="max-width:1440px; margin:0 auto; display:flex; align-items:center; gap:90px; justify-content:center;">
+
+    <div class="fw">
+      <div class="phone butter-bg">
+        <div class="status"><span>9:41</span><span class="r">⌃ ◧ <b>80</b>▮</span></div>
+        <div class="appbar" style="justify-content:flex-end; padding-bottom:10px;"><span class="xbtn">✕</span></div>
+        <div class="done">
+          <div class="checkc"><svg width="34" height="34" viewBox="0 0 34 34"><path d="M8 17.5 L14.5 24 L26 11" stroke="#fff" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="doneh">정기배송<br>신청 완료!</div>
+          <div class="firstpill">첫 배송일 <b>다음 주 6/5(금)</b></div>
+        </div>
+        <div class="receipt">
+          <div class="rtitle">정기배송 신청 내역</div>
+          <div class="rrow"><div class="rk">채소 플랜</div><div class="rv"><b>집밥박스</b> · 2주 · 금요일</div></div>
+          <div class="rrow"><div class="rk">배송 정보</div><div class="rv">Henkoo · 010-6523-1055<br>경기 의왕시 계원대학로 31, 1010호</div></div>
+          <div class="rrow"><div class="rk">결제 정보</div><div class="rv">간편 계좌이체 · 5943</div></div>
+        </div>
+        <div class="dock"><div class="cta ink">신청 내역 확인하기 →</div></div>
+      </div>
+    </div>
+
+    <div style="max-width:520px;">
+      <p class="section-label" style="margin-bottom:10px;">Screen 03 · Renewal</p>
+      <h2 class="section-h2" style="font-size:2.292vw; line-height:1.3;">신청 완료 —<br>여정의 시작점</h2>
+      <p class="section-body" style="margin-top:20px; word-break:keep-all;">기존 앱이 '완료'에서 멈췄다면, 리뉴얼은 완료를 <strong style="font-weight:600;">다음 경험의 입구</strong>로 만든다. 명확한 피드백과 함께 다음 행동으로 자연스럽게 이어준다.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SCREEN 04 — 박스 유형 시트
+══════════════════════════════════════ -->
+<section style="background:var(--beige); padding:80px 120px;">
+  <div style="max-width:1440px; margin:0 auto; display:flex; align-items:center; gap:90px; justify-content:center;">
+
+    <div style="max-width:520px;">
+      <p class="section-label" style="margin-bottom:10px;">Screen 04 · Renewal</p>
+      <h2 class="section-h2" style="font-size:2.292vw; line-height:1.3;">박스 유형 —<br>바텀시트로 고른다</h2>
+      <p class="section-body" style="margin-top:20px; word-break:keep-all;">화면 전환 없이 <strong style="font-weight:600;">바텀시트</strong>에서 선택을 마친다. 문장 속 칩을 탭하면 옵션이 떠오르고, 고르면 곧바로 문장에 반영된다.</p>
+    </div>
+
+    <div class="fw">
+      <div class="sheet-phone">
+        <div class="sheet-dim"></div>
+        <div class="sheetin">
+          <div class="grab"></div>
+          <h3>박스 유형</h3>
+          <div class="sopt on"><div><div class="t">밥 먹기 좋은</div><div class="ds">채소 가득 밥상을 위한 제철 채소</div></div><span class="chk">✓</span></div>
+          <div class="sopt"><div><div class="t">가볍게 먹기 좋은</div><div class="ds">조리가 필요 없는 샐러드 채소</div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     END — 엔드 (Figma 728:14930) 1920×1334
+══════════════════════════════════════ -->
+<section style="position:relative; width:100%; height:69.479vw; background:#fff; overflow:hidden;">
+  <!-- 배경 사진: Image frame(opacity:0.8) × rect(opacity:0.4) = 최종 0.32 -->
+  <div style="position:absolute; left:-0.698vw; top:0; width:104.573vw; height:72.656vw; background:url('../assets/figma/end-bg.png') center/cover no-repeat; opacity:0.32;"></div>
+  <!-- 목업 스크린샷: x:85→4.427vw, y:159→8.281vw, w:1750→91.146vw (full opacity) -->
+  <img src="../assets/figma/end-mockups.png" alt="" style="position:absolute; left:4.427vw; top:8.281vw; width:91.146vw; height:auto; display:block;">
+  <!-- 크레딧 텍스트 (Image frame opacity:0.8 반영) -->
+  <div style="position:absolute; inset:0; opacity:0.8; pointer-events:none;">
+    <!-- Row 1 — 레이블 (Medium 500, 20px, UPPERCASE) | y:1182 → 61.563vw -->
+    <span style="position:absolute; left:16.302vw; top:61.563vw; font-family:'Pretendard',sans-serif; font-size:1.042vw; font-weight:500; letter-spacing:-0.02em; text-transform:uppercase; line-height:1.5; color:#000; white-space:nowrap;">project</span>
+    <span style="position:absolute; left:40.417vw; top:61.563vw; font-family:'Pretendard',sans-serif; font-size:1.042vw; font-weight:500; letter-spacing:-0.02em; text-transform:uppercase; line-height:1.5; color:#000; white-space:nowrap;">prof.</span>
+    <span style="position:absolute; left:45.208vw; top:61.563vw; font-family:'Pretendard',sans-serif; font-size:1.042vw; font-weight:500; letter-spacing:-0.02em; text-transform:uppercase; line-height:1.5; color:#000; white-space:nowrap;">name</span>
+    <!-- Row 2 — 값 (Regular 400, 18px) | y:1217 → 63.385vw -->
+    <span style="position:absolute; left:16.302vw; top:63.385vw; font-family:'Pretendard',sans-serif; font-size:0.9375vw; font-weight:400; letter-spacing:-0.02em; line-height:1.6; color:#000; white-space:nowrap;">Uglyus UX/UI Renewal</span>
+    <span style="position:absolute; left:40.417vw; top:63.385vw; font-family:'Pretendard',sans-serif; font-size:0.9375vw; font-weight:400; letter-spacing:-0.02em; line-height:1.6; color:#000; white-space:nowrap;">김도현</span>
+    <span style="position:absolute; left:45.208vw; top:63.385vw; font-family:'Pretendard',sans-serif; font-size:0.9375vw; font-weight:400; letter-spacing:-0.02em; line-height:1.6; color:#000; white-space:nowrap;">22561005 고해은</span>
+    <!-- 우측 크레딧 (Regular 400, 18px, right-align) | right-edge x:1668 → right:13.125vw -->
+    <span style="position:absolute; right:13.125vw; top:61.615vw; font-family:'Pretendard',sans-serif; font-size:0.9375vw; font-weight:400; letter-spacing:-0.02em; line-height:1.6; color:#000; text-align:right; white-space:nowrap;">2026. 04. 23</span>
+    <span style="position:absolute; right:13.125vw; top:63.385vw; font-family:'Pretendard',sans-serif; font-size:0.9375vw; font-weight:400; letter-spacing:-0.02em; line-height:1.6; color:#000; text-align:right; white-space:nowrap;">Design &amp; Iconography by HENKOO_</span>
+  </div>
+</section>
+
+<script>
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
+  { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+);
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// 세 가지를 바꿉니다 — scroll-driven translateX (sticky + 스크롤 진행률 기반)
+(function() {
+  var wrap = document.querySelector('.renewal-wrap');
+  var inner = document.querySelector('.renewal__inner');
+  var renewal = document.querySelector('.renewal');
+
+  function update() {
+    var rect = wrap.getBoundingClientRect();
+    // wrap이 sticky 구간에 있는 동안 진행률 0→1
+    var scrollDist = wrap.offsetHeight - renewal.offsetHeight;
+    var progress = Math.max(0, Math.min(1, -rect.top / scrollDist));
+    var maxTranslate = inner.offsetWidth - window.innerWidth;
+    inner.style.transform = 'translateX(' + (-progress * maxTranslate) + 'px)';
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+})();
+</script>
+</body>
+</html>
